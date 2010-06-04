@@ -1,0 +1,47 @@
+;ikarus --r6rs-script filename
+(import (rnrs))
+(import (srfi :1 lists))
+
+(define rest cdr)
+
+
+;; (define-record-type BitVariable
+;;   (fields name bit))
+
+;; (define-record-type Bit
+;;   (fields value))
+;; ;bit pattern has a field variables which is a list of variables along with their positions in the bitpattern e.g. for (1 1 x y x 0) the variables would be ((x 2 4) (y 3))
+;; (define-record-type BitPattern
+;;   (fields pattern))
+
+;this works as long as the names of the variable names and values do not mix
+(define (replace variables pattern)
+  (if (null? variables)
+      pattern
+      (let ((variable (first variables)))
+        (replace (rest variables) (substitute variable pattern)))))
+
+(replace '() '(1 2 3))
+
+
+(define (substitute variable pattern)
+  (if (null? pattern)
+      '()
+      (let  ((name (first variable))
+             (value (second variable)))
+        (if (equal? (first pattern) name)
+            (cons value (substitute variable (rest pattern)))
+            (cons (first pattern) (substitute variable (rest pattern)))))))
+
+(equal? (substitute '('x 2) '(1 1 'x)) '(1 1 2))
+
+
+  
+(import (church))
+
+(church
+
+
+
+)
+
