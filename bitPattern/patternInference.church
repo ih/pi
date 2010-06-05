@@ -1,0 +1,43 @@
+;ikarus --r6rs-script filename
+(import (church))
+
+(church
+ (mh-query
+  100 100
+  (define dictionary '(0 1 x))
+
+  (define patternLength 4)
+
+  (define generatePattern (repeat patternLength (lambda () (uniform-draw dictionary))))
+
+  (define (substitute variable pattern)
+    (if (null? pattern)
+        '()
+        (let ((name (first variable))
+              (value (second variable)))
+          (if (equal? (first pattern) name)
+              (pair value (substitute variable (rest pattern)))
+              (pair (first pattern) (substitute variable (rest pattern)))))))
+  (substitute '(x 3) '(1 1 0 x 1))
+
+  (define (generateData pattern)
+    (let ((value (uniform-draw '(0 1))))
+      (substitute (list 'x (uniform-draw '(0 1))) pattern))) 
+  (substitute (list 'x (uniform-draw '(0 1))) '(1 1 0 x 1))
+
+  (define inferenceData
+    (let ((pattern generatePattern))
+      (repeat 100 (lambda () (generateData pattern)))))
+
+  (define testData
+    (let ((pattern '(1 x 0 x)))
+      (repeat 100 (lambda () (generateData pattern)))))
+
+  generatePattern
+  
+  (equal? inferenceData testData)
+  )
+)
+
+
+
