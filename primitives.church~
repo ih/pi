@@ -1,0 +1,15 @@
+(import (church))
+
+(church
+ (define-record-type primitive)
+ (mh-query
+  100 100
+
+  (define input 5)
+  (define (eval expr)
+    (if (number? expr)
+        expr))
+  input 
+  (eval input)
+  
+  )

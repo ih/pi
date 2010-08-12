@@ -1,0 +1,38 @@
+(define (program-induce data object-library connector-library)
+  (let ((disjoint-models (fit-object-models data object-library))
+        (composite-model (connect-models disjoint-models connector-library)))
+    (program-induce data (abstract-objects object-library composite-model) (abstract-connectors connector-library composite-model))))
+
+(define (init-object-model '(set-pixel! image pixel value)))
+(define (init-connector-model ))
+(define (fit-object-models
+         (order-models! data object-library)
+         (map (fit-object-model data) object-library)))
+
+(define (eval ast)
+  (cond (equal? (first ast) 'set-pixel!)
+        (eval ast)))
+(define (fit-object-model data model)
+  (order-data! data model))
+
+(define (program-induction data-models process-models))
+  
+(define (model-selector)
+  (last-model ))
+(define (model-data data)
+  (let (select-model data init-data-models)))
+
+      
+(define (fitness model data)
+  (cond ((is-draw-pixel? model)
+         (if (and
+              (equal (point-x (pixel model)) (point-x data))
+              (equal (point-y (pixel model)) (point-y data)))
+             1
+             0)
+         (else 0))))
+         
+        
+         
+        
+                         

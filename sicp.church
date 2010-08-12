@@ -1,0 +1,32 @@
+;(import (church))
+
+;eval for primitives
+(define (eval expr)
+  ;check whether expr is a primitive
+  (cond ((primitive? expr) expr)
+        ((composition? expr) expr)
+        ((abstraction? expr) expr)))
+
+(define (primitive? expr)
+  (or (number? expr)))
+
+
+(define (composition? expr) #t)
+
+(define (abstraction? expr) #t)
+
+;for primitives deval is the same as eval
+
+;; (church
+;;  (define-record-type primitive)
+;;  (mh-query
+;;   100 100
+
+;;   (define input 5)
+;;   (define (eval expr)
+;;     (if (number? expr)
+;;         expr))
+;;   input 
+;;   (eval input)
+  
+;;   )

@@ -2,6 +2,7 @@
 (import (church))
 
 (church
+
  (mh-query
   100 100
   (define dictionary '(0 1 x))
@@ -21,6 +22,11 @@
               (pair (first pattern) (substitute variable (rest pattern)))))))
   (substitute '(x 3) '(1 1 0 x 1))
 
+ (define testData
+    (let ((pattern '(1 x 0 x)))
+      (repeat 100 (lambda () (generateData pattern)))))
+
+  
   (define (generateData pattern)
     (let ((value (uniform-draw '(0 1))))
       (substitute (list 'x (uniform-draw '(0 1))) pattern))) 
@@ -32,9 +38,6 @@
       (repeat 100 (lambda () (generateData pattern)))))
 
   ;this function produces data from the "true" pattern
-  (define testData
-    (let ((pattern '(1 x 0 x)))
-      (repeat 100 (lambda () (generateData pattern)))))
 
   generatePattern
   

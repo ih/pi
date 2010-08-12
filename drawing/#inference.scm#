@@ -1,0 +1,4 @@
+(define (inferModel data)
+  (let ((images (parseImages data)))
+    (abstract (map Programs images))
+                      

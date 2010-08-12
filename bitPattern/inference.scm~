@@ -1,0 +1,29 @@
+;data is a file with a list of bit strings, but start by passing a list directly
+(define (inferModel language data)
+  (let ((bitStrings (parseData data)))
+    (performAbstraction language (createInitialModel language bitStrings))))
+
+
+
+(define (parseData data)
+  data)
+
+(parseData '(1 2 3))
+
+
+;a language is defined by its syntax and semantics
+(define-record-type language
+  (fields syntax semantics))
+
+
+(define (createInitialModel language data)
+  (if (null? data)
+      '()
+      (cons (deinterpret (first data) (semantics language)) (createInitialModel language (rest data)))))
+
+
+
+
+
+(define (performAbstraction language data)
+  data)
