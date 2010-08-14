@@ -11,30 +11,52 @@
   (if (all-data-explained? unexplained-data)
       explanation
       (let* ((current-model (choose-model possible-models))
-             (possible-explanation (explain-data current-model unexplained-data))
-             (if (good-enough? possible-explanation)
-                 (fit-data-models data-models (remove-explained possible-explanation unexplained-data) (add-to-explanation possible-explanation explanation))
-                 (fit-data-models (remove-model current-model possible-models) unexplained-data explanation))))))
+             (possible-explanation (explain-data current-model unexplained-data)))
+        (if (good-enough? possible-explanation)
+            (fit-data-models data-models (remove-explained possible-explanation unexplained-data) (add-to-explanation possible-explanation explanation))
+            (fit-data-models (remove-model current-model possible-models) unexplained-data explanation)))))
+
+;assumes data is a list
+(define (all-data-explained? data)
+  (null? data))
+
+;can scale by sampling from models instead of looking at all; or rather ensure there are few top-level (most abstract) models
+(define (choose-model models)
+  (arg-max (map fitness models)))
+
+(define (fitness expr data)
+  (cond ((draw-pixel? expr)
+         (if (same-value? expr (image-pixels (x-value expr) (y-value expr)))
+             1
+             0))
+        ((begin? expr)
+         (apply + (map fitness (begin-actions expr))))))
 
 
-                 (if 
-                 (begin
-                   (model-iterator 'reset)
-                   (data-iterator 
-                   (fit-data-models data-models (remove-data current-data unexplained-data) (add-data current-data explained-data))
-                 (fit-data-models data-models (remove-data current-data unexplained-data) (add-data current-data explained-data))
-                 
+(define (begin? expr)
+  (tagged-list? expr 'begin))
+
+(define (begin-actions expr)
+  (rest expr))
+
+(define (model-fitness model data)
+  (if (null? model)
+      0
+      (operator-fitness 
+
+;finds the subset of data the model fits the best and the parameters that give this fit
+(define (explain-data model data)
+  (create-explanation (best-parameters fitness (choose-parameters model data))
+        (fitness model parameters data)
+        (fitness (eval model parameters) best-match)
+
+
+
+        
 (define (explain-data-with-model hypothesis unexplained-data explained-data)
   (if (explained? unexplained-data)
       (add-data explained-data hypothesis)
 
-
-(define (fitness expr data)
-  (cond ((draw-pixel? expr)
-         (if (coordinate-match? expr data)
-             1
-             0))
-        (else 0)))
 
 (define (tagged-list? expr tag)
   (if (pair? expr)
