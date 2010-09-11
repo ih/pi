@@ -1,0 +1,14 @@
+(import (image))
+
+(define testPoint (make-point 3 4))
+
+(define testImage (make-image 20 10))
+
+(imageSet! point image)
+
+(set-pixel! testImage testPoint 1)
+
+(get-pixel testImage 3 4)
+
+(array-map (image-pixels testImage) (shape 0 10 0 10) (lambda (x) x)))
+

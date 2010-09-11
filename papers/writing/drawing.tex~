@@ -1,0 +1,36 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\begin{document}
+\title{A first approach to generating programs from data}
+\author{Irvin Hwang}
+\maketitle
+
+\section{Learning to draw: A concrete problem}
+Given a set of images of triangles and primitives of a language how can we learn a program, which draws triangles.
+\section{Patterns, Expressions, and Models}
+If we want flexibility we need to be able to define new models.  The problem is the space of expressions we can search over when finding a representation is huge.  One possible approach is to use the power of abstraction.  
+\section{Top Level Algorithm}
+We illustrate the high-level approach using the drawing problem.  The setup begins with the learner having a language e.g.
+
+\begin{align*}
+exp ::= &\texttt{ draw-pixel } exp \texttt{ }exp \\
+    |& \texttt{ True} \\
+    |& \texttt{ False} \\
+    |& \texttt{ If } exp \texttt{ }exp \texttt{ } exp \\
+    |& \texttt{ while } exp \texttt{ } exp \\
+    |& \texttt{ == }exp \texttt{ }exp
+\end{align*}
+
+As learning progresses more complex expressions/functions may be added to the language e.g. draw-circle radius center-x center-y.  The question of how these expressions should be organized is a major issue.  Another way to think about the learner's language is as a collection of models.  
+
+The high-level algorithm consists of three stages and we illustrate by seeing how it might learn a model for the following pattern.  
+
+In the first stage one tries to fit current models to the data.    is to try and explain the data with the current models available.  Then connect the best models together using the language as a glue.  Given several models of the same object we can form more abstract models by finding common subtrees among instances.
+\subsection{Fitting Data Models}
+
+\subsection{Gluing Models Together}
+\subsection{Abstraction}
+\bibliographystyle{plain}
+\bibliography{myBib}
+\end{document}

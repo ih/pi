@@ -1,4 +1,5 @@
 (import (srfi :1 lists))
+(import (image))
 
 (define-record-type point (fields x y distance)
   (protocol
@@ -25,12 +26,17 @@
   (arg-max (map fitness models)))
 
 (define (fitness expr data)
-  (cond ((draw-pixel? expr)
+  (cond ((set-pixel? expr)
          (if (same-value? expr (image-pixels (x-value expr) (y-value expr)))
              1
              0))
         ((begin? expr)
          (apply + (map fitness (begin-actions expr))))))
+
+;;fitness test
+(define test-image (make-image 6 6))
+
+(begin (set-pixel! test-image (make-pixel 3 4 0) 1) (set-pixel! test-image (make-pixel 3 5 0) 1) (set-pixel! test-image (make-pixel 3 6 0) 1))
 
 
 (define (begin? expr)
@@ -63,8 +69,8 @@
       (eq? (car expr) tag)
       false))
 
-(define (draw-pixel? expr)
-  (tagged-list? expr 'draw-pixel))
+(define (set-pixel? expr)
+  (tagged-list? expr 'set-pixel))
 
 (define (coordinate-match? expr pixel)
   (and (equal? (pixel-expr-x expr) (point-x pixel))
@@ -104,7 +110,7 @@
 
       
 (define (fitness model data)
-  (cond ((is-draw-pixel? model)
+  (cond ((is-set-pixel? model)
          (if (and
               (equal (point-x (pixel model)) (point-x data))
               (equal (point-y (pixel model)) (point-y data)))
