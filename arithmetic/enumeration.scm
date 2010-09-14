@@ -1,8 +1,9 @@
 (define rest cdr)
+(define operators '(+ - * /))
 (import (srfi :1 lists))
 (define (all-trees items)
   (if (<= (length items) 2)
-      (list items)
+      (make-pairs (first items) (second items))
       (let* ((pairs (choose-pairs items))
              (new-items (make-new-items pairs items)))
         (apply append (map all-trees new-items)))))
@@ -14,9 +15,17 @@
 
 (define (pair-with item others)
   (if (= (length others) 1)
-      (list (cons item others))
-      (cons (list item (first others)) (pair-with item (rest others)))))
+      (make-pairs item (first others))
+      (append (make-pairs item (first others)) (pair-with item (rest others)))))
 
+(define (make-pairs a b)
+  (let ((add-operator (add-operator-function a b)))
+    (map add-operator operators)))
+        
+(define (add-operator-function a b)
+  (lambda (operator)
+    (list operator a b)))
+       
 (define (make-new-items pairs items)
   (let ((make-new-item (make-new-item-function items)))
     (map make-new-item pairs)))
