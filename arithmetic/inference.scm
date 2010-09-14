@@ -13,7 +13,7 @@
 
 (define (generate-example expr)
   (let* ((inputs (random-values (variables expr)))
-        (output (eval (list apply expr inputs) ENV-HERE)))
+        (output (eval (list apply expr inputs) (environment '(rnrs)))))
     (list inputs output)))
 
 (define (random-values variables)
@@ -23,7 +23,7 @@
 
 (define (variables expr) (second expr))
 
-
+(define tl '(lambda (x y) (+ x y)))
 
 ;see trainingData for a version that does not assume expressions come in the form (lambda variables ...)
 ;;;;;;;;;;;;;;;;;;;;;;;;;
