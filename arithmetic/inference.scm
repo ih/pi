@@ -4,7 +4,7 @@
 ;example expression 
 (lambda (x y) (* (+ x y) 7))
 ;biggest value a number can take
-(define range 3)
+(define range 10)
 (define rest cdr)
 (define (generate-data expr amount)
   (if (= amount 0)
@@ -13,7 +13,7 @@
 
 (define (generate-example expr)
   (let* ((inputs (random-values (variables expr)))
-        (output (eval (list apply expr inputs) (environment '(rnrs)))))
+        (output (eval (cons expr inputs) (environment '(rnrs)))))
     (list inputs output)))
 
 (define (random-values variables)
@@ -27,33 +27,3 @@
 
 ;see trainingData for a version that does not assume expressions come in the form (lambda variables ...)
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(define (variables expr)
-  (if (variable? expr)
-      expr
-      (if (subexpressions expr)
-          (delete-duplicates (flatten (map variables (subexpressions expr))))
-          '())))
-
-(define (flatten l)
-  (cond ((null? l) '())
-        ((list? l)
-         (append (flatten (car l)) (flatten (cdr l))))
-        (else (list l))))
-
-
-(define (variable? expr)
-  (and (symbol? expr) (not (operator? expr))))
-(define (operator? expr)
-  (member expr '(+ - / *)))
-
-;assumes expression is either a primitive or operator with arguments that are expressions
-(define (subexpressions expr)
-  (if (primitive? expr)
-      '()
-      (rest expr)))
-
-(define (primitive? expr)
-  (or (null? expr) (number? expr) (variable? expr)))
-
