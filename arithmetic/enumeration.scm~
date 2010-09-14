@@ -1,0 +1,4 @@
+(define (choose-pairs items)
+  (let ((head (first items)))
+    (pair-off head (rest items))
+        
