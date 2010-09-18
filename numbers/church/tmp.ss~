@@ -1,0 +1,14 @@
+(import (church))
+
+(church
+ 
+ (define generate-tree
+   (if (flip)
+       1
+       (list '+ (generate-tree) (generate-tree))))
+ (define answer (generate-tree))
+ (pretty-print answer)
+ (eval answer (get-current-environment))
+ )   
+(exit)
+

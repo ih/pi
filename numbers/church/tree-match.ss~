@@ -1,0 +1,9 @@
+(define (tree-match a b)
+  (if (null? a)
+      true
+      (let ((children (children-of a)))
+        (apply and (map match a b)))))
+
+(define (create-tree-match-on b)
+  (lambda (a)
+    (tree-match a b)))

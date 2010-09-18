@@ -1,0 +1,7 @@
+(library (generate-tree)
+         (export generate-tree)
+         (import (rnrs))
+
+         (define (generate-tree types object))
+         
+         )
