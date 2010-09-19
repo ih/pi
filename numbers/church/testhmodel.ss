@@ -40,16 +40,21 @@
    (rest node))
  (define (get-operator-name node)
    (first node))
- (define (expression-generator grammar)
-   (define (generate-expression rule-name)
-     (let* ((current-rule (select-rule grammar rule-name))
-            (node (choose-node current-rule)))
-       (if (has-children? node)
-           (pair (get-operator-name node) (map generate-expression (get-children node)))
-           node))))
 
- (define generate-expression-base (expression-generator base))
- (define texp (generate-expression-base 'N))
+ (define (curry fun . args)
+          (lambda x
+            (apply fun (append args x))))
+ ((curry * 2) 6)
+
+ (define (generate-expression grammar rule-name)
+   (let* ((current-rule (select-rule grammar rule-name))
+          (node (choose-node current-rule)))
+     (if (has-children? node)
+         (pair (get-operator-name node) (map (curry generate-expression grammar) (get-children node)))
+         node)))
+
+ 
+ (define texp (generate-expression base 'N))
  (pretty-print texp)
  (define (gen-sym)
    (second (gensym)))
@@ -72,20 +77,17 @@
  (define num-vars (count-leaves texp))
  (define tvars (list-possible-variables num-vars))
  (pretty-print tvars)
- (define (insert-variable expression variables)
+
+ (define (insert-variable variables expression)
    (if (has-children? expression)
        (let ((children (get-children expression)))
-         (pair (get-operator-name expression) (map insert-variable children)));; insert-variable takes two arguments need to curry it or something http://www.engr.uconn.edu/~jeffm/Papers/curry.html
+         (pair (get-operator-name expression) (map (curry insert-variable variables) children)))
        (if (flip)
            (uniform-draw variables)
            expression)))
-; (insert-variable texp tvars)
- (symbol? (first tvars))
- (symbol? (uniform-draw tvars))
-; (insert-variable '(+ 1 (+ 1 1)) '(a b c))
- (define (curry fun . args)
-          (lambda x
-            (apply fun (append args x))))
- ((curry * 2) 6)
+ 
+
+ (insert-variable '(a b c) '(+ 1 (+ 1 1)))
+ (insert-variable tvars texp) 
  )
 (exit)
