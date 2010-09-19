@@ -55,7 +55,7 @@
 
  
  (define texp (generate-expression base 'N))
- (pretty-print texp)
+  (pretty-print texp)
  (define (gen-sym)
    (second (gensym)))
  (gen-sym)
@@ -76,18 +76,57 @@
 
  (define num-vars (count-leaves texp))
  (define tvars (list-possible-variables num-vars))
- (pretty-print tvars)
+ 
 
- (define (insert-variable variables expression)
+ (define (insert-variables-recursion variables expression)
    (if (has-children? expression)
        (let ((children (get-children expression)))
-         (pair (get-operator-name expression) (map (curry insert-variable variables) children)))
+         (pair (get-operator-name expression) (map (curry insert-variables-recursion variables) children)))
        (if (flip)
            (uniform-draw variables)
            expression)))
  
 
- (insert-variable '(a b c) '(+ 1 (+ 1 1)))
- (insert-variable tvars texp) 
+ (insert-variables-recursion '(a b c) '(+ 1 (+ 1 1)))
+
+
+ (define (insert-variables expression)
+  (let* ((upper-bound (count-leaves expression))
+         (possible-variables (list-possible-variables upper-bound)))
+    (insert-variables-recursion possible-variables expression)))
+ 
+ (define vexp (insert-variables texp))
+
+ (pretty-print vexp)
+ (define variable? symbol?)
+ (variable? 3)
+ (define (get-variables-recursion body)
+   (if (has-children? body)
+       (let ((children (get-children body)))
+         (append (map get-variables-recursion children)))
+       (if (variable? body)
+           body
+           '())))
+
+ (define (flatten l)
+  (cond ((null? l) '())
+        ((list? l)
+         (append (flatten (first l)) (flatten (rest l))))
+        (else (list l))))
+ 
+(flatten (get-variables-recursion '(+ 1 (+ 'c 1))))
+
+ (define (get-variables body)
+   (flatten (get-variables-recursion body)))
+(get-variables vexp)
+
+ (define (create-head body)
+   (let ((variable-names (get-variables body)))
+     (list 'define (pair (gen-sym) variable-names))))
+
+(create-head vexp)
+;(get-variables '(+ 1 (+ 'a (+ 'b 1))))
+
  )
+
 (exit)

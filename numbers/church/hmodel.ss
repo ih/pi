@@ -60,39 +60,58 @@
 ;;;end expression-generator *************************
 
 ;;;begin define procedure; in this version we assume the grammar has no variables,this makes eval easy,  and we only replace leaves with variables
-(define (define-procedure expression)
-  (let* ((body (insert-variables expression))
-         (head (create-head body)))
-    (pair head body)))
+ (define (define-procedure expression)
+   (let* ((body (insert-variables expression))
+          (head (create-head body)))
+     (pair head body)))
 
-(define (insert-variables variables expression)
-  (let* ((upper-bound (count-leaves expression))
-         (possible-variables (list-possible-variables upper-bound))
-         (attempts (sample-integer upper-bound)))
-    (repeat attempts (insert-variable possible-variables expression))))
+ (define (insert-variables expression)
+   (let* ((upper-bound (count-leaves expression))
+          (possible-variables (list-possible-variables upper-bound)))
+     (insert-variables-recursion possible-variables expression)))
 
-(define (count-leaves expression)
-  (if (has-children? expression)
-      (let ((children (get-children expression)))
-        (apply + (map count-leaves children)))
-      1))
+ (define (count-leaves expression)
+   (if (has-children? expression)
+       (let ((children (get-children expression)))
+         (apply + (map count-leaves children)))
+       1))
 
-(define (list-possible-variables number)
-  (repeat number gen-sym))
+ (define (list-possible-variables number)
+   (repeat number gen-sym))
 
-(define (gen-sym)
-  (second (gensym)))
+ (define (gen-sym)
+   (second (gensym)))
 
-         
-(define (insert-variable variables expression)
-  (if (has-children? expression)
-      (let ((children (get-children expression)))
-        (pair (get-operator-name expression) (map (curry insert-variable variables) children)))
-      (if (flip)
-          (uniform-draw variables)
-          expression)))
-          
  
+ (define (insert-variable-recursion variables expression)
+   (if (has-children? expression)
+       (let ((children (get-children expression)))
+         (pair (get-operator-name expression) (map (curry insert-variable-recursion variables) children)))
+       (if (flip)
+           (uniform-draw variables)
+           expression)))
+ 
+ (define (create-head body)
+   (let ((variable-names (get-variables body)))
+     (list 'define (pair (gen-sym) variables-names))))
+
+(define (flatten l)
+  (cond ((null? l) '())
+        ((list? l)
+         (append (flatten (first l)) (flatten (rest l))))
+        (else (list l))))
+
+ (define (get-variables body)
+   (flatten get-variables-recursion body))
+ (define (get-variables-recursion body)
+   (if (has-children? body)
+       (let ((children (get-children body)))
+         (append (map get-variables-recursion children)))
+       (if (variable? body)
+           body
+           '())))
+ (define variable? symbol?)
+             
  
 )
 
