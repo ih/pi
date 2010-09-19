@@ -1,7 +1,7 @@
 ;(import (srfi :1 lists))
 (import (church))
 (church
- (define nats '(N 1 (+ N N)))
+ (define nats (list 'N '1 '(+ N N)))
  (define base (list nats))
  (define (get-rule-name rule)
    (first rule))
@@ -49,6 +49,40 @@
            node))))
 
  (define generate-expression-base (expression-generator base))
- (generate-expression-base 'N)  
+ (define texp (generate-expression-base 'N))
+ (pretty-print texp)
+ (define (gen-sym)
+   (second (gensym)))
+ (gen-sym)
+
+ 
+ (define (list-possible-variables number)
+  (repeat number gen-sym))
+ (symbol? (first (list-possible-variables 4)))
+ ;(symbol? (second (gensym)))
+
+
+
+ (define (count-leaves expression)
+   (if (has-children? expression)
+       (let ((children (get-children expression)))
+         (apply + (map count-leaves children)))
+       1))
+
+ (define num-vars (count-leaves texp))
+ (define tvars (list-possible-variables num-vars))
+ (pretty-print tvars)
+ (define (insert-variable expression variables)
+   (if (has-children? expression)
+       (let ((children (get-children expression)))
+         (pair (get-operator-name expression) (map insert-variable children)));; insert-variable takes two arguments need to curry it or something http://www.engr.uconn.edu/~jeffm/Papers/curry.html
+       (if (flip)
+           (uniform-draw variables)
+           expression)))
+; (insert-variable texp tvars)
+ (symbol? (first tvars))
+ (symbol? (uniform-draw tvars))
+ (insert-variable '(+ 1 (+ 1 1)) '(a b c))
+
  )
 (exit)
