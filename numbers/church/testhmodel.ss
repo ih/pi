@@ -82,7 +82,10 @@
 ; (insert-variable texp tvars)
  (symbol? (first tvars))
  (symbol? (uniform-draw tvars))
- (insert-variable '(+ 1 (+ 1 1)) '(a b c))
-
+; (insert-variable '(+ 1 (+ 1 1)) '(a b c))
+ (define (curry fun . args)
+          (lambda x
+            (apply fun (append args x))))
+ ((curry * 2) 6)
  )
 (exit)

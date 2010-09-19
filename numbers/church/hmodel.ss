@@ -23,6 +23,9 @@
        (if (has-children? node)
            (pair (get-operator-name node) (map generate-expression (get-children node)))
            node))))
+ (define (curry fun . args)
+          (lambda x
+            (apply fun (append args x))))
 
  
  (define (select-rule grammar rule-name)
