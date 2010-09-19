@@ -68,65 +68,97 @@
 
 
 
- (define (count-leaves expression)
-   (if (has-children? expression)
-       (let ((children (get-children expression)))
-         (apply + (map count-leaves children)))
-       1))
+ ;; (define (count-leaves expression)
+ ;;   (if (has-children? expression)
+ ;;       (let ((children (get-children expression)))
+ ;;         (apply + (map count-leaves children)))
+ ;;       1))
 
- (define num-vars (count-leaves texp))
- (define tvars (list-possible-variables num-vars))
- 
+; (define num-vars (count-leaves texp))
 
- (define (insert-variables-recursion variables expression)
-   (if (has-children? expression)
-       (let ((children (get-children expression)))
-         (pair (get-operator-name expression) (map (curry insert-variables-recursion variables) children)))
-       (if (flip)
-           (uniform-draw variables)
-           expression)))
- 
-
- (insert-variables-recursion '(a b c) '(+ 1 (+ 1 1)))
+(define (tree-recursion interior-function leaf-function node)
+  (if (has-children? node)
+      (let ((children (get-children node))
+            (tree-recurse (curry tree-recursion interior-function leaf-function)))
+        (interior-function node (map tree-recurse children)))
+      (leaf-function node)))
 
 
- (define (insert-variables expression)
+(define (count-leaves root) (tree-recursion
+  (lambda (node children) (apply + children))
+  (lambda (node) 1) root))
+(define num-vars (count-leaves texp))
+
+(define (insert-variables expression)
   (let* ((upper-bound (count-leaves expression))
          (possible-variables (list-possible-variables upper-bound)))
-    (insert-variables-recursion possible-variables expression)))
+    (tree-recursion
+     (lambda (expression children) (pair (get-operator-name expression) children))
+     (lambda (expression) (if (flip)
+                              (uniform-draw possible-variables)
+                              expression)) expression)))
+(insert-variables '(+ 1 (+ 1 1)))
+
  
- (define vexp (insert-variables texp))
-
- (pretty-print vexp)
- (define variable? symbol?)
- (variable? 3)
- (define (get-variables-recursion body)
-   (if (has-children? body)
-       (let ((children (get-children body)))
-         (append (map get-variables-recursion children)))
-       (if (variable? body)
-           body
-           '())))
-
- (define (flatten l)
-  (cond ((null? l) '())
-        ((list? l)
-         (append (flatten (first l)) (flatten (rest l))))
-        (else (list l))))
+;;  (define tvars (list-possible-variables num-vars))
  
-(flatten (get-variables-recursion '(+ 1 (+ 'c 1))))
 
- (define (get-variables body)
-   (flatten (get-variables-recursion body)))
-(get-variables vexp)
 
- (define (create-head body)
-   (let ((variable-names (get-variables body)))
-     (list 'define (pair (gen-sym) variable-names))))
+ 
+;;  (define (insert-variables-recursion variables expression)
+;;    (if (has-children? expression)
+;;        (let ((children (get-children expression)))
+;;          (pair (get-operator-name expression) (map (curry insert-variables-recursion variables) children)))
+;;        (if (flip)
+;;            (uniform-draw variables)
+;;            expression)))
+ 
 
-(create-head vexp)
-;(get-variables '(+ 1 (+ 'a (+ 'b 1))))
+;;  (insert-variables-recursion '(a b c) '(+ 1 (+ 1 1)))
 
+
+;;  (define (insert-variables expression)
+;;   (let* ((upper-bound (count-leaves expression))
+;;          (possible-variables (list-possible-variables upper-bound)))
+;;     (insert-variables-recursion possible-variables expression)))
+ 
+;;  (define vexp (insert-variables texp))
+
+;;  (pretty-print vexp)
+;;  (define variable? symbol?)
+;;  (variable? 3)
+;;  (define (get-variables-recursion body)
+;;    (if (has-children? body)
+;;        (let ((children (get-children body)))
+;;          (append (map get-variables-recursion children)))
+;;        (if (variable? body)
+;;            body
+;;            '())))
+
+;;  (define (flatten l)
+;;   (cond ((null? l) '())
+;;         ((list? l)
+;;          (append (flatten (first l)) (flatten (rest l))))
+;;         (else (list l))))
+ 
+;; (flatten (get-variables-recursion '(+ 1 (+ 'c 1))))
+
+;;  (define (get-variables body)
+;;    (flatten (get-variables-recursion body)))
+;; (get-variables vexp)
+
+;;  (define (create-head body)
+;;    (let ((variable-names (get-variables body)))
+;;      (list 'define (pair (gen-sym) variable-names))))
+
+;; (create-head vexp)
+;; ;(get-variables '(+ 1 (+ 'a (+ 'b 1))))
+;; (define (tree-recursion interior-function leaf-function node)
+;;   (if (has-children? node)
+;;       (let ((children (get-children node))
+;;             (tree-recurse (curry tree-recursion interior-function node-function)))
+;;         (interior-function node (map tree-recurse children)))
+;;       (leaf-function node)))
  )
 
 (exit)

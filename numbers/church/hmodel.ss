@@ -8,7 +8,7 @@
 
  (define (test x y)
    (+ x y))
- (define generate-operator (grammar start)
+ (define (generate-operator grammar start)
    (let* ((expression (generate-expression grammar start))
           (procedure (define-procedure expression))
           (procdeure-name (define-and-add-to-environment procedure))
@@ -111,7 +111,26 @@
            body
            '())))
  (define variable? symbol?)
-             
- 
+;;;functions refactored with tree-recursion             
+(define (tree-recursion interior-function leaf-function node)
+  (if (has-children? node)
+      (let ((children (get-children node))
+            (tree-recurse (curry tree-recursion interior-function node-function)))
+        (interior-function node (map tree-recurse children)))
+      (leaf-function node)))
+
+(define (count-leaves root) (tree-recursion
+  (lambda (node children) (apply + children))
+  (lambda (node) 1) root))
+
+(define (insert-variables expression)
+  (let* ((upper-bound (count-leaves expression))
+         (possible-variables (list-possible-variables upper-bound)))
+    (tree-recursion
+     (lambda (expression children) (pair (get-operator-name expression) children))
+     (lambda (expression) (if (flip)
+                              (uniform-draw possible-variables)
+                              expression)) expression)))
+
 )
 
