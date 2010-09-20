@@ -111,26 +111,57 @@
            body
            '())))
  (define variable? symbol?)
+
+(define (delete-duplicates lst)
+  (delete-duplicates-helper set lst))
+
+(define (delete-duplicates-helper set lst)
+  (if (null? lst)
+      set
+      (delete-duplicates-helper
+       (if (member? (first lst) set)
+           set
+           (pair (first lst) set))
+       (rest lst))))
+
+(define (member? item lst)
+  (if (null? lst)
+      false
+      (if (equal? item (first lst))
+          true
+          (member? item (rest lst)))))
 ;;;functions refactored with tree-recursion             
-(define (tree-recursion interior-function leaf-function node)
-  (if (has-children? node)
-      (let ((children (get-children node))
-            (tree-recurse (curry tree-recursion interior-function node-function)))
-        (interior-function node (map tree-recurse children)))
-      (leaf-function node)))
+;; (define (tree-recursion interior-function leaf-function node)
+;;   (if (has-children? node)
+;;       (let ((children (get-children node))
+;;             (tree-recurse (curry tree-recursion interior-function node-function)))
+;;         (interior-function node (map tree-recurse children)))
+;;       (leaf-function node)))
 
-(define (count-leaves root) (tree-recursion
-  (lambda (node children) (apply + children))
-  (lambda (node) 1) root))
+;; (define (count-leaves root) (tree-recursion
+;;   (lambda (node children) (apply + children))
+;;   (lambda (node) 1) root))
 
-(define (insert-variables expression)
-  (let* ((upper-bound (count-leaves expression))
-         (possible-variables (list-possible-variables upper-bound)))
-    (tree-recursion
-     (lambda (expression children) (pair (get-operator-name expression) children))
-     (lambda (expression) (if (flip)
-                              (uniform-draw possible-variables)
-                              expression)) expression)))
+;; (define (insert-variables expression)
+;;   (let* ((upper-bound (count-leaves expression))
+;;          (possible-variables (list-possible-variables upper-bound)))
+;;     (tree-recursion
+;;      (lambda (expression children) (pair (get-operator-name expression) children))
+;;      (lambda (expression) (if (flip)
+;;                               (uniform-draw possible-variables)
+;;                               expression)) expression)))
 
+;; (define (generate-expression grammar rule-name)
+;;   (tree-recursion
+;;      (lambda (rule-name children)
+;;        (let* ((current-rule (select-rule grammar rule-name))
+;;               (node (choose-node current-rule)))
+;;          (pair (get-operator-name node) children)))
+;;      (lambda (rule-name)
+;;        (let* ((current-rule (select-rule grammar rule-name))
+;;               (node (choose-node current-rule)))
+;;          node))))
+
+         
 )
 
