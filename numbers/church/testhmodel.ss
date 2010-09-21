@@ -74,7 +74,7 @@
 
  
  (define texp (generate-expression base 'N))
-  (pretty-print texp)
+;  (pretty-print texp)
  (define (gen-sym)
    (second (gensym)))
  (gen-sym)
@@ -137,7 +137,7 @@
  
  (define vexp (insert-variables texp))
 
- (pretty-print vexp)
+; (pretty-print vexp)
  (define variable? symbol?)
  (variable? 3)
  (define (get-variables-recursion body)
@@ -185,7 +185,11 @@
 
  (define (create-head body)
    (let ((variable-names (get-variables body)))
-     (list 'define (pair (gen-sym) variable-names))))
+     (list 'lambda variable-names)))
+
+;; (define (create-head body)
+;;    (let ((variable-names (get-variables body)))
+;;      (list 'define (pair (gen-sym) variable-names))))
 
 (create-head vexp)
 
@@ -199,27 +203,35 @@
 (define (get-procedure-name procedure)
   (first (second procedure)))
 
-(define p '(define ('g 'a) (+ 1 'a)))
+(define p (define-procedure '(+ 1 (+ 1 1))))
 (pretty-print p)
+(define (get-body procedure)
+  (third procedure))
 
-(define (define-and-add-to-environment procedure)
-  (let ((name (get-procedure-name procedure)))
-    (begin
-      (eval procedure (get-current-environment))
-      name)))
-;(define q (define-and-add-to-environment p))
-;(pretty-print q)
-;(define ('g 'a) (+ 1 'a))
-;('g 3)
-(set-pair!
-(define (define-test)
-  (define defs '())
-  (define (test-def)
-    (let ((fname (gen-sym)))
-      (append (define)
-  (defin
+(get-body p)
 
 
+(define (count-args procedure)
+  (let ((variables (second procedure)))
+    (length variables)))
+
+(count-args p)
+(define rule-names '(N E))
+(define (random-existing-rule-name)
+  (uniform-draw rule-names))
+
+(random-existing-rule-name)
+
+(define (generate-operator grammar start)
+   (let* ((expression (generate-expression grammar start))
+          (procedure (define-procedure expression))
+          (number-of-args (count-args procedure)) 
+          (rule-names (repeat number-of-args random-existing-rule-name)))
+     (pair procedure rule-names)))
+ 
+(generate-operator base 'N)
+
+(eval '((lambda (g1 g2) (+ (+ (+ g2 g1) 1) 1)) 4 3) (get-current-environment))
 )
 
 (exit)

@@ -10,12 +10,20 @@
 
  (define (test x y)
    (+ x y))
+
  (define (generate-operator grammar start)
    (let* ((expression (generate-expression grammar start))
           (procedure (define-procedure expression))
-          (procdeure-info (add-to-library procedure)) ;info is name and number of arguments
-          (rule-names (repeat (number-of-args procedure-info) random-existing-rule-name)))
-     (pair (name procedure-info) rule-names)))
+          (number-of-args (count-args procedure)) 
+          (rule-names (repeat number-of-args random-existing-rule-name)))
+     (pair procedure rule-names)))
+ 
+ ;; (define (generate-operator grammar start)
+ ;;   (let* ((expression (generate-expression grammar start))
+ ;;          (procedure (define-procedure expression))
+ ;;          (procdeure-info (add-to-library procedure)) ;info is name and number of arguments
+ ;;          (rule-names (repeat (number-of-args procedure-info) random-existing-rule-name)))
+ ;;     (pair (name procedure-info) rule-names)))
 ;;;begin expression generator ****************
  (define (generate-expression grammar rule-name)
    (let* ((current-rule (select-rule grammar rule-name))
@@ -97,7 +105,7 @@
  
  (define (create-head body)
    (let ((variable-names (get-variables body)))
-     (list 'define (pair (gen-sym) variables-names))))
+     (list 'lambda variable-names))))
 
 (define (flatten l)
   (cond ((null? l) '())
@@ -135,6 +143,16 @@
           true
           (member? item (rest lst)))))
 ;;;end of define procedure
+
+(define (count-args procedure)
+  (let ((variables (second procedure)))
+    (length variables)))
+
+(define (get-body procedure)
+  (third procedure))
+
+(define (random-existing-rule-name)
+  (uniform-draw rule-names))
 
 ;;;begin define-and-add-to-environment
 (define (define-and-add-to-environment procedure)
