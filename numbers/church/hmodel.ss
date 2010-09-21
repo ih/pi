@@ -1,21 +1,28 @@
 (import (srfi :1 lists))
 (import (church))
 (church
- (define rule-names '(A B C D E F G H I J))
- (define max-number-rules 11)
+ ;; (define rule-names '(A B C D E F G H I J))
+ (define max-number-rules 10)
  (define max-rhs-length 5)
 
- (define generate-grammar
-   (let ((number-of-rules (sample-integer max-number-rules)))
-     (repeat generate-rule number-of-rules)))
-
- (define (generate-rule grammar start)
-   (let* ((lhs (gen-sym))
-          (rhs-length (sample-integer max-rhs-length)))
-     (pair lhs (repeat generate-rhs 
+ (define samples 
  
+ (define generate-grammar start-grammar 
+   (let* ((number-of-rules (sample-integer max-number-rules))
+          (rule-names (make-rule-names number-of-rules))
+     (generate-rules start-grammar rule-names)))
 
- (define (generate-operator grammar start)
+   ;this version might result in loops, you have to be careful in how you insert rule names to the rhs
+ ;; (define (generate-rules current-grammar rule-names)
+ ;;   (map (curry generate-rule current-grammar rule-names) rule-names))
+
+ ;; (define (generate-rule grammar possible-rules rule-name)
+ ;;   (let* ((rhs-length (sample-integer max-rhs-legth))
+ ;;          (rhs (repeat rhs-length (curry generate-operator grammar))))
+ ;;     (pair rule-name rhs)))
+
+;change so start is removed and a random rule from the grammar is chonsen
+ (define (generate-operator grammar rule-names)
    (let* ((expression (generate-expression grammar start))
           (procedure (define-procedure expression))
           (number-of-args (count-args procedure)) 
@@ -29,6 +36,7 @@
  ;;          (rule-names (repeat (number-of-args procedure-info) random-existing-rule-name)))
  ;;     (pair (name procedure-info) rule-names)))
 ;;;begin expression generator ****************
+ 
  (define (generate-expression grammar rule-name)
    (let* ((current-rule (select-rule grammar rule-name))
           (node (choose-node current-rule)))

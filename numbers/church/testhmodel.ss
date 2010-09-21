@@ -231,7 +231,10 @@
  
 (generate-operator base 'N)
 
-(eval '((lambda (g1 g2) (+ (+ (+ g2 g1) 1) 1)) 4 3) (get-current-environment))
+;(eval '((lambda (g1 g2) (+ (+ (+ g2 g1) 1) 1)) 4 3) (get-current-environment))
+
+(define plus2 (curry + 2 3))
+(repeat 5 plus2)
 )
 
 (exit)
