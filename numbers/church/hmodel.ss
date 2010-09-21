@@ -1,8 +1,10 @@
 (import (srfi :1 lists))
 (import (church))
 (church
+ (define rule-names '(N))
+ (define operators '());an assoc list of procedure names and definitions
  (define generate-grammar
-   '())
+   generate-rule '())
    ;(mem (lambda '())))
  ;(define (generate-parse grammar '())
 
@@ -11,9 +13,9 @@
  (define (generate-operator grammar start)
    (let* ((expression (generate-expression grammar start))
           (procedure (define-procedure expression))
-          (procdeure-name (define-and-add-to-environment procedure))
-          (rule-names (repeat number-of-args random-existing-rule-name)))
-     (pair procedure-name rule-names)))
+          (procdeure-info (add-to-library procedure)) ;info is name and number of arguments
+          (rule-names (repeat (number-of-args procedure-info) random-existing-rule-name)))
+     (pair (name procedure-info) rule-names)))
 ;;;begin expression generator ****************
  (define (generate-expression grammar rule-name)
    (let* ((current-rule (select-rule grammar rule-name))
@@ -60,10 +62,12 @@
 ;;;end expression-generator *************************
 
 ;;;begin define procedure; in this version we assume the grammar has no variables,this makes eval easy,  and we only replace leaves with variables
+
  (define (define-procedure expression)
    (let* ((body (insert-variables expression))
           (head (create-head body)))
-     (pair head body)))
+     (append head (list body))))
+
 
  (define (insert-variables expression)
    (let* ((upper-bound (count-leaves expression))
@@ -130,6 +134,19 @@
       (if (equal? item (first lst))
           true
           (member? item (rest lst)))))
+;;;end of define procedure
+
+;;;begin define-and-add-to-environment
+(define (define-and-add-to-environment procedure)
+  (let ((name (get-procedure-name procedure)))
+    (begin
+      (eval procedure (get-current-environment))
+      name)))
+
+(define (get-procedure-name procedure)
+  (first (second procedure)))
+
+
 ;;;functions refactored with tree-recursion             
 ;; (define (tree-recursion interior-function leaf-function node)
 ;;   (if (has-children? node)

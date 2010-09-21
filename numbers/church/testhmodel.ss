@@ -190,13 +190,36 @@
 (create-head vexp)
 
 (create-head '(+ 'a 'a))
-;(get-variables '(+ 1 (+ 'a (+ 'b 1))))
-;; (define (tree-recursion interior-function leaf-function node)
-;;   (if (has-children? node)
-;;       (let ((children (get-children node))
-;;             (tree-recurse (curry tree-recursion interior-function node-function)))
-;;         (interior-function node (map tree-recurse children)))
-;;       (leaf-function node)))
- )
+
+ (define (define-procedure expression)
+   (let* ((body (insert-variables expression))
+          (head (create-head body)))
+     (append head (list body))))
+
+(define (get-procedure-name procedure)
+  (first (second procedure)))
+
+(define p '(define ('g 'a) (+ 1 'a)))
+(pretty-print p)
+
+(define (define-and-add-to-environment procedure)
+  (let ((name (get-procedure-name procedure)))
+    (begin
+      (eval procedure (get-current-environment))
+      name)))
+;(define q (define-and-add-to-environment p))
+;(pretty-print q)
+;(define ('g 'a) (+ 1 'a))
+;('g 3)
+(set-pair!
+(define (define-test)
+  (define defs '())
+  (define (test-def)
+    (let ((fname (gen-sym)))
+      (append (define)
+  (defin
+
+
+)
 
 (exit)
