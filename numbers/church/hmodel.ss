@@ -10,9 +10,11 @@
  (define generate-grammar start-grammar 
    (let* ((number-of-rules (sample-integer max-number-rules))
           (rule-names (make-rule-names number-of-rules))
-     (generate-rules start-grammar rule-names)))
+     (generate-rules start-grammar rule-names))))
 
-   ;this version might result in loops, you have to be careful in how you insert rule names to the rhs
+ (define
+   
+   ;this version might result in loops, you have to be careful in how you insert rule names to the rhs, need to always ensure a path to the root
  ;; (define (generate-rules current-grammar rule-names)
  ;;   (map (curry generate-rule current-grammar rule-names) rule-names))
 
