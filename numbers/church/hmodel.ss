@@ -1,15 +1,19 @@
 (import (srfi :1 lists))
 (import (church))
 (church
- (define rule-names '(N))
- (define operators '());an assoc list of procedure names and definitions
- (define generate-grammar
-   generate-rule '())
-   ;(mem (lambda '())))
- ;(define (generate-parse grammar '())
+ (define rule-names '(A B C D E F G H I J))
+ (define max-number-rules 11)
+ (define max-rhs-length 5)
 
- (define (test x y)
-   (+ x y))
+ (define generate-grammar
+   (let ((number-of-rules (sample-integer max-number-rules)))
+     (repeat generate-rule number-of-rules)))
+
+ (define (generate-rule grammar start)
+   (let* ((lhs (gen-sym))
+          (rhs-length (sample-integer max-rhs-length)))
+     (pair lhs (repeat generate-rhs 
+ 
 
  (define (generate-operator grammar start)
    (let* ((expression (generate-expression grammar start))
