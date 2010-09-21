@@ -222,19 +222,38 @@
 
 (random-existing-rule-name)
 
-(define (generate-operator grammar start)
-   (let* ((expression (generate-expression grammar start))
-          (procedure (define-procedure expression))
-          (number-of-args (count-args procedure)) 
-          (rule-names (repeat number-of-args random-existing-rule-name)))
-     (pair procedure rule-names)))
- 
-(generate-operator base 'N)
+
 
 ;(eval '((lambda (g1 g2) (+ (+ (+ g2 g1) 1) 1)) 4 3) (get-current-environment))
 
-(define plus2 (curry + 2 3))
-(repeat 5 plus2)
-)
+(define choose-rule-name uniform-draw)
 
+(choose-rule-name '(a b c d))
+(define (get-rule-names grammar)
+  (map first grammar))
+
+(get-rule-names base)
+(uniform-draw base)
+ (define (generate-operator grammar rule-name)
+   (let* ((start-rule (uniform-draw grammar))
+          (expression (generate-expression grammar (get-rule-name start-rule)))
+          (procedure (define-procedure expression))
+          (number-of-args (count-args procedure))
+          (possible-names (pair rule-name (get-rule-names grammar))) 
+          (rule-names (repeat number-of-args (curry choose-rule-name possible-names))))
+     (pair procedure rule-names)))
+
+ (define (sample-positive-integer n)
+   (+ (sample-integer n) 1))
+
+(generate-operator base 'E)
+ (define max-rhs-length 5)
+ (define (generate-rhs grammar name)
+   (let ((rhs-length (sample-positive-integer max-rhs-length)))
+     (repeat rhs-length (curry generate-operator grammar name))))
+
+(generate-rhs base 'E)
+;(eval ((lambda () 1)) (get-current-environment))
+;(repeat 0 (lambda () 1))
+)
 (exit)

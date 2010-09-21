@@ -5,15 +5,29 @@
  (define max-number-rules 10)
  (define max-rhs-length 5)
 
- (define samples 
+
  
- (define generate-grammar start-grammar 
+ (define (generate-grammar start-grammar)
    (let* ((number-of-rules (sample-integer max-number-rules))
           (rule-names (make-rule-names number-of-rules))
      (generate-rules start-grammar rule-names))))
 
- (define
-   
+ (define (generate-rules grammar future-names)
+   (if (null? future-names)
+       grammar
+       (let ((new-rule (generate-rule grammar (first future-names))))
+         (generate-rules (add-rule new-rule grammar) (rest possible-names)))))
+
+ (define (generate-rule grammar name old-names)
+   (let ((rhs (create-rhs grammar name)))
+     (ensure-non-circular (pair name rhs))))
+
+ (define (generate-rhs grammar name)
+   (let* ((rhs-length (sample-positive-integer max-rhs-length)))
+     (repeat rhs-length (curry generate-operator grammar name))))
+
+ (define (sample-positive-integer n)
+   (+ (sample-integer n) 1))
    ;this version might result in loops, you have to be careful in how you insert rule names to the rhs, need to always ensure a path to the root
  ;; (define (generate-rules current-grammar rule-names)
  ;;   (map (curry generate-rule current-grammar rule-names) rule-names))
@@ -24,12 +38,19 @@
  ;;     (pair rule-name rhs)))
 
 ;change so start is removed and a random rule from the grammar is chonsen
- (define (generate-operator grammar rule-names)
-   (let* ((expression (generate-expression grammar start))
+ (define (generate-operator grammar rule-name)
+   (let* ((start-rule (uniform-draw grammar))
+          (expression (generate-expression grammar (get-rule-name start-rule)))
           (procedure (define-procedure expression))
-          (number-of-args (count-args procedure)) 
-          (rule-names (repeat number-of-args random-existing-rule-name)))
+          (number-of-args (count-args procedure))
+          (possible-names (pair rule-name (get-rule-names grammar))) 
+          (rule-names (repeat number-of-args (curry choose-rule-name possible-names))))
      (pair procedure rule-names)))
+
+ (define (get-rule-names grammar)
+   (map first grammar))
+
+ (define choose-rule-name uniform-draw)
  
  ;; (define (generate-operator grammar start)
  ;;   (let* ((expression (generate-expression grammar start))
