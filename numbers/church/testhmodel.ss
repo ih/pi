@@ -204,7 +204,7 @@
   (first (second procedure)))
 
 (define p (define-procedure '(+ 1 (+ 1 1))))
-(pretty-print p)
+;(pretty-print p)
 (define (get-body procedure)
   (third procedure))
 
@@ -249,13 +249,8 @@
 ;(define op (generate-operator base 'E))
 ;(pretty-print op)
  (define max-rhs-length 5)
- (define (generate-rhs grammar name)
-   (let ((rhs-length (sample-positive-integer max-rhs-length)))
-     (repeat rhs-length (curry generate-operator grammar name))))
 
-;(generate-rhs base 'E)
-;(define trule (pair 'E (generate-rhs base 'E)))
-;tests for ensure-non-circular
+                                        ;tests for ensure-non-circular
 (define get-operands rest)
  (define operator? list?)
  (define (self-reference? rule-name node)
@@ -284,11 +279,42 @@
 (circular? erule)
 (circular? arule)
 
+ (define (make-non-cicular rule old-names)
+   (pair (get-rule-name rule) (pair (uniform-draw old-names) (get-rule-rhs rule))))
+
+;(make-non-cicular erule '(N))
+
+;(make-non-cicular arule '(N))
+
+ (define (ensure-non-circular rule old-names)
+   (if (circular? rule)
+       (let ((new-rule (make-non-cicular rule old-names)))
+         new-rule)
+       rule))
+
+(ensure-non-circular erule '(N))
+(ensure-non-circular arule '(N))
+
+
 ;;  (define (make-non-cicular rule old-names)
 ;;    (pair (get-rule-name rule) (pair (uniform-draw old-names) (get-rule-rhs rule))))
 
 
 ;; ;(circular? E)
 ;; (pretty-print E)
+ (define (generate-rhs grammar name)
+   (let* ((rhs-length (sample-positive-integer max-rhs-length)))
+     (repeat rhs-length (curry generate-operator grammar name))))
+
+
+;(generate-rhs base 'E)
+;(define trule (pair 'E (generate-rhs base 'E)))
+
+ (define (generate-rule grammar name old-names)
+   (let* ((rhs (generate-rhs grammar name))
+          (rule (pair name rhs)))
+     (ensure-non-circular rule old-names)))
+
+(generate-rule base 'E )
 )
 (exit)
