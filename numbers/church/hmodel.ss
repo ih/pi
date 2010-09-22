@@ -16,11 +16,14 @@
    (if (null? future-names)
        grammar
        (let ((new-rule (generate-rule grammar (first future-names))))
-         (generate-rules (add-rule new-rule grammar) (rest possible-names)))))
+         (generate-rules (add-rule new-rule grammar) (rest future-names)))))
 
- (define (generate-rule grammar name old-names)
+ (define add-rule pair)
+ ;look into removing duplicate rules
+ (define (generate-rule grammar name)
    (let* ((rhs (generate-rhs grammar name))
-          (rule (pair name rhs)))
+          (rule (pair name rhs))
+          (old-names (get-rule-names grammar)))
      (ensure-non-circular rule old-names)))
 
  (define (generate-rhs grammar name)

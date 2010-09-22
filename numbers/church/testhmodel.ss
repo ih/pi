@@ -309,12 +309,22 @@
 
 ;(generate-rhs base 'E)
 ;(define trule (pair 'E (generate-rhs base 'E)))
-
- (define (generate-rule grammar name old-names)
+ (define (generate-rule grammar name)
    (let* ((rhs (generate-rhs grammar name))
-          (rule (pair name rhs)))
+          (rule (pair name rhs))
+          (old-names (get-rule-names grammar)))
      (ensure-non-circular rule old-names)))
 
-(generate-rule base 'E )
+
+;(generate-rule base 'E)
+ (define add-rule pair)
+ (define (generate-rules grammar future-names)
+   (if (null? future-names)
+       grammar
+       (let ((new-rule (generate-rule grammar (first future-names))))
+         (generate-rules (add-rule new-rule grammar) (rest future-names)))))
+
+(generate-rules base '(A))
+
 )
 (exit)
