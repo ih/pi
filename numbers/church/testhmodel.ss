@@ -334,7 +334,9 @@
           (rule-names (make-rule-names number-of-rules)))
      (generate-rules start-grammar rule-names)))
 
-(generate-grammar base)
-
+(define g (generate-grammar base))
+(pretty-print g)
+(define start (uniform-draw (get-rule-names g)))
+(generate-expression g start)
 )
 (exit)
