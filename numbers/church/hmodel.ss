@@ -19,8 +19,9 @@
          (generate-rules (add-rule new-rule grammar) (rest possible-names)))))
 
  (define (generate-rule grammar name old-names)
-   (let ((rhs (create-rhs grammar name)))
-     (ensure-non-circular (pair name rhs))))
+   (let* ((rhs (generate-rhs grammar name))
+          (rule (pair name rhs)))
+     (ensure-non-circular rule old-names)))
 
  (define (generate-rhs grammar name)
    (let* ((rhs-length (sample-positive-integer max-rhs-length)))
@@ -28,6 +29,30 @@
 
  (define (sample-positive-integer n)
    (+ (sample-integer n) 1))
+
+ ;add a node that goes to the previous level if it is circular
+ (define (ensure-non-circular rule old-names)
+   (if (circular? rule)
+       (let ((new-rule (make-non-cicular rule old-names)))
+         new-rule)
+       rule))
+ (define (make-non-cicular rule old-names)
+   (pair (get-rule-name rule) (pair (uniform-draw old-names) (get-rule-rhs rule))))
+
+ (define (circular? rule)
+   (let* ((rule-name (get-rule-name rule))
+          (rhs (get-rule-rhs rule)))
+     (apply and (map (curry self-reference? rule-name) rhs))))
+
+ (define (self-reference? rule-name node)
+   (if (operator? node)
+       (let ((operands (get-operands node)))
+         (member? rule-name operands))
+       (equal? node rule-name)))
+
+ (define get-operands rest)
+ (define operator? list?)
+ (define get-rule-rhs rest)
    ;this version might result in loops, you have to be careful in how you insert rule names to the rhs, need to always ensure a path to the root
  ;; (define (generate-rules current-grammar rule-names)
  ;;   (map (curry generate-rule current-grammar rule-names) rule-names))

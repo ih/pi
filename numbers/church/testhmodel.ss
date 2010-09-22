@@ -73,7 +73,7 @@
  ;;         node)) rule-name))
 
  
- (define texp (generate-expression base 'N))
+; (define texp (generate-expression base 'N))
 ;  (pretty-print texp)
  (define (gen-sym)
    (second (gensym)))
@@ -135,7 +135,7 @@
          (possible-variables (list-possible-variables upper-bound)))
     (insert-variables-recursion possible-variables expression)))
  
- (define vexp (insert-variables texp))
+; (define vexp (insert-variables texp))
 
 ; (pretty-print vexp)
  (define variable? symbol?)
@@ -181,7 +181,7 @@
 
  (define (get-variables body)
    (delete-duplicates (flatten (get-variables-recursion body))))
-(get-variables vexp)
+;(get-variables vexp)
 
  (define (create-head body)
    (let ((variable-names (get-variables body)))
@@ -191,7 +191,7 @@
 ;;    (let ((variable-names (get-variables body)))
 ;;      (list 'define (pair (gen-sym) variable-names))))
 
-(create-head vexp)
+;(create-head vexp)
 
 (create-head '(+ 'a 'a))
 
@@ -246,14 +246,49 @@
  (define (sample-positive-integer n)
    (+ (sample-integer n) 1))
 
-(generate-operator base 'E)
+;(define op (generate-operator base 'E))
+;(pretty-print op)
  (define max-rhs-length 5)
  (define (generate-rhs grammar name)
    (let ((rhs-length (sample-positive-integer max-rhs-length)))
      (repeat rhs-length (curry generate-operator grammar name))))
 
-(generate-rhs base 'E)
+;(generate-rhs base 'E)
+;(define trule (pair 'E (generate-rhs base 'E)))
+;tests for ensure-non-circular
+(define get-operands rest)
+ (define operator? list?)
+ (define (self-reference? rule-name node)
+   (if (operator? node)
+       (let ((operands (get-operands node)))
+         (member? rule-name operands))
+       (equal? node rule-name)))
+
+(define erule '(E ((lambda (x y) (+ x y)) E N) E ((lambda (x) x) E)))
+(define arule '(A A ((lambda (x y) (+ x y)) E N) E ((lambda (x) x) E)))
+;(get-operands op)
+
+ (define get-rule-rhs rest)
+(self-reference? 'E (first erule))
+
+
+ (define (circular? rule)
+   (let* ((rule-name (get-rule-name rule))
+          (rhs (get-rule-rhs rule)))
+     (apply and (map (curry self-reference? rule-name) rhs))))
+
 ;(eval ((lambda () 1)) (get-current-environment))
 ;(repeat 0 (lambda () 1))
+
+;(pretty-print trule)
+(circular? erule)
+(circular? arule)
+
+;;  (define (make-non-cicular rule old-names)
+;;    (pair (get-rule-name rule) (pair (uniform-draw old-names) (get-rule-rhs rule))))
+
+
+;; ;(circular? E)
+;; (pretty-print E)
 )
 (exit)
