@@ -324,7 +324,17 @@
        (let ((new-rule (generate-rule grammar (first future-names))))
          (generate-rules (add-rule new-rule grammar) (rest future-names)))))
 
-(generate-rules base '(A))
+;(generate-rules base '(A))
+ (define max-number-rules 3)
+ (define (make-rule-names number)
+   (repeat number gen-sym))
+
+ (define (generate-grammar start-grammar)
+   (let* ((number-of-rules (sample-integer max-number-rules))
+          (rule-names (make-rule-names number-of-rules)))
+     (generate-rules start-grammar rule-names)))
+
+(generate-grammar base)
 
 )
 (exit)

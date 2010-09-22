@@ -9,8 +9,10 @@
  
  (define (generate-grammar start-grammar)
    (let* ((number-of-rules (sample-integer max-number-rules))
-          (rule-names (make-rule-names number-of-rules))
-     (generate-rules start-grammar rule-names))))
+          (rule-names (make-rule-names number-of-rules)))
+     (generate-rules start-grammar rule-names)))
+ (define (make-rule-names number)
+   (repeat number gen-sym))
 
  (define (generate-rules grammar future-names)
    (if (null? future-names)
