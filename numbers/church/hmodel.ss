@@ -1,9 +1,11 @@
 (import (srfi :1 lists))
 (import (church))
 (church
- ;; (define rule-names '(A B C D E F G H I J))
- (define max-number-rules 10)
- (define max-rhs-length 5)
+
+ (define max-number-rules 2)
+ (define max-rhs-length 2)
+ (define naturals '((N 1 (+ N N))))
+ 
 
 
  
@@ -21,7 +23,7 @@
          (generate-rules (add-rule new-rule grammar) (rest future-names)))))
 
  (define add-rule pair)
- ;look into removing duplicate rules
+                                        ;look into removing duplicate rules
  (define (generate-rule grammar name)
    (let* ((rhs (generate-rhs grammar name))
           (rule (pair name rhs))
@@ -35,7 +37,7 @@
  (define (sample-positive-integer n)
    (+ (sample-integer n) 1))
 
- ;add a node that goes to the previous level if it is circular
+                                        ;add a node that goes to the previous level if it is circular
  (define (ensure-non-circular rule old-names)
    (if (circular? rule)
        (let ((new-rule (make-non-cicular rule old-names)))
@@ -58,16 +60,7 @@
  (define get-operands rest)
  (define operator? list?)
  (define get-rule-rhs rest)
-   ;this version might result in loops, you have to be careful in how you insert rule names to the rhs, need to always ensure a path to the root
- ;; (define (generate-rules current-grammar rule-names)
- ;;   (map (curry generate-rule current-grammar rule-names) rule-names))
 
- ;; (define (generate-rule grammar possible-rules rule-name)
- ;;   (let* ((rhs-length (sample-integer max-rhs-legth))
- ;;          (rhs (repeat rhs-length (curry generate-operator grammar))))
- ;;     (pair rule-name rhs)))
-
-;change so start is removed and a random rule from the grammar is chonsen
  (define (generate-operator grammar rule-name)
    (let* ((start-rule (uniform-draw grammar))
           (expression (generate-expression grammar (get-rule-name start-rule)))
@@ -82,12 +75,6 @@
 
  (define choose-rule-name uniform-draw)
  
- ;; (define (generate-operator grammar start)
- ;;   (let* ((expression (generate-expression grammar start))
- ;;          (procedure (define-procedure expression))
- ;;          (procdeure-info (add-to-library procedure)) ;info is name and number of arguments
- ;;          (rule-names (repeat (number-of-args procedure-info) random-existing-rule-name)))
- ;;     (pair (name procedure-info) rule-names)))
 ;;;begin expression generator ****************
  
  (define (generate-expression grammar rule-name)
@@ -98,8 +85,8 @@
          node)))
 
  (define (curry fun . args)
-          (lambda x
-            (apply fun (append args x))))
+   (lambda x
+     (apply fun (append args x))))
 
  
  (define (select-rule grammar rule-name)
@@ -114,17 +101,16 @@
              (find test (rest lst))))))
 
 
- (define (get-rule-name rule)
-   (first rule))
+ (define get-rule-name first)
 
  (define (choose-node rule)
    (uniform-draw (get-nodes rule)))
  (define (get-nodes rule)
    (rest rule))
 
- (define (has-children node)
-   (list? node))
-       
+ (define has-children? list?)
+
+ 
  
  (define (get-children node)
    (rest node))
@@ -147,6 +133,15 @@
           (possible-variables (list-possible-variables upper-bound)))
      (insert-variables-recursion possible-variables expression)))
 
+ (define (insert-variables-recursion variables expression)
+   (if (has-children? expression)
+       (let ((children (get-children expression)))
+         (pair (get-operator-name expression) (map (curry insert-variables-recursion variables) children)))
+       (if (flip)
+           (uniform-draw variables)
+           expression)))
+
+ 
  (define (count-leaves expression)
    (if (has-children? expression)
        (let ((children (get-children expression)))
@@ -170,13 +165,13 @@
  
  (define (create-head body)
    (let ((variable-names (get-variables body)))
-     (list 'lambda variable-names))))
+     (list 'lambda variable-names)))
 
-(define (flatten l)
-  (cond ((null? l) '())
-        ((list? l)
-         (append (flatten (first l)) (flatten (rest l))))
-        (else (list l))))
+ (define (flatten l)
+   (cond ((null? l) '())
+         ((list? l)
+          (append (flatten (first l)) (flatten (rest l))))
+         (else (list l))))
 
  (define (get-variables body)
    (flatten get-variables-recursion body))
@@ -189,79 +184,44 @@
            '())))
  (define variable? symbol?)
 
-(define (delete-duplicates lst)
-  (delete-duplicates-helper set lst))
+ (define (delete-duplicates lst)
+   (delete-duplicates-helper '() lst))
 
-(define (delete-duplicates-helper set lst)
-  (if (null? lst)
-      set
-      (delete-duplicates-helper
-       (if (member? (first lst) set)
-           set
-           (pair (first lst) set))
-       (rest lst))))
+ (define (delete-duplicates-helper set lst)
+   (if (null? lst)
+       set
+       (delete-duplicates-helper
+        (if (member? (first lst) set)
+            set
+            (pair (first lst) set))
+        (rest lst))))
 
-(define (member? item lst)
-  (if (null? lst)
-      false
-      (if (equal? item (first lst))
-          true
-          (member? item (rest lst)))))
+ (define (member? item lst)
+   (if (null? lst)
+       false
+       (if (equal? item (first lst))
+           true
+           (member? item (rest lst)))))
 ;;;end of define procedure
 
-(define (count-args procedure)
-  (let ((variables (second procedure)))
-    (length variables)))
+ (define (count-args procedure)
+   (let ((variables (second procedure)))
+     (length variables)))
 
-(define (get-body procedure)
-  (third procedure))
+ (define (get-body procedure)
+   (third procedure))
 
-(define (random-existing-rule-name)
-  (uniform-draw rule-names))
 
 ;;;begin define-and-add-to-environment
-(define (define-and-add-to-environment procedure)
-  (let ((name (get-procedure-name procedure)))
-    (begin
-      (eval procedure (get-current-environment))
-      name)))
+ (define (define-and-add-to-environment procedure)
+   (let ((name (get-procedure-name procedure)))
+     (begin
+       (eval procedure (get-current-environment))
+       name)))
 
-(define (get-procedure-name procedure)
-  (first (second procedure)))
+ (define (get-procedure-name procedure)
+   (first (second procedure)))
 
-
-;;;functions refactored with tree-recursion             
-;; (define (tree-recursion interior-function leaf-function node)
-;;   (if (has-children? node)
-;;       (let ((children (get-children node))
-;;             (tree-recurse (curry tree-recursion interior-function node-function)))
-;;         (interior-function node (map tree-recurse children)))
-;;       (leaf-function node)))
-
-;; (define (count-leaves root) (tree-recursion
-;;   (lambda (node children) (apply + children))
-;;   (lambda (node) 1) root))
-
-;; (define (insert-variables expression)
-;;   (let* ((upper-bound (count-leaves expression))
-;;          (possible-variables (list-possible-variables upper-bound)))
-;;     (tree-recursion
-;;      (lambda (expression children) (pair (get-operator-name expression) children))
-;;      (lambda (expression) (if (flip)
-;;                               (uniform-draw possible-variables)
-;;                               expression)) expression)))
-
-;; (define (generate-expression grammar rule-name)
-;;   (tree-recursion
-;;      (lambda (rule-name children)
-;;        (let* ((current-rule (select-rule grammar rule-name))
-;;               (node (choose-node current-rule)))
-;;          (pair (get-operator-name node) children)))
-;;      (lambda (rule-name)
-;;        (let* ((current-rule (select-rule grammar rule-name))
-;;               (node (choose-node current-rule)))
-;;          node))))
-
-         
-)
-
+ (generate-grammar naturals)
+ )
+(exit)

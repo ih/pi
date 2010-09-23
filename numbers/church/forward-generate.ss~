@@ -1,0 +1,6 @@
+(import (church))
+(church
+  (define (generate-grammar start-grammar)
+   (let* ((number-of-rules (sample-integer max-number-rules))
+          (rule-names (make-rule-names number-of-rules)))
+     (generate-rules start-grammar rule-names)))

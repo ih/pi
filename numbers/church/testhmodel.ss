@@ -217,8 +217,6 @@
 
 (count-args p)
 (define rule-names '(N E))
-(define (random-existing-rule-name)
-  (uniform-draw rule-names))
 
 (random-existing-rule-name)
 
