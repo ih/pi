@@ -96,7 +96,7 @@
  (define variable? symbol?)
 ;;;grammar implementation functions; a grammar is implemented as a list of rules
  (define (select-rule grammar rule-name)
-   (find get-rule-name grammar))
+   (find (lambda (rule) (equal? (get-rule-name rule) rule-name)) grammar))
 
  (define (get-rule-names grammar)
   (map first grammar))

@@ -4,11 +4,12 @@
 ;;;global parameters
  (define max-number-rules 3)
  (define max-rhs-length 5)
- (define debug 3); if this is -1 then generate-grammar should work normally otherwise each call to generate-syntax-tree will be limited to debug number of iterations
+ (define debug 2); if this is -1 then generate-grammar should work normally otherwise each call to generate-syntax-tree will be limited to debug number of iterations
 ;;;code for generating an parse-tree
  (define (generate-syntax-tree grammar time rule-name)
    (let* ((current-rule (select-rule grammar rule-name))
-          (operation (choose-operation current-rule)))
+          (operation (choose-operation current-rule))
+          (debug (pretty-print (list "debug" time current-rule operation))))
      (if (and (has-operands? operation) (not (times-up? time)))
          (construct-operation (get-operator operation) (map (curry generate-syntax-tree grammar (adjust-time time)) (get-operands operation)))
          operation)))
@@ -97,7 +98,7 @@
  (define variable? symbol?)
 ;;;grammar implementation functions; a grammar is implemented as a list of rules
  (define (select-rule grammar rule-name)
-   (find get-rule-name grammar))
+   (find (lambda (rule) (equal? (get-rule-name rule) rule-name)) grammar))
 
  (define (get-rule-names grammar)
   (map first grammar))
@@ -204,16 +205,17 @@
    
  (define naturals '((N 1 (+ N N))))
  ;(generate-syntax-tree naturals 'N)
-  (pretty-print (generate-grammar naturals))
+ (define ng  (generate-grammar naturals))
+ (pretty-print (pair "grammar" ng))
 
+ ;(define exp (generate-syntax-tree ng 5 (uniform-draw (get-rule-names ng))))
+ (define exp (generate-syntax-tree ng 2 'N))
 
- (define dg '((g0 ((lambda () ((lambda () 1)))) ((lambda () ((lambda (g1) g1) ((lambda () 1))))) ((lambda () ((lambda (g2) g2) ((lambda () 1))))) ((lambda () ((lambda () 1))))) (g3 ((lambda (g2) g2) N) ((lambda () 1)) ((lambda (g1) g1) g3) ((lambda (g4) g4) g3)) (N 1 (+ N N))))
-(define exp (generate-syntax-tree dg 20 'g3))
-(pretty-print exp)
+ (pretty-print (list "expression" exp))
+
+; (select-rule ng 'N)
 ; (eval exp (get-current-environment))
  
-
-
  )
 
 (exit)
