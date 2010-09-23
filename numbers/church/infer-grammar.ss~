@@ -222,19 +222,17 @@
 ;;;generate expression tests
 ; (generate-syntax-tree 3 naturals 'N)
 ;;;generate grammar tests 
-;;   (define ng  (generate-grammar naturals))
-;;   (pretty-print (pair "grammar" ng))
+  (define ng  (generate-grammar naturals))
+  (pretty-print (pair "grammar" ng))
 
-;;   (define exp (generate-syntax-tree 5 ng (uniform-draw (get-rule-names ng))))
-;; ;;  (define exp (generate-syntax-tree ng 2 'N))
+  (define exp (generate-syntax-tree 5 ng (uniform-draw (get-rule-names ng))))
+;;  (define exp (generate-syntax-tree ng 2 'N))
 
-;;   (pretty-print (list "syntax-tree" exp))
-;;   (eval exp (get-current-environment))
+  (pretty-print (list "syntax-tree" exp))
+  (eval exp (get-current-environment))
 ;;;make-evalable-test
  ;; (get-rule-names ng)
  ;; (make-evalable ng '(+ (+ 1 1) (+ (+ N N) 1)))
-;;;inference help tests
- (eval (generate-syntax-tree 5 naturals 'N) (get-current-environment))
  )
 
 (exit)
