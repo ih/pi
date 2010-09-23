@@ -164,7 +164,7 @@
  (define (curry fun . args)
           (lambda x
             (apply fun (append args x))))
- ((curry * 2) 6)
+
 
  (define (sample-positive-integer n)
    (+ (sample-integer n) 1))
@@ -198,24 +198,37 @@
           (member? item (rest lst)))))
 
 
-;;;testing
-;;;early stopping related functions
+
+;;;bounded generation related functions
  (define (times-up? time) (= 0 time))
  (define (adjust-time time) (- time 1))
+ ;for now make-evalable turns rule names into 1s, this can be generalized to replacing the rule names with primitives from the type represented by the rule name
+ (define (make-evalable grammar partial-syntax-tree)
+   (let ((rule-names (get-rule-names grammar)))
+     (make-evalable-recursion rule-names partial-syntax-tree)))
+
+ (define (make-evalable-recursion rule-names partial-syntax-tree)
+   (if (operator? partial-syntax-tree)
+       (let* ((operands (get-operands partial-syntax-tree)))
+         (construct-operation (get-operator partial-syntax-tree) (map (curry make-evalable-recursion rule-names) operands)))
+       (if (member? partial-syntax-tree rule-names)
+           1 ;the general case will depend on rule name
+           partial-syntax-tree)))
    
+
+;;;testing   
  (define naturals '((N 1 (+ N N))))
  ;(generate-syntax-tree naturals 'N)
  (define ng  (generate-grammar naturals))
  (pretty-print (pair "grammar" ng))
 
- (define exp (generate-syntax-tree ng 5 (uniform-draw (get-rule-names ng))))
-; (define exp (generate-syntax-tree ng 2 'N))
+; (define exp (generate-syntax-tree ng 5 (uniform-draw (get-rule-names ng))))
+ (define exp (generate-syntax-tree ng 2 'N))
 
- (pretty-print (list "expression" exp))
-
-; (select-rule ng 'N)
-; (eval exp (get-current-environment))
- 
+ (pretty-print (list "syntax-tree" exp))
+;;;make-evalable-test
+ (get-rule-names ng)
+ (make-evalable ng '(+ (+ 1 1) (+ (+ N N) 1)))
  )
 
 (exit)
