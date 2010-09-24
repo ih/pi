@@ -219,17 +219,17 @@
     
 ;;;
 
-
+;;;inference
  (define samples
    (mh-query
     10 100
     (define naturals '((N 1 (+ N N))))
-    (define expr (generate-syntax-tree 5 (generate-grammar naturals) 'N))
+    (define expr (generate-syntax-tree 5 naturals 'N))
     (define proc (generate-procedure expr))
 ;;;what we want to know
     expr
 ;;;what we know
-    (and (= 10 (eval expr (get-current-environment))))
+    (and (= 4 (eval expr (get-current-environment))))
     )
    )
  samples

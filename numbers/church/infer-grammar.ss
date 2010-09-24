@@ -4,10 +4,6 @@
 ;;;global parameters
  (define max-number-rules 3)
  (define max-rhs-length 5)
-
- (define samples
-   (mh-query
-    10 100
 ;;;generative model
     (define debug 2); if this is -1 then generate-grammar should work normally otherwise each call to generate-syntax-tree will be limited to debug number of iterations
 ;;;code for generating an parse-tree
@@ -223,11 +219,17 @@
     
 ;;;
 
+;;;inference
+ (define samples
+   (mh-query
+    10 100
     (define naturals '((N 1 (+ N N))))
+    (define expr (generate-syntax-tree 5 naturals 'N))
+    (define proc (generate-procedure expr))
 ;;;what we want to know
-    generate-syntax-tree
+    expr
 ;;;what we know
-    (and (= 4 (eval (generate-syntax-tree 5 naturals 'N) (get-current-environment))))
+    (and (= 4 (eval expr (get-current-environment))))
     )
    )
  samples
