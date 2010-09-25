@@ -23,7 +23,14 @@
       (let* ((number-of-rules (sample-integer max-number-rules))
              (rule-names (make-rule-names number-of-rules)))
         (generate-rules start-grammar rule-names)))
+    ;; (define generate-grammar
+    ;;   (mem
+    ;;    (lambda (start-grammar)
+    ;;      (let* ((number-of-rules (sample-integer max-number-rules))
+    ;;             (rule-names (make-rule-names number-of-rules)))
+    ;;        (generate-rules start-grammar rule-names)))))
 
+    
     (define (generate-rules grammar future-names)
       (if (null? future-names)
           grammar
@@ -224,15 +231,29 @@
    (mh-query
     10 100
     (define naturals '((N 1 (+ N N))))
-    (define expr (generate-syntax-tree 5 naturals 'N))
-    (define proc (generate-procedure expr))
+    (define grammar (generate-grammar naturals))
+    (define start-rule (uniform-draw (get-rule-names grammar)))
+    ;(define expr (generate-syntax-tree 5 naturals 'N))
+
 ;;;what we want to know
-    expr
+    (generate-syntax-tree 5 grammar start-rule)
+    ;expr
 ;;;what we know
-    (and (= 4 (eval expr (get-current-environment))))
+    (and (= 2 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 4 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 6 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 8 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 10 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 12 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))))
+    ;(= 4 (eval expr (get-current-environment)))
     )
    )
- samples
+(pretty-print samples)
+(define (mappable-eval expression)
+  (eval expression (get-current-environment)))
+(map mappable-eval samples)
+
+;;;testing
+    ;; (define naturals '((N 1 (+ N N))))
+    ;; (define expr (generate-syntax-tree 5 naturals 'N))
+    ;; ;; ;(generate-syntax-tree 10 naturals 'N)
+    ;; ;;(generate-grammar naturals)
+    
  )
 
 (exit)
