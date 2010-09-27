@@ -10,8 +10,8 @@
 ;;;code for generating a syntax-tree
     (define (generate-partial-syntax-tree time grammar rule-name)
       (let* ((current-rule (select-rule grammar rule-name))
-             (operation (choose-operation current-rule)))
-                                        ;          (debug (pretty-print (list "debug" time current-rule operation))))
+             (operation (choose-operation current-rule))
+             )
         (if (and (has-operands? operation) (not (times-up? time)))
             (construct-operation (get-operator operation) (map (curry generate-partial-syntax-tree (adjust-time time) grammar) (get-operands operation)))
             operation)))
@@ -146,7 +146,8 @@
     (define get-rule-rhs rest)
     
 ;;;operation implementation functions; operations are implemented as a list with the first element being an operator (lambda syntax-tree) and the rest of the elements are the operands, within a rule the operands are represented by rule names 
-    (define has-operands? list?)
+    (define (has-operands? op)
+      (and (list? op) (not (null? op))))
 
                                         ;construct-operation takes two arguments, the operator and a list of operands
     (define construct-operation pair)
@@ -156,7 +157,8 @@
     (define get-operands rest)
 
 ;;;syntax tree implementation functions
-    (define operator? list?)
+    (define (operator? op)
+      (and (list? op) (not (null? op))))
 
     (define (count-leaves syntax-tree)
       (if (operator? syntax-tree)
@@ -222,36 +224,67 @@
           (let* ((operands (get-operands partial-syntax-tree)))
             (construct-operation (get-operator partial-syntax-tree) (map (curry make-evalable-recursion rule-names) operands)))
           (if (member? partial-syntax-tree rule-names)
-              1 ;the general case will depend on rule name
+              () ;the general case will depend on rule name
               partial-syntax-tree)))
     
 ;;;
+;;;tree grammar related functions
+    (define trees '((T ((lambda (x) (append '(node color) x)) A)) (A ((lambda (x) (list x)) T) () ((lambda (x y) (list x y)) A A))))
+
+    (define (join x y)
+      (list 'join x y))
+    (define (flatten-join jlist)
+      (if (jlist? jlist)
+          (let ((items (get-jlist-items jlist)))
+            (append (list (flatten-join (first items))) (flatten-join (rest items))))
+          (list jlist)))
+
+(define (jlist? lst)
+  (if (list? lst)
+      (equal? (first lst) 'join)
+      false))
+
+(define get-jlist-items rest)
 
 ;;;inference
- (define samples
-   (mh-query
-    100 100
-    (define naturals '((N 1 (+ N N))))
-    (define grammar (generate-grammar naturals))
-    (define start-rule (get-rule-name (first grammar)))
-    ;(define expr (generate-syntax-tree 5 naturals 'N))
+;;  (define samples
+;;    (mh-query
+;;     100 100naturals
+;;     (define trees '((T ((lambda (x) (append '(node color) x)) A)) (A T '() (flatten (join A A)))))
+;;     (naturals ((N 1 (+ N N)))
+;;     (define grammar (generate-grammar naturals))
+;;     (define start-rule (get-rule-name (first grammar)))
+;;     ;(define expr (generate-syntax-tree 5 naturals 'N))
 
-;;;what we want to know
-    (list "grammar" grammar "expression"(generate-syntax-tree 5 grammar start-rule))
-    ;expr
-;;;what we know
-    (and (= 2 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 4 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 6 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))))
-    ;(= 4 (eval expr (get-current-environment)))
-    )
-   )
-(pretty-print samples)
-(define (mappable-eval expression)
-  (eval expression (get-current-environment)))
-(map mappable-eval (map fourth samples))
+;; ;;;what we want to know
+;;     (list "grammar" grammar "expression"(generate-syntax-tree 5 grammar start-rule))
+;;     ;expr
+;; ;;;what we know
+;;     (and (= 2 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 4 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 6 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))))
+;;     ;(= 4 (eval expr (get-current-environment)))
+;;     )
+;;    )
+;; (pretty-print samples)
+;; (define (mappable-eval expression)
+;;   (eval expression (get-current-environment)))
+;; (map mappable-eval (map fourth samples))
 
 ;;;testing
-    ;; (define naturals '((N 1 (+ N N))))
-    ;; (define expr (generate-syntax-tree 5 naturals 'N))
+;;;tree grammar tests
+;; (define j (join '(3 4 (4 5)) 4))
+;; (define k (join (list 3 4 (join 4 5)) 4))
+;; (pretty-print j)
+;; (pretty-print k)
+;; (jlist? j)
+;; (flatten-join j)
+;; k
+;; (flatten-join k)          
+;(has-operands? ''())            
+(define expr (generate-syntax-tree 5 trees 'T))
+expr
+;(eval '((lambda (x) (append '(node color) x)) ()) (get-current-environment))
+(pretty-print expr)
+(eval expr (get-current-environment))
     ;; ;; ;(generate-syntax-tree 10 naturals 'N)
     ;; ;;(generate-grammar naturals)
     

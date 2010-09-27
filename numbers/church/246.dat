@@ -1,0 +1,2167 @@
+Ikarus Scheme version 0.0.4-rc1+ (revision 1870, build 2010-06-03)
+Copyright (c) 2006-2009 Abdulaziz Ghuloum
+
+Loaded Church v0.1.2-alpha
+
+  Beginning syntactic analysis...
+  Beginning MCMC...
+(("grammar"
+   ((#{g972 |Wokz1QP&l>R<l/tF|}
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        N)
+      ((lambda (#{g974 |>tYsQy9INV$/Q=D!|})
+         #{g974 |>tYsQy9INV$/Q=D!|})
+        #{g972 |Wokz1QP&l>R<l/tF|}))
+     (N 1 (+ N N)))
+   "expression"
+   ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+      (+ #{g973 |n6uM1sisw6XIZgfL|}
+        #{g973 |n6uM1sisw6XIZgfL|}))
+     1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 1) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ 1 (+ 1 (+ 1 (+ 1 1)))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ (+ 1 (+ 1 1)) (+ 1 1)))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 1) (+ (+ 1 (+ (+ 1 1) (+ 1 1))) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ (+ (+ (+ 1 1) (+ 1 1)) (+ (+ 1 1) 1)) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 (+ 1 (+ (+ 1 1) (+ 1 1)))) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ (+ 1 (+ (+ 1 1) (+ 1 1))) (+ 1 1)) (+ 1 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ (+ (+ (+ 1 1) (+ 1 1)) 1) 1) (+ 1 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 1) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 1) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 (+ (+ 1 1) 1)) (+ 1 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g976 |!&J31MLHDs2LW9Jx|})
+          (+ #{g976 |!&J31MLHDs2LW9Jx|} 1))
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda
+          (#{g977 |AW&j9LNYR<H1E6TU|}
+            #{g978 |<$Dm9d&A!NTx3MX!|})
+          (+ (+ 1 #{g978 |<$Dm9d&A!NTx3MX!|})
+            (+ 1 #{g977 |AW&j9LNYR<H1E6TU|})))
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g977 |AW&j9LNYR<H1E6TU|}
+         #{g978 |<$Dm9d&A!NTx3MX!|})
+       (+ (+ 1 #{g978 |<$Dm9d&A!NTx3MX!|})
+         (+ 1 #{g977 |AW&j9LNYR<H1E6TU|})))
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        1)
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () 1))
+       ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+          (+ (+ 1 (+ 1 #{g977 |AW&j9LNYR<H1E6TU|}))
+            (+ #{g977 |AW&j9LNYR<H1E6TU|} (+ 1 1))))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+       (+ (+ 1 (+ 1 #{g977 |AW&j9LNYR<H1E6TU|}))
+         (+ #{g977 |AW&j9LNYR<H1E6TU|} (+ 1 1))))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () 1))
+       ((lambda
+          (#{g979 |lWWWEpR2HNQC3XY2|}
+            #{g977 |AW&j9LNYR<H1E6TU|}
+            #{g978 |<$Dm9d&A!NTx3MX!|}
+            #{g980 |M/K6WoW?T3DobRDM|}
+            #{g981 |tAEHIDkxiGGhAxbD|})
+          (+
+            (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+              (+ #{g980 |M/K6WoW?T3DobRDM|}
+                #{g978 |<$Dm9d&A!NTx3MX!|}))
+            (+ #{g977 |AW&j9LNYR<H1E6TU|}
+              (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                #{g979 |lWWWEpR2HNQC3XY2|}))))
+         N #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g979 |lWWWEpR2HNQC3XY2|}
+         #{g977 |AW&j9LNYR<H1E6TU|}
+         #{g978 |<$Dm9d&A!NTx3MX!|}
+         #{g980 |M/K6WoW?T3DobRDM|}
+         #{g981 |tAEHIDkxiGGhAxbD|})
+       (+
+         (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+           (+ #{g980 |M/K6WoW?T3DobRDM|}
+             #{g978 |<$Dm9d&A!NTx3MX!|}))
+         (+ #{g977 |AW&j9LNYR<H1E6TU|}
+           (+ #{g977 |AW&j9LNYR<H1E6TU|}
+             #{g979 |lWWWEpR2HNQC3XY2|}))))
+      (+ 1 (+ 1 (+ 1 1)))
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        (+ (+ 1 (+ 1 1)) 1))
+      ((lambda
+         (#{g979 |lWWWEpR2HNQC3XY2|}
+           #{g977 |AW&j9LNYR<H1E6TU|}
+           #{g978 |<$Dm9d&A!NTx3MX!|}
+           #{g980 |M/K6WoW?T3DobRDM|}
+           #{g981 |tAEHIDkxiGGhAxbD|})
+         (+
+           (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+             (+ #{g980 |M/K6WoW?T3DobRDM|}
+               #{g978 |<$Dm9d&A!NTx3MX!|}))
+           (+ #{g977 |AW&j9LNYR<H1E6TU|}
+             (+ #{g977 |AW&j9LNYR<H1E6TU|}
+               #{g979 |lWWWEpR2HNQC3XY2|}))))
+        1 ((lambda () 1)) ((lambda () 1))
+        ((lambda
+           (#{g979 |lWWWEpR2HNQC3XY2|}
+             #{g977 |AW&j9LNYR<H1E6TU|}
+             #{g978 |<$Dm9d&A!NTx3MX!|}
+             #{g980 |M/K6WoW?T3DobRDM|}
+             #{g981 |tAEHIDkxiGGhAxbD|})
+           (+
+             (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+               (+ #{g980 |M/K6WoW?T3DobRDM|}
+                 #{g978 |<$Dm9d&A!NTx3MX!|}))
+             (+ #{g977 |AW&j9LNYR<H1E6TU|}
+               (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                 #{g979 |lWWWEpR2HNQC3XY2|}))))
+          1
+          ((lambda
+             (#{g979 |lWWWEpR2HNQC3XY2|}
+               #{g977 |AW&j9LNYR<H1E6TU|}
+               #{g978 |<$Dm9d&A!NTx3MX!|}
+               #{g980 |M/K6WoW?T3DobRDM|}
+               #{g981 |tAEHIDkxiGGhAxbD|})
+             (+
+               (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+                 (+ #{g980 |M/K6WoW?T3DobRDM|}
+                   #{g978 |<$Dm9d&A!NTx3MX!|}))
+               (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                 (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                   #{g979 |lWWWEpR2HNQC3XY2|}))))
+            (+ (+ 1 1) (+ 1 1))
+            ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+               (+ #{g973 |n6uM1sisw6XIZgfL|}
+                 #{g973 |n6uM1sisw6XIZgfL|}))
+              1)
+            ((lambda () 1)) ((lambda () 1))
+            ((lambda
+               (#{g979 |lWWWEpR2HNQC3XY2|}
+                 #{g977 |AW&j9LNYR<H1E6TU|}
+                 #{g978 |<$Dm9d&A!NTx3MX!|}
+                 #{g980 |M/K6WoW?T3DobRDM|}
+                 #{g981 |tAEHIDkxiGGhAxbD|})
+               (+
+                 (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+                   (+ #{g980 |M/K6WoW?T3DobRDM|}
+                     #{g978 |<$Dm9d&A!NTx3MX!|}))
+                 (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                   (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                     #{g979 |lWWWEpR2HNQC3XY2|}))))
+              (+ 1 1)
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1)
+              ((lambda
+                 (#{g979 |lWWWEpR2HNQC3XY2|}
+                   #{g977 |AW&j9LNYR<H1E6TU|}
+                   #{g978 |<$Dm9d&A!NTx3MX!|}
+                   #{g980 |M/K6WoW?T3DobRDM|}
+                   #{g981 |tAEHIDkxiGGhAxbD|})
+                 (+
+                   (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+                     (+ #{g980 |M/K6WoW?T3DobRDM|}
+                       #{g978 |<$Dm9d&A!NTx3MX!|}))
+                   (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                     (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                       #{g979 |lWWWEpR2HNQC3XY2|}))))
+                1 1 1 1 1)
+              ((lambda
+                 (#{g979 |lWWWEpR2HNQC3XY2|}
+                   #{g977 |AW&j9LNYR<H1E6TU|}
+                   #{g978 |<$Dm9d&A!NTx3MX!|}
+                   #{g980 |M/K6WoW?T3DobRDM|}
+                   #{g981 |tAEHIDkxiGGhAxbD|})
+                 (+
+                   (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+                     (+ #{g980 |M/K6WoW?T3DobRDM|}
+                       #{g978 |<$Dm9d&A!NTx3MX!|}))
+                   (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                     (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                       #{g979 |lWWWEpR2HNQC3XY2|}))))
+                1 1 1 1 1)
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1)))
+          ((lambda
+             (#{g979 |lWWWEpR2HNQC3XY2|}
+               #{g977 |AW&j9LNYR<H1E6TU|}
+               #{g978 |<$Dm9d&A!NTx3MX!|}
+               #{g980 |M/K6WoW?T3DobRDM|}
+               #{g981 |tAEHIDkxiGGhAxbD|})
+             (+
+               (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+                 (+ #{g980 |M/K6WoW?T3DobRDM|}
+                   #{g978 |<$Dm9d&A!NTx3MX!|}))
+               (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                 (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                   #{g979 |lWWWEpR2HNQC3XY2|}))))
+            (+ (+ 1 1) (+ 1 1))
+            ((lambda
+               (#{g979 |lWWWEpR2HNQC3XY2|}
+                 #{g977 |AW&j9LNYR<H1E6TU|}
+                 #{g978 |<$Dm9d&A!NTx3MX!|}
+                 #{g980 |M/K6WoW?T3DobRDM|}
+                 #{g981 |tAEHIDkxiGGhAxbD|})
+               (+
+                 (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+                   (+ #{g980 |M/K6WoW?T3DobRDM|}
+                     #{g978 |<$Dm9d&A!NTx3MX!|}))
+                 (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                   (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                     #{g979 |lWWWEpR2HNQC3XY2|}))))
+              1
+              ((lambda
+                 (#{g979 |lWWWEpR2HNQC3XY2|}
+                   #{g977 |AW&j9LNYR<H1E6TU|}
+                   #{g978 |<$Dm9d&A!NTx3MX!|}
+                   #{g980 |M/K6WoW?T3DobRDM|}
+                   #{g981 |tAEHIDkxiGGhAxbD|})
+                 (+
+                   (+ (+ 1 #{g981 |tAEHIDkxiGGhAxbD|})
+                     (+ #{g980 |M/K6WoW?T3DobRDM|}
+                       #{g978 |<$Dm9d&A!NTx3MX!|}))
+                   (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                     (+ #{g977 |AW&j9LNYR<H1E6TU|}
+                       #{g979 |lWWWEpR2HNQC3XY2|}))))
+                1 1 1 1 1)
+              ((lambda () 1)) ((lambda () 1))
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1))
+            ((lambda () 1))
+            ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+               (+ #{g973 |n6uM1sisw6XIZgfL|}
+                 #{g973 |n6uM1sisw6XIZgfL|}))
+              1)
+            ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+               (+ #{g973 |n6uM1sisw6XIZgfL|}
+                 #{g973 |n6uM1sisw6XIZgfL|}))
+              1))
+          ((lambda () 1))
+          ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+             (+ #{g973 |n6uM1sisw6XIZgfL|}
+               #{g973 |n6uM1sisw6XIZgfL|}))
+            (+ (+ 1 1) (+ 1 1))))
+        ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+           (+ #{g973 |n6uM1sisw6XIZgfL|}
+             #{g973 |n6uM1sisw6XIZgfL|}))
+          1))
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        (+ 1 1))
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        (+ (+ 1 (+ 1 (+ 1 1))) (+ 1 1)))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda
+          (#{g977 |AW&j9LNYR<H1E6TU|}
+            #{g982 |a4l6f/T2FAKMV%6D|}
+            #{g978 |<$Dm9d&A!NTx3MX!|})
+          (+
+            (+ #{g978 |<$Dm9d&A!NTx3MX!|}
+              (+ #{g978 |<$Dm9d&A!NTx3MX!|}
+                #{g982 |a4l6f/T2FAKMV%6D|}))
+            #{g977 |AW&j9LNYR<H1E6TU|}))
+         N #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ (+ 1 (+ (+ 1 1) 1)) (+ (+ 1 1) 1)) (+ 1 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+          #{g977 |AW&j9LNYR<H1E6TU|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda (#{g983 |v1O/?!uBnbx<PEo/|})
+          (+ #{g983 |v1O/?!uBnbx<PEo/|} 1))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 (+ 1 (+ 1 (+ 1 1))))
+        (+ 1 (+ (+ (+ 1 1) (+ 1 1)) 1)))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda () 1)) ((lambda () (+ 1 1))))
+      (N 1 (+ N N)))
+    "expression" ((lambda () 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () 1)) ((lambda () 1))
+       ((lambda
+          (#{g984 |1bRzkC7skjjtoG>W|}
+            #{g983 |v1O/?!uBnbx<PEo/|})
+          (+ #{g983 |v1O/?!uBnbx<PEo/|}
+            #{g984 |1bRzkC7skjjtoG>W|}))
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression" ((lambda () 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g985 |9V?BVUXsCf3M!AiN|})
+          (+ 1 #{g985 |9V?BVUXsCf3M!AiN|}))
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda () 1)) ((lambda () (+ 1 1))))
+      (N 1 (+ N N)))
+    "expression" ((lambda () (+ 1 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+          #{g977 |AW&j9LNYR<H1E6TU|})
+         N)
+       ((lambda () (+ 1 1))))
+      (N 1 (+ N N)))
+    "expression" ((lambda () (+ 1 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () 1))
+       ((lambda
+          (#{g986 |2B9304?fSu9tzTDT|}
+            #{g987 |PvD9DQeWr02Zfst$|})
+          (+
+            (+ #{g987 |PvD9DQeWr02Zfst$|}
+              (+ 1 #{g986 |2B9304?fSu9tzTDT|}))
+            (+ 1 #{g986 |2B9304?fSu9tzTDT|})))
+         #{g972 |Wokz1QP&l>R<l/tF|} N)
+       ((lambda () (+ 1 1))))
+      (N 1 (+ N N)))
+    "expression" ((lambda () 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () 1))
+       ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+          #{g977 |AW&j9LNYR<H1E6TU|})
+         N)
+       ((lambda () (+ 1 1)))
+       ((lambda
+          (#{g988 |cVZPdFB?=lzoTLAW|}
+            #{g989 |R<$8b/FK3OstUEMi|})
+          (+
+            (+ (+ 1 #{g989 |R<$8b/FK3OstUEMi|})
+              (+ #{g988 |cVZPdFB?=lzoTLAW|}
+                #{g989 |R<$8b/FK3OstUEMi|}))
+            1))
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+       #{g977 |AW&j9LNYR<H1E6TU|})
+      (+ (+ (+ (+ 1 1) 1) 1) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         N)
+       ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+          (+ #{g977 |AW&j9LNYR<H1E6TU|} 1))
+         N)
+       ((lambda (#{g983 |v1O/?!uBnbx<PEo/|})
+          #{g983 |v1O/?!uBnbx<PEo/|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda () 1)))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+       (+ #{g977 |AW&j9LNYR<H1E6TU|} 1))
+      (+ (+ 1 (+ 1 (+ 1 1))) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () (+ (+ 1 1) 1)))
+       ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+          #{g977 |AW&j9LNYR<H1E6TU|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda (#{g990 |99pmukYXx=?e!RST|})
+          (+ 1 #{g990 |99pmukYXx=?e!RST|}))
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda () 1)))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+       #{g977 |AW&j9LNYR<H1E6TU|})
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda
+          (#{g977 |AW&j9LNYR<H1E6TU|}
+            #{g991 |h4DK%RPEGHKoPM1W|}
+            #{g992 |lzbuJT&JTrRm&AB1|})
+          (+ 1
+            (+
+              (+ #{g992 |lzbuJT&JTrRm&AB1|}
+                #{g991 |h4DK%RPEGHKoPM1W|})
+              #{g977 |AW&j9LNYR<H1E6TU|})))
+         N N #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda () (+ 1 1)))
+       ((lambda
+          (#{g993 |Wwr!NGU<XooU0VJS|}
+            #{g994 |HnHENQoVuVWP?e2d|}
+            #{g995 |G!/SIR?BQ9/$QYs2|})
+          (+ (+ (+ #{g995 |G!/SIR?BQ9/$QYs2|} 1) 1)
+            (+
+              (+ #{g994 |HnHENQoVuVWP?e2d|}
+                #{g993 |Wwr!NGU<XooU0VJS|})
+              #{g993 |Wwr!NGU<XooU0VJS|})))
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g993 |Wwr!NGU<XooU0VJS|}
+         #{g994 |HnHENQoVuVWP?e2d|}
+         #{g995 |G!/SIR?BQ9/$QYs2|})
+       (+ (+ (+ #{g995 |G!/SIR?BQ9/$QYs2|} 1) 1)
+         (+
+           (+ #{g994 |HnHENQoVuVWP?e2d|}
+             #{g993 |Wwr!NGU<XooU0VJS|})
+           #{g993 |Wwr!NGU<XooU0VJS|})))
+      ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+         #{g975 |YW<3WbNidxH6z&FA|})
+        ((lambda
+           (#{g977 |AW&j9LNYR<H1E6TU|}
+             #{g991 |h4DK%RPEGHKoPM1W|}
+             #{g992 |lzbuJT&JTrRm&AB1|})
+           (+ 1
+             (+
+               (+ #{g992 |lzbuJT&JTrRm&AB1|}
+                 #{g991 |h4DK%RPEGHKoPM1W|})
+               #{g977 |AW&j9LNYR<H1E6TU|})))
+          1 1
+          ((lambda
+             (#{g993 |Wwr!NGU<XooU0VJS|}
+               #{g994 |HnHENQoVuVWP?e2d|}
+               #{g995 |G!/SIR?BQ9/$QYs2|})
+             (+ (+ (+ #{g995 |G!/SIR?BQ9/$QYs2|} 1) 1)
+               (+
+                 (+ #{g994 |HnHENQoVuVWP?e2d|}
+                   #{g993 |Wwr!NGU<XooU0VJS|})
+                 #{g993 |Wwr!NGU<XooU0VJS|})))
+            ((lambda
+               (#{g993 |Wwr!NGU<XooU0VJS|}
+                 #{g994 |HnHENQoVuVWP?e2d|}
+                 #{g995 |G!/SIR?BQ9/$QYs2|})
+               (+ (+ (+ #{g995 |G!/SIR?BQ9/$QYs2|} 1) 1)
+                 (+
+                   (+ #{g994 |HnHENQoVuVWP?e2d|}
+                     #{g993 |Wwr!NGU<XooU0VJS|})
+                   #{g993 |Wwr!NGU<XooU0VJS|})))
+              ((lambda
+                 (#{g993 |Wwr!NGU<XooU0VJS|}
+                   #{g994 |HnHENQoVuVWP?e2d|}
+                   #{g995 |G!/SIR?BQ9/$QYs2|})
+                 (+ (+ (+ #{g995 |G!/SIR?BQ9/$QYs2|} 1) 1)
+                   (+
+                     (+ #{g994 |HnHENQoVuVWP?e2d|}
+                       #{g993 |Wwr!NGU<XooU0VJS|})
+                     #{g993 |Wwr!NGU<XooU0VJS|})))
+                1 1 1)
+              ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+                 #{g975 |YW<3WbNidxH6z&FA|})
+                1)
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1))
+            ((lambda
+               (#{g977 |AW&j9LNYR<H1E6TU|}
+                 #{g991 |h4DK%RPEGHKoPM1W|}
+                 #{g992 |lzbuJT&JTrRm&AB1|})
+               (+ 1
+                 (+
+                   (+ #{g992 |lzbuJT&JTrRm&AB1|}
+                     #{g991 |h4DK%RPEGHKoPM1W|})
+                   #{g977 |AW&j9LNYR<H1E6TU|})))
+              (+ 1 1) (+ 1 1)
+              ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+                 #{g975 |YW<3WbNidxH6z&FA|})
+                1))
+            ((lambda
+               (#{g993 |Wwr!NGU<XooU0VJS|}
+                 #{g994 |HnHENQoVuVWP?e2d|}
+                 #{g995 |G!/SIR?BQ9/$QYs2|})
+               (+ (+ (+ #{g995 |G!/SIR?BQ9/$QYs2|} 1) 1)
+                 (+
+                   (+ #{g994 |HnHENQoVuVWP?e2d|}
+                     #{g993 |Wwr!NGU<XooU0VJS|})
+                   #{g993 |Wwr!NGU<XooU0VJS|})))
+              ((lambda
+                 (#{g977 |AW&j9LNYR<H1E6TU|}
+                   #{g991 |h4DK%RPEGHKoPM1W|}
+                   #{g992 |lzbuJT&JTrRm&AB1|})
+                 (+ 1
+                   (+
+                     (+ #{g992 |lzbuJT&JTrRm&AB1|}
+                       #{g991 |h4DK%RPEGHKoPM1W|})
+                     #{g977 |AW&j9LNYR<H1E6TU|})))
+                1 1 1)
+              ((lambda
+                 (#{g993 |Wwr!NGU<XooU0VJS|}
+                   #{g994 |HnHENQoVuVWP?e2d|}
+                   #{g995 |G!/SIR?BQ9/$QYs2|})
+                 (+ (+ (+ #{g995 |G!/SIR?BQ9/$QYs2|} 1) 1)
+                   (+
+                     (+ #{g994 |HnHENQoVuVWP?e2d|}
+                       #{g993 |Wwr!NGU<XooU0VJS|})
+                     #{g993 |Wwr!NGU<XooU0VJS|})))
+                1 1 1)
+              ((lambda
+                 (#{g993 |Wwr!NGU<XooU0VJS|}
+                   #{g994 |HnHENQoVuVWP?e2d|}
+                   #{g995 |G!/SIR?BQ9/$QYs2|})
+                 (+ (+ (+ #{g995 |G!/SIR?BQ9/$QYs2|} 1) 1)
+                   (+
+                     (+ #{g994 |HnHENQoVuVWP?e2d|}
+                       #{g993 |Wwr!NGU<XooU0VJS|})
+                     #{g993 |Wwr!NGU<XooU0VJS|})))
+                1 1 1)))))
+      ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+         #{g975 |YW<3WbNidxH6z&FA|})
+        ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+           (+ #{g973 |n6uM1sisw6XIZgfL|}
+             #{g973 |n6uM1sisw6XIZgfL|}))
+          1))
+      ((lambda () (+ 1 1)))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda
+          (#{g996 |A?4k8w/?jcuJZ9MK|}
+            #{g997 |hLPQa8zMnd?D?f$b|}
+            #{g998 |?wGQ=eGoZ4>DUH&/|})
+          (+ (+ 1 #{g998 |?wGQ=eGoZ4>DUH&/|})
+            (+ #{g997 |hLPQa8zMnd?D?f$b|}
+              (+ 1 #{g996 |A?4k8w/?jcuJZ9MK|}))))
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda () 1))
+       ((lambda
+          (#{g990 |99pmukYXx=?e!RST|}
+            #{g999 |oEsMG<5Q8rw4fYkM|})
+          (+
+            (+ 1
+              (+ #{g999 |oEsMG<5Q8rw4fYkM|}
+                #{g990 |99pmukYXx=?e!RST|}))
+            #{g990 |99pmukYXx=?e!RST|}))
+         #{g972 |Wokz1QP&l>R<l/tF|} N)
+       ((lambda
+          (#{g994 |HnHENQoVuVWP?e2d|}
+            #{g995 |G!/SIR?BQ9/$QYs2|})
+          (+ (+ (+ 1 #{g995 |G!/SIR?BQ9/$QYs2|}) 1)
+            (+ 1 #{g994 |HnHENQoVuVWP?e2d|})))
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g994 |HnHENQoVuVWP?e2d|}
+         #{g995 |G!/SIR?BQ9/$QYs2|})
+       (+ (+ (+ 1 #{g995 |G!/SIR?BQ9/$QYs2|}) 1)
+         (+ 1 #{g994 |HnHENQoVuVWP?e2d|})))
+      ((lambda () 1))
+      ((lambda
+         (#{g996 |A?4k8w/?jcuJZ9MK|}
+           #{g997 |hLPQa8zMnd?D?f$b|}
+           #{g998 |?wGQ=eGoZ4>DUH&/|})
+         (+ (+ 1 #{g998 |?wGQ=eGoZ4>DUH&/|})
+           (+ #{g997 |hLPQa8zMnd?D?f$b|}
+             (+ 1 #{g996 |A?4k8w/?jcuJZ9MK|}))))
+        ((lambda
+           (#{g990 |99pmukYXx=?e!RST|}
+             #{g999 |oEsMG<5Q8rw4fYkM|})
+           (+
+             (+ 1
+               (+ #{g999 |oEsMG<5Q8rw4fYkM|}
+                 #{g990 |99pmukYXx=?e!RST|}))
+             #{g990 |99pmukYXx=?e!RST|}))
+          ((lambda
+             (#{g990 |99pmukYXx=?e!RST|}
+               #{g999 |oEsMG<5Q8rw4fYkM|})
+             (+
+               (+ 1
+                 (+ #{g999 |oEsMG<5Q8rw4fYkM|}
+                   #{g990 |99pmukYXx=?e!RST|}))
+               #{g990 |99pmukYXx=?e!RST|}))
+            ((lambda
+               (#{g994 |HnHENQoVuVWP?e2d|}
+                 #{g995 |G!/SIR?BQ9/$QYs2|})
+               (+ (+ (+ 1 #{g995 |G!/SIR?BQ9/$QYs2|}) 1)
+                 (+ 1 #{g994 |HnHENQoVuVWP?e2d|})))
+              ((lambda
+                 (#{g996 |A?4k8w/?jcuJZ9MK|}
+                   #{g997 |hLPQa8zMnd?D?f$b|}
+                   #{g998 |?wGQ=eGoZ4>DUH&/|})
+                 (+ (+ 1 #{g998 |?wGQ=eGoZ4>DUH&/|})
+                   (+ #{g997 |hLPQa8zMnd?D?f$b|}
+                     (+ 1 #{g996 |A?4k8w/?jcuJZ9MK|}))))
+                1 1 1)
+              ((lambda () 1)))
+            1)
+          1)
+        ((lambda () 1))
+        ((lambda
+           (#{g994 |HnHENQoVuVWP?e2d|}
+             #{g995 |G!/SIR?BQ9/$QYs2|})
+           (+ (+ (+ 1 #{g995 |G!/SIR?BQ9/$QYs2|}) 1)
+             (+ 1 #{g994 |HnHENQoVuVWP?e2d|})))
+          ((lambda
+             (#{g996 |A?4k8w/?jcuJZ9MK|}
+               #{g997 |hLPQa8zMnd?D?f$b|}
+               #{g998 |?wGQ=eGoZ4>DUH&/|})
+             (+ (+ 1 #{g998 |?wGQ=eGoZ4>DUH&/|})
+               (+ #{g997 |hLPQa8zMnd?D?f$b|}
+                 (+ 1 #{g996 |A?4k8w/?jcuJZ9MK|}))))
+            ((lambda () 1))
+            ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+               (+ #{g973 |n6uM1sisw6XIZgfL|}
+                 #{g973 |n6uM1sisw6XIZgfL|}))
+              1)
+            ((lambda () 1)))
+          ((lambda
+             (#{g996 |A?4k8w/?jcuJZ9MK|}
+               #{g997 |hLPQa8zMnd?D?f$b|}
+               #{g998 |?wGQ=eGoZ4>DUH&/|})
+             (+ (+ 1 #{g998 |?wGQ=eGoZ4>DUH&/|})
+               (+ #{g997 |hLPQa8zMnd?D?f$b|}
+                 (+ 1 #{g996 |A?4k8w/?jcuJZ9MK|}))))
+            ((lambda
+               (#{g990 |99pmukYXx=?e!RST|}
+                 #{g999 |oEsMG<5Q8rw4fYkM|})
+               (+
+                 (+ 1
+                   (+ #{g999 |oEsMG<5Q8rw4fYkM|}
+                     #{g990 |99pmukYXx=?e!RST|}))
+                 #{g990 |99pmukYXx=?e!RST|}))
+              ((lambda
+                 (#{g994 |HnHENQoVuVWP?e2d|}
+                   #{g995 |G!/SIR?BQ9/$QYs2|})
+                 (+ (+ (+ 1 #{g995 |G!/SIR?BQ9/$QYs2|}) 1)
+                   (+ 1 #{g994 |HnHENQoVuVWP?e2d|})))
+                1 1)
+              (+ 1 1))
+            ((lambda
+               (#{g990 |99pmukYXx=?e!RST|}
+                 #{g999 |oEsMG<5Q8rw4fYkM|})
+               (+
+                 (+ 1
+                   (+ #{g999 |oEsMG<5Q8rw4fYkM|}
+                     #{g990 |99pmukYXx=?e!RST|}))
+                 #{g990 |99pmukYXx=?e!RST|}))
+              ((lambda
+                 (#{g994 |HnHENQoVuVWP?e2d|}
+                   #{g995 |G!/SIR?BQ9/$QYs2|})
+                 (+ (+ (+ 1 #{g995 |G!/SIR?BQ9/$QYs2|}) 1)
+                   (+ 1 #{g994 |HnHENQoVuVWP?e2d|})))
+                1 1)
+              1)
+            ((lambda
+               (#{g994 |HnHENQoVuVWP?e2d|}
+                 #{g995 |G!/SIR?BQ9/$QYs2|})
+               (+ (+ (+ 1 #{g995 |G!/SIR?BQ9/$QYs2|}) 1)
+                 (+ 1 #{g994 |HnHENQoVuVWP?e2d|})))
+              ((lambda
+                 (#{g990 |99pmukYXx=?e!RST|}
+                   #{g999 |oEsMG<5Q8rw4fYkM|})
+                 (+
+                   (+ 1
+                     (+ #{g999 |oEsMG<5Q8rw4fYkM|}
+                       #{g990 |99pmukYXx=?e!RST|}))
+                   #{g990 |99pmukYXx=?e!RST|}))
+                1 1)
+              ((lambda
+                 (#{g996 |A?4k8w/?jcuJZ9MK|}
+                   #{g997 |hLPQa8zMnd?D?f$b|}
+                   #{g998 |?wGQ=eGoZ4>DUH&/|})
+                 (+ (+ 1 #{g998 |?wGQ=eGoZ4>DUH&/|})
+                   (+ #{g997 |hLPQa8zMnd?D?f$b|}
+                     (+ 1 #{g996 |A?4k8w/?jcuJZ9MK|}))))
+                1 1 1)))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+          #{g977 |AW&j9LNYR<H1E6TU|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda (#{g983 |v1O/?!uBnbx<PEo/|})
+          (+ #{g983 |v1O/?!uBnbx<PEo/|} 1))
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda
+          (#{g1000 |e<IJe5igXKA1zHUP|}
+            #{g995 |G!/SIR?BQ9/$QYs2|}
+            #{g1001 |5Nk%sC$bNPbbZXe8|})
+          (+
+            (+
+              (+ #{g1001 |5Nk%sC$bNPbbZXe8|}
+                #{g995 |G!/SIR?BQ9/$QYs2|})
+              1)
+            (+ (+ 1 #{g1000 |e<IJe5igXKA1zHUP|}) 1)))
+         #{g972 |Wokz1QP&l>R<l/tF|} N
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g977 |AW&j9LNYR<H1E6TU|})
+       #{g977 |AW&j9LNYR<H1E6TU|})
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        (+ 1 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () 1))
+       ((lambda
+          (#{g1002 |?/T?%R7D57vxXn5c|}
+            #{g1003 |VO8Cf!L1>G9VzU0A|}
+            #{g1004 |=<wJh1f4wgl1G/eF|})
+          (+ (+ (+ 1 #{g1004 |=<wJh1f4wgl1G/eF|}) 1)
+            (+
+              (+ #{g1003 |VO8Cf!L1>G9VzU0A|}
+                #{g1004 |=<wJh1f4wgl1G/eF|})
+              #{g1002 |?/T?%R7D57vxXn5c|})))
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|} N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g1002 |?/T?%R7D57vxXn5c|}
+         #{g1003 |VO8Cf!L1>G9VzU0A|}
+         #{g1004 |=<wJh1f4wgl1G/eF|})
+       (+ (+ (+ 1 #{g1004 |=<wJh1f4wgl1G/eF|}) 1)
+         (+
+           (+ #{g1003 |VO8Cf!L1>G9VzU0A|}
+             #{g1004 |=<wJh1f4wgl1G/eF|})
+           #{g1002 |?/T?%R7D57vxXn5c|})))
+      ((lambda () 1))
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        (+ (+ 1 1) (+ (+ (+ 1 1) 1) (+ (+ 1 1) 1))))
+      (+ 1 (+ (+ 1 (+ 1 (+ 1 1))) (+ 1 (+ 1 1))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g1005 |DBY?oDwqV<qHkYjW|})
+          (+ (+ 1 1) (+ (+ 1 1) #{g1005 |DBY?oDwqV<qHkYjW|})))
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda (#{g1006 |UH$uJpB<C82!J4TQ|})
+          (+ 1 (+ (+ 1 1) #{g1006 |UH$uJpB<C82!J4TQ|})))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g1005 |DBY?oDwqV<qHkYjW|})
+       (+ (+ 1 1) (+ (+ 1 1) #{g1005 |DBY?oDwqV<qHkYjW|})))
+      ((lambda (#{g1005 |DBY?oDwqV<qHkYjW|})
+         (+ (+ 1 1) (+ (+ 1 1) #{g1005 |DBY?oDwqV<qHkYjW|})))
+        ((lambda (#{g1006 |UH$uJpB<C82!J4TQ|})
+           (+ 1 (+ (+ 1 1) #{g1006 |UH$uJpB<C82!J4TQ|})))
+          (+ 1 1)))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda
+          (#{g1007 |PxC4>?b47BkWz>%>|}
+            #{g975 |YW<3WbNidxH6z&FA|}
+            #{g1008 |7b?VhUCHdTIb8dL%|})
+          (+ #{g1008 |7b?VhUCHdTIb8dL%|}
+            (+ #{g975 |YW<3WbNidxH6z&FA|}
+              (+ #{g1007 |PxC4>?b47BkWz>%>|}
+                #{g1008 |7b?VhUCHdTIb8dL%|}))))
+         N N #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda
+          (#{g1009 |n8zxKkUJYP<<ZvG4|}
+            #{g1010 |%1ojjEz&8>YFslzQ|})
+          (+
+            (+ (+ 1 #{g1010 |%1ojjEz&8>YFslzQ|})
+              #{g1009 |n8zxKkUJYP<<ZvG4|})
+            (+ (+ 1 1) 1)))
+         N #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g1007 |PxC4>?b47BkWz>%>|}
+         #{g975 |YW<3WbNidxH6z&FA|}
+         #{g1008 |7b?VhUCHdTIb8dL%|})
+       (+ #{g1008 |7b?VhUCHdTIb8dL%|}
+         (+ #{g975 |YW<3WbNidxH6z&FA|}
+           (+ #{g1007 |PxC4>?b47BkWz>%>|}
+             #{g1008 |7b?VhUCHdTIb8dL%|}))))
+      1 1
+      ((lambda
+         (#{g1009 |n8zxKkUJYP<<ZvG4|}
+           #{g1010 |%1ojjEz&8>YFslzQ|})
+         (+
+           (+ (+ 1 #{g1010 |%1ojjEz&8>YFslzQ|})
+             #{g1009 |n8zxKkUJYP<<ZvG4|})
+           (+ (+ 1 1) 1)))
+        (+ 1 (+ (+ 1 1) (+ (+ 1 1) (+ 1 1))))
+        ((lambda
+           (#{g1009 |n8zxKkUJYP<<ZvG4|}
+             #{g1010 |%1ojjEz&8>YFslzQ|})
+           (+
+             (+ (+ 1 #{g1010 |%1ojjEz&8>YFslzQ|})
+               #{g1009 |n8zxKkUJYP<<ZvG4|})
+             (+ (+ 1 1) 1)))
+          (+ (+ 1 1) (+ 1 1))
+          ((lambda
+             (#{g1007 |PxC4>?b47BkWz>%>|}
+               #{g975 |YW<3WbNidxH6z&FA|}
+               #{g1008 |7b?VhUCHdTIb8dL%|})
+             (+ #{g1008 |7b?VhUCHdTIb8dL%|}
+               (+ #{g975 |YW<3WbNidxH6z&FA|}
+                 (+ #{g1007 |PxC4>?b47BkWz>%>|}
+                   #{g1008 |7b?VhUCHdTIb8dL%|}))))
+            1 (+ (+ 1 1) (+ 1 1))
+            ((lambda
+               (#{g1007 |PxC4>?b47BkWz>%>|}
+                 #{g975 |YW<3WbNidxH6z&FA|}
+                 #{g1008 |7b?VhUCHdTIb8dL%|})
+               (+ #{g1008 |7b?VhUCHdTIb8dL%|}
+                 (+ #{g975 |YW<3WbNidxH6z&FA|}
+                   (+ #{g1007 |PxC4>?b47BkWz>%>|}
+                     #{g1008 |7b?VhUCHdTIb8dL%|}))))
+              (+ 1 1) (+ 1 1)
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1)))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda (#{g1011 |zeHwKqXya&DFfseA|})
+          (+ (+ 1 1)
+            (+ (+ 1 1) (+ #{g1011 |zeHwKqXya&DFfseA|} 1))))
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+       #{g975 |YW<3WbNidxH6z&FA|})
+      ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+         #{g975 |YW<3WbNidxH6z&FA|})
+        ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+           (+ #{g973 |n6uM1sisw6XIZgfL|}
+             #{g973 |n6uM1sisw6XIZgfL|}))
+          (+ 1 (+ 1 (+ 1 1)))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          #{g975 |YW<3WbNidxH6z&FA|})
+         #{g972 |Wokz1QP&l>R<l/tF|})
+       ((lambda
+          (#{g1010 |%1ojjEz&8>YFslzQ|}
+            #{g1012 |/EBhSx25DBx7XKu3|}
+            #{g1013 |2dGNcXVYEUzBeA2>|}
+            #{g1014 |VENJo$%ts9J1IM!l|})
+          (+
+            (+
+              (+ #{g1014 |VENJo$%ts9J1IM!l|}
+                #{g1013 |2dGNcXVYEUzBeA2>|})
+              #{g1012 |/EBhSx25DBx7XKu3|})
+            (+ #{g1010 |%1ojjEz&8>YFslzQ|} 1)))
+         N N #{g972 |Wokz1QP&l>R<l/tF|} N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g1010 |%1ojjEz&8>YFslzQ|}
+         #{g1012 |/EBhSx25DBx7XKu3|}
+         #{g1013 |2dGNcXVYEUzBeA2>|}
+         #{g1014 |VENJo$%ts9J1IM!l|})
+       (+
+         (+
+           (+ #{g1014 |VENJo$%ts9J1IM!l|}
+             #{g1013 |2dGNcXVYEUzBeA2>|})
+           #{g1012 |/EBhSx25DBx7XKu3|})
+         (+ #{g1010 |%1ojjEz&8>YFslzQ|} 1)))
+      1 1
+      ((lambda
+         (#{g1010 |%1ojjEz&8>YFslzQ|}
+           #{g1012 |/EBhSx25DBx7XKu3|}
+           #{g1013 |2dGNcXVYEUzBeA2>|}
+           #{g1014 |VENJo$%ts9J1IM!l|})
+         (+
+           (+
+             (+ #{g1014 |VENJo$%ts9J1IM!l|}
+               #{g1013 |2dGNcXVYEUzBeA2>|})
+             #{g1012 |/EBhSx25DBx7XKu3|})
+           (+ #{g1010 |%1ojjEz&8>YFslzQ|} 1)))
+        (+ (+ 1 (+ (+ 1 1) (+ 1 1))) 1) 1
+        ((lambda
+           (#{g1010 |%1ojjEz&8>YFslzQ|}
+             #{g1012 |/EBhSx25DBx7XKu3|}
+             #{g1013 |2dGNcXVYEUzBeA2>|}
+             #{g1014 |VENJo$%ts9J1IM!l|})
+           (+
+             (+
+               (+ #{g1014 |VENJo$%ts9J1IM!l|}
+                 #{g1013 |2dGNcXVYEUzBeA2>|})
+               #{g1012 |/EBhSx25DBx7XKu3|})
+             (+ #{g1010 |%1ojjEz&8>YFslzQ|} 1)))
+          (+ 1 1) 1
+          ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+             (+ #{g973 |n6uM1sisw6XIZgfL|}
+               #{g973 |n6uM1sisw6XIZgfL|}))
+            1)
+          1)
+        (+ (+ 1 1) 1))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g1015 |DKKsNq&CBBt6t9fs|})
+          (+ #{g1015 |DKKsNq&CBBt6t9fs|} 1))
+         N)
+       ((lambda () 1))
+       ((lambda (#{g1016 |Z2hkDDuq8dewzQZt|})
+          (+ (+ 1 1) #{g1016 |Z2hkDDuq8dewzQZt|}))
+         N))
+      (N 1 (+ N N)))
+    "expression" ((lambda () 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () (+ 1 1))) ((lambda () (+ (+ 1 1) 1)))
+       ((lambda
+          (#{g1017 |FCmPP%%H1I&K6%T/|}
+            #{g1016 |Z2hkDDuq8dewzQZt|})
+          (+ 1
+            (+ (+ #{g1016 |Z2hkDDuq8dewzQZt|} 1)
+              (+ 1 #{g1017 |FCmPP%%H1I&K6%T/|}))))
+         #{g972 |Wokz1QP&l>R<l/tF|}
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g1017 |FCmPP%%H1I&K6%T/|}
+         #{g1016 |Z2hkDDuq8dewzQZt|})
+       (+ 1
+         (+ (+ #{g1016 |Z2hkDDuq8dewzQZt|} 1)
+           (+ 1 #{g1017 |FCmPP%%H1I&K6%T/|}))))
+      ((lambda () (+ (+ 1 1) 1))) ((lambda () (+ 1 1)))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g975 |YW<3WbNidxH6z&FA|})
+          (+ #{g975 |YW<3WbNidxH6z&FA|} 1))
+         N)
+       ((lambda (#{g1002 |?/T?%R7D57vxXn5c|})
+          (+ #{g1002 |?/T?%R7D57vxXn5c|}
+            #{g1002 |?/T?%R7D57vxXn5c|}))
+         N)
+       ((lambda (#{g1017 |FCmPP%%H1I&K6%T/|})
+          #{g1017 |FCmPP%%H1I&K6%T/|})
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ 1 (+ (+ 1 (+ 1 1)) 1)))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 1)
+        (+ (+ (+ 1 (+ 1 1)) 1) (+ 1 (+ (+ 1 1) (+ 1 1)))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ (+ 1 1) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ (+ 1 1) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g1018 |KTO>eH6?7Yz<F%Ow|})
+          (+ #{g1018 |KTO>eH6?7Yz<F%Ow|} (+ (+ 1 1) 1)))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda
+          (#{g1019 |NvFA>h0qES!D?4Mc|}
+            #{g1020 |m%?qI!M=N8N8<GLf|}
+            #{g1021 |i3A!uS<BH66CzV=k|}
+            #{g1022 |7O>%&ZLVj0=gCNqi|})
+          (+
+            (+ (+ 1 #{g1022 |7O>%&ZLVj0=gCNqi|})
+              (+ 1 #{g1021 |i3A!uS<BH66CzV=k|}))
+            (+ #{g1020 |m%?qI!M=N8N8<GLf|}
+              (+ 1 #{g1019 |NvFA>h0qES!D?4Mc|}))))
+         N N N N)
+       ((lambda () 1)))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda
+          (#{g1023 |jeX/R2MjKX0MKKcV|}
+            #{g1019 |NvFA>h0qES!D?4Mc|}
+            #{g1024 |5!RnhrIMgod8OV$0|}
+            #{g1025 |?HEs0NYzrOdZSN13|})
+          (+
+            (+ (+ 1 #{g1025 |?HEs0NYzrOdZSN13|})
+              (+ #{g1024 |5!RnhrIMgod8OV$0|}
+                #{g1019 |NvFA>h0qES!D?4Mc|}))
+            (+ (+ 1 #{g1019 |NvFA>h0qES!D?4Mc|})
+              (+ #{g1023 |jeX/R2MjKX0MKKcV|}
+                #{g1023 |jeX/R2MjKX0MKKcV|}))))
+         #{g972 |Wokz1QP&l>R<l/tF|} N N N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g1023 |jeX/R2MjKX0MKKcV|}
+         #{g1019 |NvFA>h0qES!D?4Mc|}
+         #{g1024 |5!RnhrIMgod8OV$0|}
+         #{g1025 |?HEs0NYzrOdZSN13|})
+       (+
+         (+ (+ 1 #{g1025 |?HEs0NYzrOdZSN13|})
+           (+ #{g1024 |5!RnhrIMgod8OV$0|}
+             #{g1019 |NvFA>h0qES!D?4Mc|}))
+         (+ (+ 1 #{g1019 |NvFA>h0qES!D?4Mc|})
+           (+ #{g1023 |jeX/R2MjKX0MKKcV|}
+             #{g1023 |jeX/R2MjKX0MKKcV|}))))
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        (+ 1 (+ (+ (+ 1 1) (+ 1 1)) 1)))
+      1 (+ 1 1) 1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g1026 |CqdHf>P?z&ZBeTGW|})
+          (+ (+ 1 (+ #{g1026 |CqdHf>P?z&ZBeTGW|} 1)) (+ 1 1)))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g1026 |CqdHf>P?z&ZBeTGW|})
+       (+ (+ 1 (+ #{g1026 |CqdHf>P?z&ZBeTGW|} 1)) (+ 1 1)))
+      (+ (+ (+ 1 (+ (+ 1 1) 1)) (+ (+ (+ 1 1) 1) (+ 1 1))) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda
+          (#{g1023 |jeX/R2MjKX0MKKcV|}
+            #{g1022 |7O>%&ZLVj0=gCNqi|}
+            #{g1026 |CqdHf>P?z&ZBeTGW|})
+          (+
+            (+ (+ 1 #{g1026 |CqdHf>P?z&ZBeTGW|})
+              (+ #{g1022 |7O>%&ZLVj0=gCNqi|}
+                #{g1023 |jeX/R2MjKX0MKKcV|}))
+            #{g1023 |jeX/R2MjKX0MKKcV|}))
+         #{g972 |Wokz1QP&l>R<l/tF|} N
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g1023 |jeX/R2MjKX0MKKcV|}
+         #{g1022 |7O>%&ZLVj0=gCNqi|}
+         #{g1026 |CqdHf>P?z&ZBeTGW|})
+       (+
+         (+ (+ 1 #{g1026 |CqdHf>P?z&ZBeTGW|})
+           (+ #{g1022 |7O>%&ZLVj0=gCNqi|}
+             #{g1023 |jeX/R2MjKX0MKKcV|}))
+         #{g1023 |jeX/R2MjKX0MKKcV|}))
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        (+ (+ 1 (+ 1 (+ 1 1)))
+          (+ (+ (+ 1 1) (+ 1 1)) (+ 1 1))))
+      1
+      ((lambda
+         (#{g1023 |jeX/R2MjKX0MKKcV|}
+           #{g1022 |7O>%&ZLVj0=gCNqi|}
+           #{g1026 |CqdHf>P?z&ZBeTGW|})
+         (+
+           (+ (+ 1 #{g1026 |CqdHf>P?z&ZBeTGW|})
+             (+ #{g1022 |7O>%&ZLVj0=gCNqi|}
+               #{g1023 |jeX/R2MjKX0MKKcV|}))
+           #{g1023 |jeX/R2MjKX0MKKcV|}))
+        ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+           (+ #{g973 |n6uM1sisw6XIZgfL|}
+             #{g973 |n6uM1sisw6XIZgfL|}))
+          1)
+        1
+        ((lambda
+           (#{g1023 |jeX/R2MjKX0MKKcV|}
+             #{g1022 |7O>%&ZLVj0=gCNqi|}
+             #{g1026 |CqdHf>P?z&ZBeTGW|})
+           (+
+             (+ (+ 1 #{g1026 |CqdHf>P?z&ZBeTGW|})
+               (+ #{g1022 |7O>%&ZLVj0=gCNqi|}
+                 #{g1023 |jeX/R2MjKX0MKKcV|}))
+             #{g1023 |jeX/R2MjKX0MKKcV|}))
+          ((lambda
+             (#{g1023 |jeX/R2MjKX0MKKcV|}
+               #{g1022 |7O>%&ZLVj0=gCNqi|}
+               #{g1026 |CqdHf>P?z&ZBeTGW|})
+             (+
+               (+ (+ 1 #{g1026 |CqdHf>P?z&ZBeTGW|})
+                 (+ #{g1022 |7O>%&ZLVj0=gCNqi|}
+                   #{g1023 |jeX/R2MjKX0MKKcV|}))
+               #{g1023 |jeX/R2MjKX0MKKcV|}))
+            ((lambda
+               (#{g1023 |jeX/R2MjKX0MKKcV|}
+                 #{g1022 |7O>%&ZLVj0=gCNqi|}
+                 #{g1026 |CqdHf>P?z&ZBeTGW|})
+               (+
+                 (+ (+ 1 #{g1026 |CqdHf>P?z&ZBeTGW|})
+                   (+ #{g1022 |7O>%&ZLVj0=gCNqi|}
+                     #{g1023 |jeX/R2MjKX0MKKcV|}))
+                 #{g1023 |jeX/R2MjKX0MKKcV|}))
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1)
+              1
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1))
+            (+ 1 1)
+            ((lambda
+               (#{g1023 |jeX/R2MjKX0MKKcV|}
+                 #{g1022 |7O>%&ZLVj0=gCNqi|}
+                 #{g1026 |CqdHf>P?z&ZBeTGW|})
+               (+
+                 (+ (+ 1 #{g1026 |CqdHf>P?z&ZBeTGW|})
+                   (+ #{g1022 |7O>%&ZLVj0=gCNqi|}
+                     #{g1023 |jeX/R2MjKX0MKKcV|}))
+                 #{g1023 |jeX/R2MjKX0MKKcV|}))
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1)
+              (+ 1 1)
+              ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+                 (+ #{g973 |n6uM1sisw6XIZgfL|}
+                   #{g973 |n6uM1sisw6XIZgfL|}))
+                1)))
+          (+ 1 1)
+          ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+             (+ #{g973 |n6uM1sisw6XIZgfL|}
+               #{g973 |n6uM1sisw6XIZgfL|}))
+            (+ (+ 1 1) 1))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ (+ (+ (+ 1 1) (+ 1 1)) 1) (+ 1 1)) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda
+          (#{g1027 |OQE&ez<?$iwoIXUh|}
+            #{g1028 |h9UxPFESc!HUJ9uf|}
+            #{g1029 |eh>4FIjwME6U=K=0|})
+          (+
+            (+ #{g1029 |eh>4FIjwME6U=K=0|}
+              (+ #{g1028 |h9UxPFESc!HUJ9uf|} 1))
+            #{g1027 |OQE&ez<?$iwoIXUh|}))
+         N N N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda
+       (#{g1027 |OQE&ez<?$iwoIXUh|}
+         #{g1028 |h9UxPFESc!HUJ9uf|}
+         #{g1029 |eh>4FIjwME6U=K=0|})
+       (+
+         (+ #{g1029 |eh>4FIjwME6U=K=0|}
+           (+ #{g1028 |h9UxPFESc!HUJ9uf|} 1))
+         #{g1027 |OQE&ez<?$iwoIXUh|}))
+      (+ 1 (+ 1 (+ 1 1))) 1
+      (+ (+ 1 (+ 1 1))
+        (+ (+ 1 (+ (+ 1 1) (+ 1 1)))
+          (+ (+ 1 1) (+ 1 (+ 1 1)))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda () 1)))
+      (N 1 (+ N N)))
+    "expression" ((lambda () 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g1028 |h9UxPFESc!HUJ9uf|})
+          (+ #{g1028 |h9UxPFESc!HUJ9uf|}
+            (+ #{g1028 |h9UxPFESc!HUJ9uf|} 1)))
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ (+ 1 (+ 1 (+ 1 1))) 1) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N)
+       ((lambda (#{g1028 |h9UxPFESc!HUJ9uf|})
+          #{g1028 |h9UxPFESc!HUJ9uf|})
+         #{g972 |Wokz1QP&l>R<l/tF|}))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g1028 |h9UxPFESc!HUJ9uf|})
+       #{g1028 |h9UxPFESc!HUJ9uf|})
+      ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+         (+ #{g973 |n6uM1sisw6XIZgfL|}
+           #{g973 |n6uM1sisw6XIZgfL|}))
+        1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ (+ (+ (+ 1 1) 1) 1) (+ 1 1))
+        (+ 1 (+ (+ 1 (+ 1 1)) 1)))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ 1 (+ (+ (+ 1 1) 1) (+ (+ 1 1) (+ 1 1)))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ (+ 1 (+ 1 (+ 1 1))) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ (+ 1 (+ (+ 1 1) (+ 1 1))) (+ (+ (+ 1 1) 1) 1))
+        (+ (+ (+ (+ 1 1) 1) (+ 1 1)) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ (+ (+ 1 1) 1) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 (+ (+ (+ 1 1) 1) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ 1 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 (+ 1 (+ 1 (+ 1 1)))) 1)))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ (+ (+ 1 1) (+ 1 (+ 1 1))) (+ (+ (+ 1 1) 1) 1))
+        (+ 1 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 (+ (+ (+ 1 1) 1) (+ 1 1)))
+        (+ (+ (+ 1 (+ 1 1)) (+ 1 (+ 1 1)))
+          (+ (+ 1 (+ 1 1)) (+ (+ 1 1) 1))))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      (+ (+ 1 1)
+        (+ (+ (+ (+ 1 1) (+ 1 1)) (+ (+ 1 1) (+ 1 1))) 1))))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1))
+  ("grammar"
+    ((#{g972 |Wokz1QP&l>R<l/tF|}
+       ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+          (+ #{g973 |n6uM1sisw6XIZgfL|}
+            #{g973 |n6uM1sisw6XIZgfL|}))
+         N))
+      (N 1 (+ N N)))
+    "expression"
+    ((lambda (#{g973 |n6uM1sisw6XIZgfL|})
+       (+ #{g973 |n6uM1sisw6XIZgfL|}
+         #{g973 |n6uM1sisw6XIZgfL|}))
+      1)))
+(2 4 6 12 2 2 2 12 2 16 18 14 4 18 4 4 4 16 6 2 2 6 12 4 2 2 6 6 173 18 22 1 1 2 2 1 5 6 2 140 97 4 35 13 82 8 23 1 8 2 2 4 12 2 4 22 2 2 2 8 8 2 4 2 2 31 14 113 4 16 19 1 12 2 4 2 22 18 12 30 10 10 2 4 4 2 2 2 2 2 2 2 2 12 22 2 36 22 2 2)
