@@ -224,21 +224,37 @@
           (let* ((operands (get-operands partial-syntax-tree)))
             (construct-operation (get-operator partial-syntax-tree) (map (curry make-evalable-recursion rule-names) operands)))
           (if (member? partial-syntax-tree rule-names)
-              () ;the general case will depend on rule name
+              '() ;the general case will depend on rule name
               partial-syntax-tree)))
     
 ;;;
 ;;;tree grammar related functions
-    (define trees '((T ((lambda (x) (append '(node color) x)) A)) (A ((lambda (x) (list x)) T) () ((lambda (x y) (list x y)) A A))))
+    (define trees '((T ((lambda (x) (append '(node color) (flatten-empty x))) A)) (A ((lambda (x) (list x)) T) () ((lambda (x y) (append (flatten-empty x) (flatten-empty y))) A A))))
 
+    (define (flatten-empty lst)
+      (if (all-empty? lst)
+          '()
+          lst))
+    (define (all-empty? lst)
+      (if (list? lst)
+          (if (null? lst)
+              true
+              (apply and (map all-empty? lst)))
+          false))
+              
+      
     (define (join x y)
-      (list 'join x y))
+      (cond ((null? x) y)
+            ((null? y) x)
+            (else (list 'join x y))))
     (define (flatten-join jlist)
       (if (jlist? jlist)
           (let ((items (get-jlist-items jlist)))
             (append (list (flatten-join (first items))) (flatten-join (rest items))))
           (list jlist)))
 
+
+    
 (define (jlist? lst)
   (if (list? lst)
       (equal? (first lst) 'join)
@@ -280,11 +296,12 @@
 ;; k
 ;; (flatten-join k)          
 ;(has-operands? ''())            
-(define expr (generate-syntax-tree 5 trees 'T))
-expr
-;(eval '((lambda (x) (append '(node color) x)) ()) (get-current-environment))
+(define expr (generate-syntax-tree 10 trees 'T))
+;expr
+(eval '((lambda (x) (append '(node color) x)) ()) (get-current-environment))
 (pretty-print expr)
 (eval expr (get-current-environment))
+;(all-empty? '((())))
     ;; ;; ;(generate-syntax-tree 10 naturals 'N)
     ;; ;;(generate-grammar naturals)
     
