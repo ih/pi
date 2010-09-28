@@ -1,0 +1,7 @@
+(import
+ (church external py-pickle))
+
+(define draw-trees
+  (py-pickle-script "./treedraw.py"))
+
+(draw-trees "test.png" (list '(a (b (c (c)) (b)) (d (e))))

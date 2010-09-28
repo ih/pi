@@ -156,10 +156,10 @@
     
     (define get-operands rest)
 
-;;;syntax tree implementation functions
     (define (operator? op)
       (and (list? op) (not (null? op))))
 
+;;;syntax tree implementation functions
     (define (count-leaves syntax-tree)
       (if (operator? syntax-tree)
           (let ((operands (get-operands syntax-tree)))
@@ -241,26 +241,7 @@
               true
               (apply and (map all-empty? lst)))
           false))
-              
       
-    (define (join x y)
-      (cond ((null? x) y)
-            ((null? y) x)
-            (else (list 'join x y))))
-    (define (flatten-join jlist)
-      (if (jlist? jlist)
-          (let ((items (get-jlist-items jlist)))
-            (append (list (flatten-join (first items))) (flatten-join (rest items))))
-          (list jlist)))
-
-
-    
-(define (jlist? lst)
-  (if (list? lst)
-      (equal? (first lst) 'join)
-      false))
-
-(define get-jlist-items rest)
 
 ;;;inference
 ;;  (define samples
