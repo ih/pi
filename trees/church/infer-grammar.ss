@@ -3,7 +3,7 @@
 
 (define draw-trees
   (py-pickle-script "../treedraw.py"))
-(define atree
+(define sampled-trees
 (church
  (debug-mode 'trace-eval true)
 ;;;global parameters
@@ -14,9 +14,9 @@
 ;;;code for generating a syntax-tree
     (define (generate-partial-syntax-tree time grammar rule-name)
       (let* ((current-rule (select-rule grammar rule-name))
-             (db (pretty-print (list "db1" time rule-name current-rule)))
+             ;(db (pretty-print (list "db1" time rule-name current-rule)))
              (operation (choose-operation current-rule))
-             (db (pretty-print (list "db2" time rule-name operation)))
+             ;(db (pretty-print (list "db2" time rule-name operation)))
              )
         (if (and (has-operands? operation) (not (times-up? time)))
             (construct-operation (get-operator operation) (map (curry generate-partial-syntax-tree (adjust-time time) grammar) (get-operands operation)))
@@ -251,36 +251,39 @@
     (define trees '((T (create-node C A)) (A (list T) (append A A) null) (C a b c d e f)))
 
 ;;;inference
-    ;;  (define samples
-    ;;    (mh-query
-    ;;     100 100naturals
-    ;;     (define trees '((T ((lambda (x) (append '(node color) x)) A)) (A T '() (flatten (join A A)))))
-    ;;     (naturals ((N 1 (+ N N)))
-    ;;     (define grammar (generate-grammar naturals))
-    ;;     (define start-rule (get-rule-name (first grammar)))
-    ;;     ;(define expr (generate-syntax-tree 5 naturals 'N))
+;;;data to be conditioned upon
+    ;; (define data (lambda (expr) (and (equal? '(a (b)) (eval expr (get-current-environment)))))) 
+
+    ;; (define samples
+    ;;   (mh-query
+    ;;    100 100
+    ;;                                     ;(define grammar (generate-grammar trees))
+    ;;    (define grammar trees)
+    ;;    (define start-rule (get-rule-name (first grammar)))
+    ;;    (define expr (generate-syntax-tree 5 grammar 'T))
 
     ;; ;;;what we want to know
-    ;;     (list "grammar" grammar "expression"(generate-syntax-tree 5 grammar start-rule))
-    ;;     ;expr
+    ;;                                     ;(generate-syntax-tree 5 grammar start-rule)
+    ;;    expr
     ;; ;;;what we know
-    ;;     (and (= 2 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 4 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 6 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))))
-    ;;     ;(= 4 (eval expr (get-current-environment)))
-    ;;     )
+    ;;    (data expr)
     ;;    )
-    ;; (pretty-print samples)
+    ;;   )
+    ;; samples
     ;; (define (mappable-eval expression)
     ;;   (eval expression (get-current-environment)))
-    ;; (map mappable-eval (map fourth samples))
+    
+    ;; ;; (pretty-print samples)
+    ;; (map mappable-eval samples)
 
 ;;;testing
 ;;;tree grammar tests
-    (define expr (generate-syntax-tree 10 trees 'T))
-    expr
+    (define expr (generate-syntax-tree 100 trees 'T))
+
     (pretty-print expr)
     (define test-tree (eval expr (get-current-environment)))
     (pretty-print test-tree)
-    test-tree
+    (list test-tree)
     ))
-(draw-trees (cons "./test.png" (list atree)))
+(draw-trees (cons "./test.png" sampled-trees))
 (exit)

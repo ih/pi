@@ -66,7 +66,7 @@ def add_node(graph, label, ncols=None):
     if not ncols:
         ncols = node_colors
     global colors
-    node = graph.add_node(label)
+    node = graph.add_node()
     node.fillcolor = ncols.get(label) or ncols.setdefault(label, colors.pop(0))
     node.label = ''
     if label == "flip":
