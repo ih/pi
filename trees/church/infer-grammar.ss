@@ -227,7 +227,7 @@
             (construct-operation (get-operator partial-syntax-tree) (map (curry make-evalable-recursion rule-names) operands)))
           (if (member? partial-syntax-tree rule-names)
               ;domain specific code; pick a primitive from the type
-              (cond ((equal? partial-syntax-tree 'C) 'a)
+              (cond ((equal? partial-syntax-tree 'C) (uniform-draw (list 'a 'b 'c 'd 'e 'f)))
                     ((equal? partial-syntax-tree 'A) '())
                     ((equal? partial-syntax-tree 'T) '(create-node 'a '())))
               partial-syntax-tree)))
@@ -235,81 +235,46 @@
 ;;;
 ;;;tree grammar related functions
     (define (create-node color tail)
-      (if (null? color)
-          (list 'a)
-          (pair color tail)))
-    (define (id x) x)
-    (define (join x y)
-      (append (list (flatten-empty x)) (list (flatten-empty y))))
-    ;; (define trees '((T (create-node C A)) (A (id T) null (join A A)) (C a b c d e f)))
-     (define a 'a)
-     (define b 'b)
-     (define c 'c)
-     (define d 'd)
-     (define e 'e)
-     (define f 'f)
-     (define nub '())
-;    (define trees '((T (create-node C A)) (A (repeat N T)) (N 0 1 2 3 4) (C a b c)))
-     (define trees '((T (create-node C A)) (A (list T) (append A A) nub) (C a b c d e f)))
-    (define naturals '((N 1 (+ N N))))
+      (pair color tail))
+    (define a 'a)
+    (define b 'b)
+    (define c 'c)
+    (define d 'd)
+    (define e 'e)
+    (define f 'f)
+    (define null '())
 
-    (define (flatten-empty lst)
-      (if (all-empty? lst)
-          '()
-          lst))
-    (define (all-empty? lst)
-      (if (list? lst)
-          (if (null? lst)
-              true
-              (apply and (map all-empty? lst)))
-          false))
-      
+    (define trees '((T (create-node C A)) (A (list T) (append A A) null) (C a b c d e f)))
 
 ;;;inference
-;;  (define samples
-;;    (mh-query
-;;     100 100naturals
-;;     (define trees '((T ((lambda (x) (append '(node color) x)) A)) (A T '() (flatten (join A A)))))
-;;     (naturals ((N 1 (+ N N)))
-;;     (define grammar (generate-grammar naturals))
-;;     (define start-rule (get-rule-name (first grammar)))
-;;     ;(define expr (generate-syntax-tree 5 naturals 'N))
+    ;;  (define samples
+    ;;    (mh-query
+    ;;     100 100naturals
+    ;;     (define trees '((T ((lambda (x) (append '(node color) x)) A)) (A T '() (flatten (join A A)))))
+    ;;     (naturals ((N 1 (+ N N)))
+    ;;     (define grammar (generate-grammar naturals))
+    ;;     (define start-rule (get-rule-name (first grammar)))
+    ;;     ;(define expr (generate-syntax-tree 5 naturals 'N))
 
-;; ;;;what we want to know
-;;     (list "grammar" grammar "expression"(generate-syntax-tree 5 grammar start-rule))
-;;     ;expr
-;; ;;;what we know
-;;     (and (= 2 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 4 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 6 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))))
-;;     ;(= 4 (eval expr (get-current-environment)))
-;;     )
-;;    )
-;; (pretty-print samples)
-;; (define (mappable-eval expression)
-;;   (eval expression (get-current-environment)))
-;; (map mappable-eval (map fourth samples))
+    ;; ;;;what we want to know
+    ;;     (list "grammar" grammar "expression"(generate-syntax-tree 5 grammar start-rule))
+    ;;     ;expr
+    ;; ;;;what we know
+    ;;     (and (= 2 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 4 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))) (= 6 (eval (generate-syntax-tree 5 grammar start-rule) (get-current-environment))))
+    ;;     ;(= 4 (eval expr (get-current-environment)))
+    ;;     )
+    ;;    )
+    ;; (pretty-print samples)
+    ;; (define (mappable-eval expression)
+    ;;   (eval expression (get-current-environment)))
+    ;; (map mappable-eval (map fourth samples))
 
 ;;;testing
 ;;;tree grammar tests
-;; (define j (join '(3 4 (4 5)) 4))
-;; (define k (join (list 3 4 (join 4 5)) 4))
-;; (pretty-print j)
-;; (pretty-print k)
-;; (jlist? j)
-;; (flatten-join j)
-;; k
-;; (flatten-join k)          
-;(has-operands? ''())            
-(define expr (generate-syntax-tree 10 trees 'T))
-expr
-;(eval '((lambda (x) (append '(node color) x)) ()) (get-current-environment))
-(pretty-print expr)
-(eval expr (get-current-environment))
-;    (repeat 3 (create-node 'a '()))
-;(repeat 0 (lambda () "hello"))
-;(all-empty? '((())))
-    ;; ;; ;(generate-syntax-tree 10 naturals 'N)
-    ;; ;;(generate-grammar naturals)
-    
+    (define expr (generate-syntax-tree 100 trees 'T))
+    expr
+    (pretty-print expr)
+    (eval expr (get-current-environment))
  )
 
 (exit)
