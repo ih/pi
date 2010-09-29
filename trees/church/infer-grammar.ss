@@ -10,7 +10,9 @@
 ;;;code for generating a syntax-tree
     (define (generate-partial-syntax-tree time grammar rule-name)
       (let* ((current-rule (select-rule grammar rule-name))
+             (db (pretty-print (list "db1" time rule-name current-rule)))
              (operation (choose-operation current-rule))
+             (db (pretty-print (list "db2" time rule-name operation)))
              )
         (if (and (has-operands? operation) (not (times-up? time)))
             (construct-operation (get-operator operation) (map (curry generate-partial-syntax-tree (adjust-time time) grammar) (get-operands operation)))
@@ -224,12 +226,32 @@
           (let* ((operands (get-operands partial-syntax-tree)))
             (construct-operation (get-operator partial-syntax-tree) (map (curry make-evalable-recursion rule-names) operands)))
           (if (member? partial-syntax-tree rule-names)
-              '() ;the general case will depend on rule name
+              ;domain specific code; pick a primitive from the type
+              (cond ((equal? partial-syntax-tree 'C) 'a)
+                    ((equal? partial-syntax-tree 'A) '())
+                    ((equal? partial-syntax-tree 'T) '(create-node 'a '())))
               partial-syntax-tree)))
     
 ;;;
 ;;;tree grammar related functions
-    (define trees '((T ((lambda (x) (append '(node color) (flatten-empty x))) A)) (A ((lambda (x) (list x)) T) () ((lambda (x y) (append (flatten-empty x) (flatten-empty y))) A A))))
+    (define (create-node color tail)
+      (if (null? color)
+          (list 'a)
+          (pair color tail)))
+    (define (id x) x)
+    (define (join x y)
+      (append (list (flatten-empty x)) (list (flatten-empty y))))
+    ;; (define trees '((T (create-node C A)) (A (id T) null (join A A)) (C a b c d e f)))
+     (define a 'a)
+     (define b 'b)
+     (define c 'c)
+     (define d 'd)
+     (define e 'e)
+     (define f 'f)
+     (define nub '())
+;    (define trees '((T (create-node C A)) (A (repeat N T)) (N 0 1 2 3 4) (C a b c)))
+     (define trees '((T (create-node C A)) (A (list T) (append A A) nub) (C a b c d e f)))
+    (define naturals '((N 1 (+ N N))))
 
     (define (flatten-empty lst)
       (if (all-empty? lst)
@@ -278,10 +300,12 @@
 ;; (flatten-join k)          
 ;(has-operands? ''())            
 (define expr (generate-syntax-tree 10 trees 'T))
-;expr
-(eval '((lambda (x) (append '(node color) x)) ()) (get-current-environment))
+expr
+;(eval '((lambda (x) (append '(node color) x)) ()) (get-current-environment))
 (pretty-print expr)
 (eval expr (get-current-environment))
+;    (repeat 3 (create-node 'a '()))
+;(repeat 0 (lambda () "hello"))
 ;(all-empty? '((())))
     ;; ;; ;(generate-syntax-tree 10 naturals 'N)
     ;; ;;(generate-grammar naturals)
