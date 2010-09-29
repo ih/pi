@@ -1,5 +1,9 @@
-(import (church))
+(import (church)
+        (church external py-pickle))
 
+(define draw-trees
+  (py-pickle-script "../treedraw.py"))
+(define atree
 (church
  (debug-mode 'trace-eval true)
 ;;;global parameters
@@ -271,10 +275,12 @@
 
 ;;;testing
 ;;;tree grammar tests
-    (define expr (generate-syntax-tree 100 trees 'T))
+    (define expr (generate-syntax-tree 10 trees 'T))
     expr
     (pretty-print expr)
-    (eval expr (get-current-environment))
- )
-
+    (define test-tree (eval expr (get-current-environment)))
+    (pretty-print test-tree)
+    test-tree
+    ))
+(draw-trees (cons "./test.png" (list atree)))
 (exit)
