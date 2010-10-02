@@ -1,0 +1,23 @@
+(import (srfi :1 lists))
+(import (church))
+(church
+ (define (list-ref lst index)
+   (if (= 0 index)
+       (first lst)
+       (list-ref (rest lst) (- index 1))))
+ (define (lcs-recursion seq1 seq2 i j)
+   (if (or (= i -1) (= j -1))
+       0
+       (if (equal? (list-ref seq1 i) (list-ref seq2 j))
+           (let* ((a (lcs-recursion seq1 seq2 (- i 1) (- j 1)))
+                  (db (pretty-print (list "eq" (+ a 1) i j))))
+             (+ a 1))
+           (let* ((b (lcs-recursion seq1 seq2 (- i 1) j))
+                  (c (lcs-recursion seq1 seq2 i (- j 1)))
+                  (db (pretty-print (list "neq" b c i j))))
+             (max b c)))))
+ ;(list-ref '(a b c) 2)
+ (lcs-recursion '(a q q q q b) '(a c b) 5 2)
+)
+(exit)
+                         

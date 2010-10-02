@@ -122,6 +122,9 @@
       (map first grammar))
 
     (define add-rule pair)
+
+    (define (get-first-rule-name grammar)
+      (first (get-rule-names grammar)))
 ;;;rule implementation functions; rules are implemented as a list with the first element being the name of the rule and the rest of the elements are operations
 
     (define construct-rule pair)
@@ -232,7 +235,7 @@
           (if (member? partial-syntax-tree rule-names)
               ;domain specific code; pick a primitive from the type
               (cond ((equal? partial-syntax-tree 'C) (uniform-draw (list 'a 'b 'c 'd 'e 'f)))
-                    ((equal? partial-syntax-tree 'A) '())
+                    ((equal? partial-syntax-tree 'L) '())
                     ((equal? partial-syntax-tree 'T) '(create-node 'a '())))
               partial-syntax-tree)))
     
@@ -248,42 +251,49 @@
     (define f 'f)
     (define null '())
 
-    (define trees '((T (create-node C A)) (A (list T) (append A A) null) (C a b c d e f)))
+    (define trees '((T (create-node C L)) (L (list T) (append L L) null) (C a b c d e f)))
 
 ;;;inference
-;;;data to be conditioned upon
-    ;; (define data (lambda (expr) (and (equal? '(a (b)) (eval expr (get-current-environment)))))) 
-
-    ;; (define samples
-    ;;   (mh-query
-    ;;    100 100
-    ;;                                     ;(define grammar (generate-grammar trees))
-    ;;    (define grammar trees)
-    ;;    (define start-rule (get-rule-name (first grammar)))
-    ;;    (define expr (generate-syntax-tree 5 grammar 'T))
-
-    ;; ;;;what we want to know
-    ;;                                     ;(generate-syntax-tree 5 grammar start-rule)
-    ;;    expr
-    ;; ;;;what we know
-    ;;    (data expr)
-    ;;    )
-    ;;   )
-    ;; samples
-    ;; (define (mappable-eval expression)
-    ;;   (eval expression (get-current-environment)))
+;;;data to be conditioned upon for learning a grammar
+    ;; (define data (lambda (grammar) (and (equal? '(a (b)) (eval (generate-syntax-tree 5 grammar (get-first-rule-name grammar)) (get-current-environment))) (equal? '(a (b)) (eval (generate-syntax-tree 5 grammar (get-first-rule-name grammar)) (get-current-environment))) (equal? '(a (b)) (eval (generate-syntax-tree 5 grammar (get-first-rule-name grammar)) (get-current-environment))))))
+;;;data for parsing   
+    (define data (lambda (expr) (and (equal? '(a (a (a) (a))) (eval expr (get-current-environment))))))
     
-    ;; ;; (pretty-print samples)
-    ;; (map mappable-eval samples)
+    (define samples
+      (mh-query
+       10 100
+       ;(define grammar (generate-grammar trees))
+       (define grammar trees)
+       (define expr (generate-syntax-tree 5 grammar 'T))
+
+    ;;;what we want to know
+       ;(generate-syntax-tree 5 grammar start-rule)
+       expr
+    ;;;what we know
+       (data expr)
+       )
+      )
+    samples
+    (define (mappable-eval expression)
+      (eval expression (get-current-environment)))
+    
+    (pretty-print samples)
+    (map mappable-eval samples)
 
 ;;;testing
-;;;tree grammar tests
-    (define expr (generate-syntax-tree 100 trees 'T))
+;;;grammar tests
+;;   (get-first-rule-name trees)
+;;tree grammar tests
+    ;; (define expr (generate-syntax-tree 100 trees 'T))
 
-    (pretty-print expr)
-    (define test-tree (eval expr (get-current-environment)))
-    (pretty-print test-tree)
-    (list test-tree)
+    ;; (pretty-print expr)
+    ;; (define test-tree (eval expr (get-current-environment)))
+    ;; (pretty-print test-tree)
+    ;; (list test-tree)
+
+;    (generate-grammar trees)
+    
+    
     ))
 (draw-trees (cons "./test.png" sampled-trees))
 (exit)
