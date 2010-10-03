@@ -5,54 +5,54 @@
    (if (= 0 index)
        (first lst)
        (list-ref (rest lst) (- index 1))))
- (define (lcs-recursion seq1 seq2 i j)
-   (if (or (= i -1) (= j -1))
-       0
-       (if (equal? (list-ref seq1 i) (list-ref seq2 j))
-           (let* ((a (lcs-recursion seq1 seq2 (- i 1) (- j 1)))
-                  (db (pretty-print (list "eq" (+ a 1) i j))))
-             (+ a 1))
-           (let* ((b (lcs-recursion seq1 seq2 (- i 1) j))
-                  (c (lcs-recursion seq1 seq2 i (- j 1)))
-                  (db (pretty-print (list "neq" b c i j))))
-             (max b c)))))
- (define lcs (mem lcs-recursion))
- ;(list-ref '(a b c) 2)
-; (lcs '(a b c b d a b) '(b d c a b a) 6 5)
-(define s1 '(a b c b d a b))
-(define s2 '(b d c a b a b))
-;;;try scanning the already created "table"
- (define (recover-LCS seq1 seq2 i j)
-   (let ((length (lcs seq1 seq2 i j)))
-     (if (= length 0)
-         '()
-         (if (item-match? seq1 seq2 i j)
-             (let ((common-character (list-ref seq1 i)))
-               (pair common-character (recover-LCS seq1 seq2 (- i 1) (- j 1))))
-             (let ((next-coordinates (determine-next-move seq1 seq2 i j)))
-               (recover-LCS seq1 seq2 (get-x next-coordinates) (get-y next-coordinates)))))))
 
- (define (determine-next-move seq1 seq2 i j)
-   (let ((up-length (lcs seq1 seq2 i (- j 1)))
-         (left-length (lcs seq1 seq2 (- i 1) j)))
-     (if (< up-length left-length)
-         (make-coordinate (- i 1) j)
-         (make-coordinate i (- j 1)))))
+(define (lcs seq1 seq2)
+  (begin
+    (define (item-match? row column)
+      (equal? (list-ref seq1 row) (list-ref seq2 column)))
+
+    (define (length-table-recursion row column)
+      (if (or (= row -1) (= column -1))
+          0
+          (if (item-match? row column)
+              (let* ((up-left (length-table-recursion (- row 1) (- column 1))))
+                (+ up-left 1))
+              (let* ((left (length-table-recursion (- row 1) column))
+                     (up (length-table-recursion row (- column 1))))
+                (max left up)))))
+
+    (define length-table (mem length-table-recursion))
+
+    (define (recover-lcs row column)
+      (let ((length (length-table row column)))
+        (if (= length 0)
+            '()
+            (if (item-match? row column)
+                (let ((common-character (list-ref seq1 row)))
+                  (pair common-character (recover-lcs (- row 1) (- column 1))))
+                (let ((next-coordinates (determine-next-move row column)))
+                  (recover-lcs (get-x next-coordinates) (get-y next-coordinates)))))))
+
+    (define (determine-next-move row column)
+      (let ((up-length (length-table row (- column 1)))
+            (left-length (length-table (- row 1) column)))
+        (if (< up-length left-length)
+            (make-coordinate (- row 1) column)
+            (make-coordinate row (- column 1)))))
+
+    (length-table (- (length seq1) 1) (- (length seq2) 1))
+    (recover-lcs (- (length seq1) 1) (- (length seq2) 1))
+   ))
 
 (define (make-coordinate i j)
   (list i j))
 (define get-x first)
 (define get-y second)
-  
- (define (item-match? seq1 seq2 i j)
-   (equal? (list-ref seq1 i) (list-ref seq2 j)))
-       
- (lcs s2 s1 6 6)
 
-(determine-next-move s2 s1 5 5)
+(lcs '(x f x a x b c y d y y) '(x g x a v d y y))
 
 
-(recover-LCS s2 s1 6 6)
+
 ;;;all subsequences...
 ;; (define (common-subsequences seq1 seq2)
 ;;   (let ((subsequences '())
