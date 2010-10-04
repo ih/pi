@@ -49,11 +49,44 @@
 (define get-x first)
 (define get-y second)
 
-(lcs '(x f x a x b c y d y y) '(x g x a v d y y))
+;(lcs '(x f x a x b c y d y y) '(x g x a v d y y))
 
 
 
 ;;;all subsequences...
+(define (cs seq1 seq2)
+  (begin
+  (define (item-match? row column)
+    (equal? (list-ref seq1 row) (list-ref seq2 column)))
+
+  (define (cs-recursion row column)
+    (if (or (= row -1) (= column -1))
+        '(())
+        (if (item-match? row column)
+            (let* ((common-item (list-ref seq1 row))
+                   (up-left-sequences (cs-recursion (- row 1) (- column 1))))
+              (make-sequences common-item up-left-sequences))
+            (let* ((left-sequences (cs-recursion (- row 1) column))
+                   (up-sequences (cs-recursion row (- column 1))))
+              (get-longer-sequences left-sequences up-sequences)))))
+
+  (define (make-sequences item seqs)
+    (map (lambda (y) (pair item y)) seqs)) 
+  (define (get-longer-sequences seqs1 seqs2)
+    (let ((length1 (length (first seqs1)))
+          (length2 (length (first seqs2))))
+      (cond ((> length1 length2) seqs1)
+            ((< length1 length2) seqs2)
+            (else (append seqs1 seqs2)))))
+
+  (define cs-table (mem cs-recursion))
+  (cs-table (- (length seq1) 1) (- (length seq2) 1))
+  )
+  )
+
+(cs '(a b c b d a b) '(b d c a b a))
+;(cs '(x f x a x b c y d y y) '(x g x a v d y y))
+
 ;; (define (common-subsequences seq1 seq2)
 ;;   (let ((subsequences '())
 ;;   (begin
