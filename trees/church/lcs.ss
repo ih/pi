@@ -61,6 +61,7 @@
 
   (define (cs-recursion row column)
     (if (or (= row -1) (= column -1))
+        ;(list (list (gen-sym)))
         '(())
         (if (item-match? row column)
             (let* ((common-item (list-ref seq1 row))
@@ -68,8 +69,8 @@
               (make-sequences common-item up-left-sequences))
             (let* ((left-sequences (cs-recursion (- row 1) column))
                    (up-sequences (cs-recursion row (- column 1))))
-              (get-longer-sequences left-sequences up-sequences)))))
-
+              (add-variables (get-longer-sequences left-sequences up-sequences))))))
+              ;(get-longer-sequences left-sequences up-sequences)))))
   (define (make-sequences item seqs)
     (map (lambda (y) (pair item y)) seqs)) 
   (define (get-longer-sequences seqs1 seqs2)
@@ -77,13 +78,63 @@
           (length2 (length (first seqs2))))
       (cond ((> length1 length2) seqs1)
             ((< length1 length2) seqs2)
-            (else (append seqs1 seqs2)))))
+            (else (set-append seqs1 seqs2)))))
 
-  (define cs-table (mem cs-recursion))
+  (define (set-append lst1 lst2)
+    (delete-duplicates (append lst1 lst2)))
+  
+  (define (delete-duplicates lst)
+    (delete-duplicates-helper '() lst))
+
+  (define (delete-duplicates-helper set lst)
+    (if (null? lst)
+        set
+        (delete-duplicates-helper
+         (if (member? (first lst) set)
+             set
+             (pair (first lst) set))
+         (rest lst))))
+
+  
+  (define (add-variables subsequences)
+    (map add-variable subsequences))
+  (define (add-variable subsequence)
+    (if (null? subsequence)
+        subsequence
+        (if (in-a-sequence? (first subsequence))
+            (pair (gen-sym) subsequence)
+            subsequence)))
+  (define (in-a-sequence? item)
+    (or (member? item seq1) (member? item seq2)))
+  (define (member? item lst)
+    (if (null? lst)
+        false
+        (if (equal? item (first lst))
+            true
+            (member? item (rest lst)))))
+  (define (gen-sym)
+    (second (gensym)))
+
+                        
+  
+  (define cs-table (mem cs-recursion))  
+  
+  (define (row-iter i j)
+    (if (and (= i 0) (= j 0))
+        (cs-table i j)
+        (if (= i 0)
+            (set-append (cs-table i j) (row-iter (- (length seq1) 1) (- j 1)))
+            (set-append (cs-table i j) (row-iter (- i 1) j)))))
+
   (cs-table (- (length seq1) 1) (- (length seq2) 1))
-  )
+        
+;  (row-iter (- (length seq1) 1) (- (length seq2) 1))
   )
 
+
+  )
+
+;(cs (
 ;(cs '(a b c b d a b) '(b d c a b a))
 ;(cs '(x f x a x b c y d y y) '(x g x a v d y y))
 (cs '(a a a) '(a b b a))
