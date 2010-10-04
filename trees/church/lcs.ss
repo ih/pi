@@ -84,9 +84,9 @@
   )
   )
 
-(cs '(a b c b d a b) '(b d c a b a))
+;(cs '(a b c b d a b) '(b d c a b a))
 ;(cs '(x f x a x b c y d y y) '(x g x a v d y y))
-
+(cs '(a a a) '(a b b a))
 ;; (define (common-subsequences seq1 seq2)
 ;;   (let ((subsequences '())
 ;;   (begin
