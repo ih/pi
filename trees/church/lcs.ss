@@ -74,12 +74,23 @@
   (define (make-sequences item seqs)
     (map (lambda (y) (pair item y)) seqs)) 
   (define (get-longer-sequences seqs1 seqs2)
-    (let ((length1 (length (first seqs1)))
-          (length2 (length (first seqs2))))
+    (let ((length1 (length (strip-variables (first seqs1))))
+          (length2 (length (strip-variables (first seqs2)))))
       (cond ((> length1 length2) seqs1)
             ((< length1 length2) seqs2)
             (else (set-append seqs1 seqs2)))))
 
+  (define (strip-variables expression)
+    (if (null? expression)
+        '()
+        (let ((item (first expression)))
+          (if (list? item)
+              (strip-variables item)
+              (if (in-a-sequence? item)
+                  (pair exp (strip-variables (rest expression)))
+                  (strip-variables (rest expression)))))))
+                  
+  
   (define (set-append lst1 lst2)
     (delete-duplicates (append lst1 lst2)))
   
@@ -95,15 +106,32 @@
              (pair (first lst) set))
          (rest lst))))
 
-  
   (define (add-variables subsequences)
     (map add-variable subsequences))
-  (define (add-variable subsequence)
+
+  
+  ;; (define add-variables
+  ;;   (mem
+  ;;   (lambda (subsequences)
+  ;;          (let ((variable (gen-sym)))
+  ;;            (map (lambda (x) (add-variable variable x)) subsequences)))))
+
+;  (define add-fixed-variable (mem add-variable))
+
+  ;; (define (add-variable variable subsequence)
+  ;;   (if (null? subsequence)
+  ;;       subsequence
+  ;;       (if (in-a-sequence? (first subsequence))
+  ;;           (pair variable subsequence)
+  ;;           subsequence)))
+
+  (define add-variable (mem (lambda (subsequence)
     (if (null? subsequence)
         subsequence
         (if (in-a-sequence? (first subsequence))
             (pair (gen-sym) subsequence)
-            subsequence)))
+            subsequence)))))
+
   (define (in-a-sequence? item)
     (or (member? item seq1) (member? item seq2)))
   (define (member? item lst)
@@ -123,8 +151,8 @@
     (if (and (= i 0) (= j 0))
         (cs-table i j)
         (if (= i 0)
-            (set-append (cs-table i j) (row-iter (- (length seq1) 1) (- j 1)))
-            (set-append (cs-table i j) (row-iter (- i 1) j)))))
+            (append (cs-table i j) (row-iter (- (length seq1) 1) (- j 1)))
+            (append (cs-table i j) (row-iter (- i 1) j)))))
 
   (cs-table (- (length seq1) 1) (- (length seq2) 1))
         
@@ -134,10 +162,10 @@
 
   )
 
-;(cs (
-;(cs '(a b c b d a b) '(b d c a b a))
+;(cs '(x a x b c y y) '(x a x b d y y))
+(cs '(a b c b d a b) '(b d c a b a))
 ;(cs '(x f x a x b c y d y y) '(x g x a v d y y))
-(cs '(a a a) '(a b b a))
+;(cs '(a b b a) '(a a a))
 ;; (define (common-subsequences seq1 seq2)
 ;;   (let ((subsequences '())
 ;;   (begin
