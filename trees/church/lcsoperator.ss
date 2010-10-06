@@ -2,12 +2,20 @@
 
 (church
  ;;;general functions; these should be imported somehow
-   (define (member? item lst)
-    (if (null? lst)
-        false
-        (if (equal? item (first lst))
-            true
-            (member? item (rest lst)))))
+ (define (replace lst old new)
+   (begin
+     (define (swap old new item)
+       (if (equal? item old)
+           new
+           item))
+     (map (curry swap old new) lst)))
+ 
+ (define (member? item lst)
+   (if (null? lst)
+       false
+       (if (equal? item (first lst))
+           true
+           (member? item (rest lst)))))
 
   (define (curry fun . args)
    (lambda x
@@ -26,6 +34,10 @@
 
   (define (set-append lst1 lst2)
     (delete-duplicates (append lst1 lst2)))
+  (define (set-pair item lst)
+    (if (member? item lst)
+        lst
+        (pair item lst)))
   
   (define (delete-duplicates lst)
     (delete-duplicates-helper '() lst))
@@ -86,19 +98,32 @@
  ;subsequences computation
  ;eventually import records into church and define a record for the entry
  (define (make-lcs-entry variable-info expressions)
-   (pair variable-info expressions))
+   (list variable-info expressions))
  (define get-entry-expressions second)
  (define get-entry-variable-info first)
  (define get-entry-variables first)
+ (define (replace-entry-expression entry expression new-expression)
+   (let* ((old-expressions (get-entry-expressions entry))
+          (new-expressions (replace old-expressions expression new-expression))
+          (old-variable-info (get-entry-variable-info entry)))
+     (make-lcs-entry old-variable-info new-expressions)))
+
+ (define (add-entry-variable entry new-variable)
+   (let* ((old-variable-info (get-entry-variable-info entry))
+          (new-variable-info (set-pair new-variable old-variable-info))
+          (old-expressions (get-entry-expressions entry)))
+     (make-lcs-entry new-variable-info old-expressions)))
  
- (define lcs-base '(()()))
+ (define lcs-base '(() ()))
  (define (lcs-common common-item up-left-entry)
    (let* ((old-expressions (get-entry-expressions up-left-entry))
           (new-expressions (add-item common-item old-expressions))
           (old-variable-info (get-entry-variable-info up-left-entry)))
      (make-lcs-entry old-variable-info new-expressions)))
  (define (add-item common-item expressions)
-   (map (curry pair common-item) expressions))
+   (if (null? expressions)
+       (list (list common-item))
+       (map (curry pair common-item) expressions)))
  
  (define (lcs-get-biggest left-entry up-entry)
    (get-biggest entry-subsequence-length join-entries left-entry up-entry))
@@ -119,8 +144,10 @@
 
  (define (get-subsequence entry)
    (let ((variables (get-entry-variables entry))
-         (expression (first (get-entry-expressions entry))))
-     (strip-variables variables expression)))
+         (expressions (get-entry-expressions entry)))
+     (if (null? expressions)
+         expressions
+         (strip-variables variables (first expressions)))))
 
  (define (strip-variables variables expression)
    (let ((not-variable? (make-not-variable-filter variables)))
@@ -142,68 +169,19 @@
      (define add-variable
        (mem
         (lambda (expression)
-          (let ((not-variable? (make-not-variable-filter (get-variables entry))))
+          (let ((not-variable? (make-not-variable-filter (get-entry-variables entry))))
             (if (not-variable? (first expression))
                 (let* ((new-variable (gen-sym))
                        (new-expression (pair new-variable expression))
-                       (new-entry (replace-expression entry expression new-expression))
-                       (new-entry (add-variable new-entry new-variable)))
-                  ))))))
-     (add-variable expression)
-     ))
+                       (new-entry (replace-entry-expression entry expression new-expression))
+                       (new-entry (add-entry-variable new-entry new-variable)))
+                  new-entry)
+                entry
+                )))))
+     (add-variable expression)))
 
-
-         
-
-   (let* ((new-variable (gen-sym))
-          (old-expressions (get-entry-expressions entry))
-          (old-variables (get-entry-variables entry))
-          (not-variable? (make-not-variable-filter old-variables))
-          (new-expressions-and-variables (add-variables not-variable? old-expressions))
-          (new-variables (get-new-variables not-variable? new-expressions)))
-     (make-lcs-entry new-variable-info new-expressions)))
-
- (define (add-variables not-variable? old-expressions)
-   (let ((variable-expression-pairs (map (curry add-variable not-variable?) old-expressions))
-         (variables (get-unique-variables variable-expression-pairs))
-         (expressions (get-expressions-part variable-expression-pairs)))
-     (make-lcs-entry variables 
-         
-
-
- ;only add a variable if the last thing added to the expression was NOT a variable, returns both the new variable and the new expression
- (define add-variable
-   (mem
-    (lambda (not-variable? expression)
-      (let* ((new-variable (gen-sym))
-             (new-expression (pair new-variable expression)))
-        (if (null? expression)
-            expression
-            (if (not-variable? (first expression))
-                (pair (list new-variable) new-expression)
-                (pair '() expression)))))))
 
  (define lcs (make-lcs-operator lcs-base lcs-common lcs-uncommon lcs-get-biggest))
-
-
-
-
- ;eventually implement this in terms of filter
- ;; (define (strip-variables expression)
- ;;   (if (null? expression)
- ;;       '()
- ;;       (let ((item (first expression)))
- ;;         (if (list? item)
- ;;             (strip-variables item)
- ;;             (if (in-a-sequence? item)
- ;;                 (pair exp (strip-variables (rest expression)))
- ;;                 (strip-variables (rest expression)))))))
-
-
- 
-; (define 
-   
-               
  
 ;;;item-match tests
  ;(equal? (lcs-op '(a b c) '(a b d)) false)
@@ -213,8 +191,38 @@
 ;;;lcs tests
  ;(lcs-common 'a '((b b c) (b d e)))
  ;(lcs-length '(a b c b d a b a) '(b d c a b a))
- (lcs '(a b c b d a b a) '(b d c a b a))
-; (first '(()))
+
+;;;lcs lcs function tests
+ (define vinfo '(x))
+ (define exps '((a b c x d) (b a d f)))
+ (define test-entry (make-lcs-entry vinfo exps))
+ (define tentry2 (make-lcs-entry '(x y) '((a b c y r t) (b x d f v d))))
+
+ ;add variable test
+ test-entry
+
+;(get-entry-expressions lcs-base)
+;(add-item 'e '(()))
+
+
+
+ (lcs '(a b c b d a b) '(b d c a b a))
+
+
+;;;passed
+; (lcs-get-biggest test-entry lcs-base)
+;   (lcs-common 'e lcs-base)
+;  (lcs-get-biggest test-entry tentry2)
+; (lcs-uncommon test-entry) 
+ ;  (replace-entry-expression test-entry '(a b c x d) '(a b c x d y))
+  ;(replace '(a b c d) 'b 'x)
+;   (add-entry-variable test-entry 'y)
+  ; (add-variable-to-entry '(a b c x d) test-entry)
+; (lcs-common 'e test-entry)
+
+; (pretty-print "hello")
+; (first (get-entry-expressions '(() (a))))
+
  )
 (exit)
    
