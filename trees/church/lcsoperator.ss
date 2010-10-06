@@ -163,22 +163,37 @@
  (define (add-variables entry)
    (let ((expressions (get-entry-expressions entry)))
      (fold add-variable-to-entry entry expressions)))
+
+ (define add-variable-to-entry
+   (mem
+    (lambda (expression entry)
+      (let ((not-variable? (make-not-variable-filter (get-entry-variables entry))))
+        (if (not-variable? (first expression))
+            (let* ((new-variable (gen-sym))
+                   (new-expression (pair new-variable expression))
+                   (new-entry (replace-entry-expression entry expression new-expression))
+                   (new-entry (add-entry-variable new-entry new-variable)))
+              new-entry)
+            entry
+            )))))
+
+ 
  ;this is a hack to use mem on add-variable so we don't get repeated expressions
- (define (add-variable-to-entry expression entry)
-   (begin
-     (define add-variable
-       (mem
-        (lambda (expression)
-          (let ((not-variable? (make-not-variable-filter (get-entry-variables entry))))
-            (if (not-variable? (first expression))
-                (let* ((new-variable (gen-sym))
-                       (new-expression (pair new-variable expression))
-                       (new-entry (replace-entry-expression entry expression new-expression))
-                       (new-entry (add-entry-variable new-entry new-variable)))
-                  new-entry)
-                entry
-                )))))
-     (add-variable expression)))
+ ;; (define (add-variable-to-entry expression entry)
+ ;;   (begin
+ ;;     (define add-variable
+ ;;       (mem
+ ;;        (lambda (expression)
+ ;;          (let ((not-variable? (make-not-variable-filter (get-entry-variables entry))))
+ ;;            (if (not-variable? (first expression))
+ ;;                (let* ((new-variable (gen-sym))
+ ;;                       (new-expression (pair new-variable expression))
+ ;;                       (new-entry (replace-entry-expression entry expression new-expression))
+ ;;                       (new-entry (add-entry-variable new-entry new-variable)))
+ ;;                  new-entry)
+ ;;                entry
+ ;;                )))))
+ ;;     (add-variable expression)))
 
 
  (define lcs (make-lcs-operator lcs-base lcs-common lcs-uncommon lcs-get-biggest))
@@ -204,12 +219,11 @@
 ;(get-entry-expressions lcs-base)
 ;(add-item 'e '(()))
 
-
-
- (lcs '(a b c b d a b) '(b d c a b a))
-
-
+ (lcs '(a b b a) '(a a))
+;(lcs '(x f x a x b c y d y y) '(x g x a v d y y))
+;(lcs '(x a x b c y y) '(x a x b d y y))
 ;;;passed
+; (lcs '(a b c b d a b) '(b d c a b a))
 ; (lcs-get-biggest test-entry lcs-base)
 ;   (lcs-common 'e lcs-base)
 ;  (lcs-get-biggest test-entry tentry2)
