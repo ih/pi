@@ -118,9 +118,9 @@
    (length (get-subsequence entry)))
 
  (define (get-subsequence entry)
-   (let ((variables (get-variables entry))
-         (expression (first (get-expressions entry))))
-     (strip-variables variables expressions)))
+   (let ((variables (get-entry-variables entry))
+         (expression (first (get-entry-expressions entry))))
+     (strip-variables variables expression)))
 
  (define (strip-variables variables expression)
    (let ((not-variable? (make-not-variable-filter variables)))
@@ -134,24 +134,54 @@
    (add-variables biggest-entry))
 ;you have to create the variable and add it to a subsequence at the same time and this should be memoized, the variable also has to be added to variables (maybe set-appended)
  (define (add-variables entry)
-   (let ((old-expressions (get-expressions entry))
-         (old-variables (get-variables entry))
-         (not-variable? (make-not-variable-filter old-variables))
-         (new-expressions (add-variable not-variable? old-expressions))
-         (new-variable-info (get-new-variables new-expressions)))
-     (make-lcs-entry new-variable-info new-expressions)))
+   (let ((expressions (get-entry-expressions entry)))
+     (fold add-variable-to-entry entry expressions)))
+ ;this is a hack to use mem on add-variable so we don't get repeated expressions
+ (define (add-variable-to-entry expression entry)
+   (begin
+     (define add-variable
+       (mem
+        (lambda (expression)
+          (let ((not-variable? (make-not-variable-filter (get-variables entry))))
+            (if (not-variable? (first expression))
+                (let* ((new-variable (gen-sym))
+                       (new-expression (pair new-variable expression))
+                       (new-entry (replace-expression entry expression new-expression))
+                       (new-entry (add-variable new-entry new-variable)))
+                  ))))))
+     (add-variable expression)
+     ))
+
+
          
 
+   (let* ((new-variable (gen-sym))
+          (old-expressions (get-entry-expressions entry))
+          (old-variables (get-entry-variables entry))
+          (not-variable? (make-not-variable-filter old-variables))
+          (new-expressions-and-variables (add-variables not-variable? old-expressions))
+          (new-variables (get-new-variables not-variable? new-expressions)))
+     (make-lcs-entry new-variable-info new-expressions)))
+
+ (define (add-variables not-variable? old-expressions)
+   (let ((variable-expression-pairs (map (curry add-variable not-variable?) old-expressions))
+         (variables (get-unique-variables variable-expression-pairs))
+         (expressions (get-expressions-part variable-expression-pairs)))
+     (make-lcs-entry variables 
+         
+
+
+ ;only add a variable if the last thing added to the expression was NOT a variable, returns both the new variable and the new expression
  (define add-variable
    (mem
     (lambda (not-variable? expression)
-      (if (null? expression)
-          expression
-          (if (not-variable? (first expression))
-              (pair (gen-sym) expression)
-              expression)))))
-
-      ))
+      (let* ((new-variable (gen-sym))
+             (new-expression (pair new-variable expression)))
+        (if (null? expression)
+            expression
+            (if (not-variable? (first expression))
+                (pair (list new-variable) new-expression)
+                (pair '() expression)))))))
 
  (define lcs (make-lcs-operator lcs-base lcs-common lcs-uncommon lcs-get-biggest))
 
@@ -183,7 +213,7 @@
 ;;;lcs tests
  ;(lcs-common 'a '((b b c) (b d e)))
  ;(lcs-length '(a b c b d a b a) '(b d c a b a))
-; (lcs '(a b c b d a b a) '(b d c a b a))
+ (lcs '(a b c b d a b a) '(b d c a b a))
 ; (first '(()))
  )
 (exit)
