@@ -105,7 +105,13 @@
 
  ;set-append variables and expression lists
  (define (join-entries entry1 entry2)
-   ())
+   (let* ((expressions1 (get-entry-expressions entry1))
+          (expressions2 (get-entry-expressions entry2))
+          (variable-info1 (get-entry-variable-info entry1))
+          (variable-info2 (get-entry-variable-info entry2))
+          (new-variable-info (set-append variable-info1 variable-info2))
+          (new-expressions (set-append expressions1 expressions2)))
+     (make-lcs-entry new-variable-info new-expressions)))
 
  ;length of the expression without variables
  (define (entry-subsequence-length entry)
@@ -124,20 +130,29 @@
    (lambda (x)
      (not (member? x variables))))
  
- (define (lcs-uncommon biggest-entry seq1 seq2)
-   (begin
+ (define (lcs-uncommon biggest-entry)
+   (add-variable biggest-entry))
+;you have to create the variable and add it to a subsequence at the same time and this should be memoized, the variable also has to be added to variables (maybe set-appended)
+ (define (add-variable entry)
+   (let ((variables (get-variables entry))
+         (expressions (get-expressions entry)))
+     (make-lcs-entry (add-to-variables variables
+
+                                       
+ (define append-variable
+   (mem (lambda (subsequence)
+          (if (null? subsequence)
+              subsequence
+              (if (in-a-sequence? (first subsequence))
+                  (pair (gen-sym) subsequence)
+                  subsequence)))))
+
+ 
       (define (add-variables entry)
         (map add-variable entry))
-      (define add-variable
-        (mem (lambda (subsequence)
-               (if (null? subsequence)
-                   subsequence
-                   (if (in-a-sequence? (first subsequence))
-                       (pair (gen-sym) subsequence)
-                       subsequence)))))
       (define (in-a-sequence? item)
         (or (member? item seq1) (member? item seq2)))
-      (add-variables biggest-entry)
+
       ))
 
  (define lcs (make-lcs-operator lcs-base lcs-common lcs-uncommon lcs-get-biggest))
