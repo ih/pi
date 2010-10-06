@@ -123,35 +123,33 @@
      (strip-variables variables expressions)))
 
  (define (strip-variables variables expression)
-   (let ((not-variable (make-not-variable-filter variables)))
-     (filter not-variable expression)))
+   (let ((not-variable? (make-not-variable-filter variables)))
+     (filter not-variable? expression)))
 
  (define (make-not-variable-filter variables)
    (lambda (x)
      (not (member? x variables))))
  
  (define (lcs-uncommon biggest-entry)
-   (add-variable biggest-entry))
+   (add-variables biggest-entry))
 ;you have to create the variable and add it to a subsequence at the same time and this should be memoized, the variable also has to be added to variables (maybe set-appended)
- (define (add-variable entry)
-   (let ((variables (get-variables entry))
-         (expressions (get-expressions entry)))
-     (make-lcs-entry (add-to-variables variables
+ (define (add-variables entry)
+   (let ((old-expressions (get-expressions entry))
+         (old-variables (get-variables entry))
+         (not-variable? (make-not-variable-filter old-variables))
+         (new-expressions (add-variable not-variable? old-expressions))
+         (new-variable-info (get-new-variables new-expressions)))
+     (make-lcs-entry new-variable-info new-expressions)))
+         
 
-                                       
- (define append-variable
-   (mem (lambda (subsequence)
-          (if (null? subsequence)
-              subsequence
-              (if (in-a-sequence? (first subsequence))
-                  (pair (gen-sym) subsequence)
-                  subsequence)))))
-
- 
-      (define (add-variables entry)
-        (map add-variable entry))
-      (define (in-a-sequence? item)
-        (or (member? item seq1) (member? item seq2)))
+ (define add-variable
+   (mem
+    (lambda (not-variable? expression)
+      (if (null? expression)
+          expression
+          (if (not-variable? (first expression))
+              (pair (gen-sym) expression)
+              expression)))))
 
       ))
 
