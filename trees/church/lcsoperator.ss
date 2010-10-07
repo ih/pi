@@ -219,11 +219,11 @@
 ;(get-entry-expressions lcs-base)
 ;(add-item 'e '(()))
 
- (lcs '(a b b a) '(a a))
+; (lcs '(a b b a) '(a a))
 ;(lcs '(x f x a x b c y d y y) '(x g x a v d y y))
 ;(lcs '(x a x b c y y) '(x a x b d y y))
 ;;;passed
-; (lcs '(a b c b d a b) '(b d c a b a))
+ (lcs '(a b c b d a b) '(b d c a b a))
 ; (lcs-get-biggest test-entry lcs-base)
 ;   (lcs-common 'e lcs-base)
 ;  (lcs-get-biggest test-entry tentry2)
