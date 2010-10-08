@@ -223,7 +223,11 @@
 ;(lcs '(x f x a x b c y d y y) '(x g x a v d y y))
 ;(lcs '(x a x b c y y) '(x a x b d y y))
 ;;;passed
- (lcs '(a b c b d a b) '(b d c a b a))
+; (lcs '(x x a x b d y x e f y y h x j k y y) '(x x a x c d y m y h x j l y y))
+ (lcs '(x z x a x b x a x c y y y y y) '(x z x b x q x a x d y y y y y))
+; (lcs '(x x a x b d y x e f y y) '(x x a x c d y m y))
+; (lcs '(x x a b y x c d y y) '(x x d y y))
+; (lcs '(a b c b d a b) '(b d c a b a))
 ; (lcs-get-biggest test-entry lcs-base)
 ;   (lcs-common 'e lcs-base)
 ;  (lcs-get-biggest test-entry tentry2)
