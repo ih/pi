@@ -1,0 +1,3 @@
+;;TODO:
+;; - make abstract a library and export beam-search-compressions
+;; - write something like test-compression and run it on a set of church numerals

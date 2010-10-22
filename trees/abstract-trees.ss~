@@ -1,0 +1,8 @@
+;;to do
+;;--write a program for each concept classes
+;;--generate a set of examples for a concept and run abstraction to get a new program
+;;--use the new program to try and classify programs using the Bayesian decision making
+
+;;mini to do
+;;-look at andreas' code for decision making to see how program is used 
+;;--write a program for each concept classes
