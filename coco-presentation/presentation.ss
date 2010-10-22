@@ -17,11 +17,17 @@
 
 ;;prototype
 
+(define a 'a)
+(define b 'b)
+(define c 'c)
+(define d 'd)
+(define e 'e)
+
+
 (define growth-noise .05)
 (define label-noise .05)
 (define sample-size 5)
 (define labels '(a b c d e))
-
 (define node-def '((define (node x . subtrees)
   (if (flip (- 1 growth-noise))
       (delete '() (pair (noisy-label x) subtrees))
@@ -74,6 +80,15 @@
 
 
 
+(define (nodify-noquote tree)
+  (if (null? tree)
+      '()
+      (append (list 'node (first tree))
+              (map nodify-noquote (rest tree)))))
+
+;;(pretty-print (nodify-noquote '(a (b (c)) (d))))
+
+
 (define (nodify tree)
   (if (null? tree)
       '()
@@ -90,8 +105,14 @@
 
 
 (define (program-compression data)
-  (let* ([all-examples (map nodify data)])
-    (pretty-print-program (beam-compression all-examples 2))))
+  (let* ([all-examples (map nodify-noquote data)]
+         [prog (program->sexpr (beam-compression (list 'uniform-draw all-examples) 2))])
+    (pretty-print (list "hello" prog))
+    (lambda () (eval (program->sexpr prog) (interaction-environment)))))
+
+(define p (program-compression (gen-data prototype)))
+
+(p)
 
 (define (process-model model name)
   (let* ([data (gen-data model)]
@@ -115,8 +136,9 @@
 
 ;;(process-model multiple-recursion "mrecur")
 
-(program-compression (gen-data prototype))
+;;(program-compression (gen-data prototype))
 
 
+;; -do program->sexpr inside beam-compression
 ;; -eval the compressed program
 ;; -compress the literal translation of the data

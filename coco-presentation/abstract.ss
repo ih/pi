@@ -7,7 +7,7 @@
 ;; - ignore size for definition of recursion pattern to encourage its use
 ;; - find example of need for variable capture 
 (library (abstract)
-         (export beam-compression pretty-print-program)
+         (export beam-compression pretty-print-program program->sexpr)
          (import (except (rnrs) string-hash string-ci-hash)
                  (only (ikarus) set-car! set-cdr!)
                  (_srfi :1)
