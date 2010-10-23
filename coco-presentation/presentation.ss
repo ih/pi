@@ -106,13 +106,10 @@
 
 (define (program-compression data)
   (let* ([all-examples (map nodify-noquote data)]
-         [prog (program->sexpr (beam-compression (list 'uniform-draw all-examples) 2))])
+         [prog (program->sexpr (beam-compression (list 'uniform-draw (pair 'list all-examples)) 2))])
     (pretty-print (list "hello" prog))
-    (lambda () (eval (program->sexpr prog) (interaction-environment)))))
+    (lambda () (eval prog (interaction-environment)))))
 
-(define p (program-compression (gen-data prototype)))
-
-(p)
 
 (define (process-model model name)
   (let* ([data (gen-data model)]
@@ -123,22 +120,26 @@
          [prog-exemplar (program-exemplar data)]
          [prog-exemplar-data (gen-data prog-exemplar)]
          [prog-exemplar-file-name (string-join (list name "-prog-exemplar.png") "")]
+         [compress-prog (program-compression data)]
+         [compress-prog-data (gen-data compress-prog)]
+         [compress-prog-file-name (string-join (list name "-compress.png") "")]
          [new-data (gen-data model)]
          [new-file-name (string-join (list name "-new.png") "")])
     (draw-trees (pair orig-file-name data))
     (draw-trees (pair exemp-file-name exemp-data))
     (draw-trees (pair prog-exemplar-file-name prog-exemplar-data))
+    (draw-trees (pair compress-prog-file-name compress-prog-data))
     (draw-trees (pair new-file-name new-data))))
 
 ;;(process-model prototype "proto")
          
 ;;(process-model parameterized-parts "param")
 
-;;(process-model multiple-recursion "mrecur")
+(process-model multiple-recursion "mrecur")
 
 ;;(program-compression (gen-data prototype))
 
-
+;; -fix problem when recursion abstraction is learned off of an abstraction and there is variable capture, this can cause recursion to take a variable value
 ;; -do program->sexpr inside beam-compression
 ;; -eval the compressed program
 ;; -compress the literal translation of the data

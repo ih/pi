@@ -471,7 +471,7 @@
          (define (replace-matches s abstraction)
            (let* ((recursion-details (recursive? s)))
              (if (recursion-match? abstraction recursion-details)
-                 (replace-recursion abstraction) 
+                 (replace-recursion abstraction recursion-details) 
                  (let ([unified-vars (unify s
                                             (abstraction->pattern abstraction)
                                             (abstraction->vars abstraction))])
@@ -492,9 +492,28 @@
                #f))
          
          ;;replaces expressions that match the recursion pattern with the recursive pattern
-         (define (replace-recursion abstraction)
-           (abstraction-instances->add-instance! abstraction '())
-           (list (abstraction->name abstraction)))
+         (define (replace-recursion abstraction details)
+           (let ([vars (abstraction->vars abstraction)])
+             (abstraction-instances->add-instance! abstraction '())
+             (if (null? vars)
+                 (begin
+                   (list (abstraction->name abstraction)))
+                 (let ([unified-vars (unify-recursion abstraction details)])
+                   (pair (abstraction->name abstraction) unified-vars)))))
+
+         ;;this occurs when the recursion abstraction is created from another abstraction and either the base-case or function-call is a variable in the other abstraction
+         (define (unify-recursion abstraction details)
+           (let ([vars (abstraction->vars abstraction)]
+                 [pattern (abstraction->pattern abstraction)])
+             (map (curry unify-recursive-var pattern details) vars)))
+
+         (define (unify-recursive-var pattern details var)
+           (if (base-case? pattern var)
+               (recursion-details->base-case details)
+               (recursion-details->function details)))
+
+         (define (base-case? pattern var)
+           (equal? (second (third pattern)) var))
 
          ;; throw out any matches that are #f
          (define (get-valid-abstractions subtree-matches)
@@ -844,6 +863,8 @@
 ;; ;;(test-inline-recursion)
     
 
+
+;;- write unify-recursion
 
 ;; ;; - maybe add special case to rewrite; applied anonymous functions rewritten as the body of the lambda with the variables filled in
 
