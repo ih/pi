@@ -1,0 +1,33 @@
+=====TO DO=====
+-[1] look at Josh's thesis for anything about induction for use in section 1.3?
+-[2] give examples of formalizing intuitions in other fields (e.g. distance in topology, chance in probability)
+-
+====
+
+
+
+MAIN IDEAS
+-Cognition is about finding structure
+-Structure defined as common computation
+-Finding structure can be interpreted as program induction
+-Grammar inference as an approach to program induction
+-Probabilistic inference as a principled approach to learning grammars
+
+COGNITION AND STRUCTURE
+-Survival depends on induction i.e. structure [1]
+-Past representations of concept
+-How do we define structure?
+     -Formal methods [2]
+-The number game
+  {2,4,6,8}
+  {68,77,44,20}
+-Trees
+  
+
+COMPUTATIONAL VIEW OF STRUCTURE 
+
+
+
+
+
+

@@ -697,7 +697,7 @@
            (for-each display (list "original expr:\n" sexpr "\n"
                                    "size: " (size sexpr)
                                    "\n\n"
-                                   "compressed exprs:\n"))
+                                   "compressing...\n"))
            (first (sort-by-size
             (unique-programs
              (beam-search-compressions beam-size (make-program '() sexpr))))))
