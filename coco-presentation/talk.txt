@@ -1,33 +1,50 @@
 =====TO DO=====
--[1] look at Josh's thesis for anything about induction for use in section 1.3?
--[2] give examples of formalizing intuitions in other fields (e.g. distance in topology, chance in probability)
--
+-[1] look at Josh's thesis for anything about induction for use in section 1
+-[2] examples of formalizing intuition (closeness topology, rates of change calculus, chance probability)
+-[3] examples of limitations see Percy's paper, Kemp et al, grammar induction book
+-[4] chaos butterfly? http://www.gocomics.com/tomthedancingbug/
+- maybe remove first point of defining structure...a bit off tangent
+- [5] examples of importance of reuse in fragment grammar paper
 ====
 
-
-
 MAIN IDEAS
--Cognition is about finding structure
--Structure defined as common computation
--Finding structure can be interpreted as program induction
--Grammar inference as an approach to program induction
--Probabilistic inference as a principled approach to learning grammars
+-Structure and computation
+-First steps, current progress 
+-Program induction as a model of concept learning
+-Learning grammars(?)
 
-COGNITION AND STRUCTURE
--Survival depends on induction i.e. structure [1]
--Past representations of concept
--How do we define structure?
+STRUCTURE
+-Induction is a central aspect of cognition [1]
+-An example 
+{2,4,6,8}
+{3,1,6,7}
+-Algorithm design
+
+DEFINING STRUCTURE
+-The right definition can lead to powerful results (butterfly effect.. [4]) 
      -Formal methods [2]
--The number game
-  {2,4,6,8}
-  {68,77,44,20}
--Trees
-  
+-Limitations of feature vector representations [3]
+-Relations represented as computations
+-Number game revisited
+  -a possible definition of structure
+  -distributions represented as computations with uncertainty
 
-COMPUTATIONAL VIEW OF STRUCTURE 
+INITIAL STEPS
+-Tree domain 
+-Humans learning can be modeled with structured generative coconcepts
+-Program induction as a computational model of concept learning
 
+PROGRAM INDUCTION 
+-Naive Approach 
+-Difficulties
+-(Re)Using structure [5] 
+  -different generative model results
 
-
+FUTURE DIRECTIONS AND BARRIERS
+-Learning grammars as a more general approach
+-Grammars in terms of common computations
+-Recursion and branching patterns  
+-quotes from Saussure and SICP
 
 
 
