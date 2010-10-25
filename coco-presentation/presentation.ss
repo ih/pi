@@ -1,6 +1,9 @@
 
 ;; to do
-
+;; -compute size for compressed program
+;; -determine cases where exemplar and compressed models would be differentiated (i.e. where exemplar fails)
+;; -look at using abstract without the recursion pattern
+;; -look at recursive concepts where the flip parameter is drawn uniformly at random
 ;; -do program->sexpr inside beam-compression
 
 ;; -separate data generation between training and "test"
@@ -29,8 +32,8 @@
 (define growth-noise .05)
 (define label-noise .05)
 ;;(define sample-size 5)
-(define training-size 5)
-(define generalize-size 20)
+(define training-size 6)
+(define generalize-size 40)
 (define labels '(a b c d e))
 (define node-def '((define (node x . subtrees)
   (if (flip (- 1 growth-noise))
@@ -110,8 +113,8 @@
 
 (define (program-compression data)
   (let* ([all-examples (map nodify-noquote data)]
-         [prog (program->sexpr (beam-compression (list 'uniform-draw (pair 'list all-examples)) 2))])
-    (pretty-print (list "compressed-program:" prog))
+         [prog (program->sexpr (beam-compression (list 'uniform-draw (pair 'list all-examples)) 1))])
+    (pretty-print (list "compressed-program:" prog "size: " (size prog)))
     (lambda () (eval prog (interaction-environment)))))
 
 
@@ -155,6 +158,8 @@
 ;;(process-model parameterized-parts "param")
 
 (process-model multiple-recursion "mrecur")
+
+;;(pretty-print (beam-compression '((f (f (f (f x)))) (f (f (f (f x)))) (f (f (f (f x)))) (g (f (f (f x))))) 1))
 
 ;;(program-compression (gen-data prototype))
 
