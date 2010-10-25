@@ -131,7 +131,7 @@
     
     (define get-rule-name first)
 
-                                        ;rules should be modified to have a parameterized distribution over operations
+;;rules should be modified to have a parameterized distribution over operations
     (define (choose-operation rule)
       (uniform-draw (get-operations rule)))
 
@@ -223,7 +223,7 @@
 ;;;bounded generation related functions
     (define (times-up? time) (= 0 time))
     (define (adjust-time time) (- time 1))
-                                        ;for now make-evalable turns rule names into 1s, this can be generalized to replacing the rule names with primitives from the type represented by the rule name
+    ;;for now make-evalable turns rule names into 1s, this can be generalized to replacing the rule names with primitives from the type represented by the rule name
     (define (make-evalable grammar partial-syntax-tree)
       (let ((rule-names (get-rule-names grammar)))
         (make-evalable-recursion rule-names partial-syntax-tree)))
@@ -251,7 +251,9 @@
     (define f 'f)
     (define null '())
 
-    (define trees '((T (create-node C L)) (L (list T) (append L L) null) (C a b c d e f)))
+    (define trees '((T (create-node C L))
+                    (L (list T) (append L L) null)
+                    (C a b c d e f)))
 
 ;;;inference
 ;;;data to be conditioned upon for learning a grammar

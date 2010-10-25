@@ -4,16 +4,17 @@
 -[3] examples of limitations see Percy's paper, Kemp et al, grammar induction book
 -[4] chaos butterfly? http://www.gocomics.com/tomthedancingbug/
 - maybe remove first point of defining structure...a bit off tangent
-- [5] examples of importance of reuse in fragment grammar paper
+-[5] examples of importance of reuse in fragment grammar paper
 ====
 
 MAIN IDEAS
--Structure and computation
--First steps, current progress 
--Program induction as a model of concept learning
+-Model cognition as programming
+-Structured generative concepts
+-Modeling abstraction with lambda abstraction
 -Learning grammars(?)
 
-STRUCTURE
+Cognition as programming
+-quotes from Saussure and SICP
 -Induction is a central aspect of cognition [1]
 -An example 
 {2,4,6,8}
@@ -44,7 +45,7 @@ FUTURE DIRECTIONS AND BARRIERS
 -Learning grammars as a more general approach
 -Grammars in terms of common computations
 -Recursion and branching patterns  
--quotes from Saussure and SICP
+
 
 
 

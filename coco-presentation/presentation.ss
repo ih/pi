@@ -1,6 +1,5 @@
 
 ;; to do
-;; -compute size for compressed program
 ;; -determine cases where exemplar and compressed models would be differentiated (i.e. where exemplar fails)
 ;; -look at using abstract without the recursion pattern
 ;; -look at recursive concepts where the flip parameter is drawn uniformly at random
@@ -65,6 +64,14 @@
   (part (if (flip .5)
             (node 'b)
             (node 'c))))
+
+(define (single-recursion)
+  (define (part)
+    (node 'a
+          (if (flip .8)
+              (node 'b (part) (node c))
+              (node 'd))))
+  (node b (node b (node c) (node c)) (part)))
 
    
 (define (multiple-recursion)
@@ -157,7 +164,9 @@
          
 ;;(process-model parameterized-parts "param")
 
-(process-model multiple-recursion "mrecur")
+(process-model single-recursion "srecur")
+
+;;(process-model multiple-recursion "mrecur")
 
 ;;(pretty-print (beam-compression '((f (f (f (f x)))) (f (f (f (f x)))) (f (f (f (f x)))) (g (f (f (f x))))) 1))
 

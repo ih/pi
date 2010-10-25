@@ -1,0 +1,19 @@
+(define trees '((T (create-node C L))
+                (L (list T) (append L L) null)
+                (C a b c d e f)
+                (TIF (make-if T T))
+
+(define (generate-syntax-tree time grammar rule-name)
+  (make-evalable grammar (generate-partial-syntax-tree time grammar rule-name)))
+
+
+
+(define (generate-partial-syntax-tree time grammar rule-name)
+  (let* ((current-rule (select-rule grammar rule-name))
+                                        ;(db (pretty-print (list "db1" time rule-name current-rule)))
+         (operation (choose-operation current-rule))
+                                        ;(db (pretty-print (list "db2" time rule-name operation)))
+         )
+    (if (and (has-operands? operation) (not (times-up? time)))
+        (construct-operation (get-operator operation) (map (curry generate-partial-syntax-tree (adjust-time time) grammar) (get-operands operation)))
+        operation)))
