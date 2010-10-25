@@ -10,18 +10,6 @@
 
 (define (terminal t) (lambda () t))
 
-;; (define LABEL
-;;   (lambda ()
-;;     (map sample
-;;          (uniform-draw
-;;           (list 
-;;            (list (terminal 'a))
-;;            (list (terminal 'b))
-;;            (list (terminal 'c)))))))
-
-
-;;(RULE 'TREE-EXPR make-tree '((IF) (NODE)))
-
 (define LABEL
   (lambda ()
     (sample 
@@ -32,9 +20,18 @@
       (terminal 'c))))))
 
 
+;; (define TREE-EXPR
+;;   (lambda ()
+;;     (map sample (uniform-draw (list (list IF) (list NODE) (list FUNC-APP) (list (terminal '())))))))
+
 (define TREE-EXPR
   (lambda ()
-    (map sample (uniform-draw (list (list IF) (list NODE) (list (terminal '())))))))
+    (sample (uniform-draw (list IF NODE FUNC-APP (terminal '()))))))
+
+
+(define FUNC-APP
+  (lambda ()
+    (make-application (uniform-draw functions))))
 
 (define IF
   (lambda ()
@@ -45,19 +42,29 @@
   (lambda ()
     (make-node (map sample (list LABEL TREE-EXPR)))))
 
+(define functions (list (list 'F1 (list LABEL TREE-EXPR)) (list 'F2 '()) (list 'F3 (list LABEL LABEL))))
 
+(define (make-application func-info)
+  (let ([name (first func-info)]
+        [args (second func-info)])
+    (pair name (map sample args))))
+    
+;;
 (define (make-tree-expr a) (first a))
 
 (define (make-if if-info)
-  (let ([true-condition (first (first if-info))]
-        [false-condition (first (second if-info))])
+  (let ([true-condition (first if-info)]
+        [false-condition (second if-info)])
     `(if (flip) ,true-condition ,false-condition)))
 
 
 (define (make-node node-info)
-  (let ([label (first node-info)]
-        [expr (first (second node-info))])
-    (list 'node label expr)))
+  (let* ([label (first node-info)]
+        [expr (second node-info)])
+;;        [db (pretty-print (list "expr" expr))])
+    (if (null? expr)
+        (list 'node label)
+        (list 'node label expr))))
 
 
 

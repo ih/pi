@@ -1,6 +1,16 @@
 (uniform-draw (list (node c (node b (node d (node a (node a (node e (node a (node a) (node a (node a (node a (node b)) (node a (node a (node a (node a (node d) (node b)) (node a (node a (node a) (node b)) (node b))) (node a (node b))) (node b (node a (node a (node a) (node b)) (node a (node a (node a) (node d)) (node a (node a) (node b)))) (node a (node a) (node b))))) (node a (node a (node a (node a) (node a (node a (node a) (node a (node c (node a (node a) (node b)) (node b)) (node b))) (node a (node a) (node b)))) (node a (node a) (node a (node b)))) (node b)))) (node a (node a (node a) (node b)) (node a (node a) (node b)))) (node a (node a (node a) (node b)) (node a (node a (node a (node a (node a) (node b)) (node b)) (node b))))) (node a (node a (node a) (node a (node a) (node b))) (node a (node a) (node a (node a (node a (node a (node a (node a (node a (node a (node a (node a) (node b)) (node a (node a) (node b))) (node b)) (node b)) (node a (node a) (node a (node a (node a) (node a (node a) (node a (node a (node a (node a)) (node a (node a) (node d))) (node a (node a (node a) (node a (node a) (node a (node a) (node b)))) (node b))))) (node b)))) (node a (node a (node a (node a (node a) (node b)) (node a (node a (node a (node a (node a) (node b))) (node a (node a) (node b))))) (node b)) (node b))) (node a (node a (node a) (node b)) (node b))) (node c)) (node a (node a) (node b)))))))) (node a (node b) (node a (node a) (node a (node a (node a (node a) (node a (node a (node a) (node a (node a) (node a (node a) (node b)))) (node d))) (node b)) (node b))))) (node c (node b (node d (node a (node a (node a) (node a (node a (node a (node a (node a (node a (node a) (node a)) (node b)) (node b)) (node b)) (node a (node a) (node a (node a) (node b)))) (node b))) (node b)))) (node a (node a (node a) (node a (node a (node a (node a (node a) (node a (node a) (node b))) (node a (node a) (node b))) (node b)))) (node b)))))
 size: 430
 
+(define (multiple-recursion)
+  (define (part)
+    (node 'a
+          (if (flip .5)
+              (part)
+              (node 'a))
+          (if (flip .5)
+              (part)
+              (node 'b))))
+  (node 'c (node 'b (node 'd (part))) (part)))
 
 ("compressed-program:"
   (let ()
