@@ -8,31 +8,33 @@
 ====
 
 MAIN IDEAS
--Model cognition as programming
--Structured generative concepts
+-The process of programming can be a good source of inspiration for modeling cognition
+-Learning structured generative concepts
 -Modeling abstraction with lambda abstraction
--Learning grammars(?)
-
-Cognition as programming
+-Future directions
+Seen from this perspective, the technology for coping with large-scale computer systems merges with the technology for building new computer languages, and computer science itself becomes no more (and no less) than the discipline of constructing appropriate descriptive languages.
+COGNITION AS PROGRAMMING
 -quotes from Saussure and SICP
--Induction is a central aspect of cognition [1]
--An example 
-{2,4,6,8}
-{3,1,6,7}
--Algorithm design
+-RL and algorithm design
+-chunking as function definition 
+-concept learning as lambda abstraction
+-language development
 
-DEFINING STRUCTURE
--The right definition can lead to powerful results (butterfly effect.. [4]) 
-     -Formal methods [2]
+STRUCTURED GENERATIVE PROCESSES
+-Humans learning can be modeled with structured generative concepts
 -Limitations of feature vector representations [3]
 -Relations represented as computations
 -Number game revisited
   -a possible definition of structure
   -distributions represented as computations with uncertainty
 
+MODELING ABSTRACTION WITH LAMBDA ABSTRACTION
+-lambda calculus
+-forming lambda abstractions
+
+
 INITIAL STEPS
 -Tree domain 
--Humans learning can be modeled with structured generative coconcepts
 -Program induction as a computational model of concept learning
 
 PROGRAM INDUCTION 
@@ -48,4 +50,6 @@ FUTURE DIRECTIONS AND BARRIERS
 
 
 
+-The right definition can lead to powerful results (butterfly effect.. [4]) 
+     -Formal methods [2]
 
