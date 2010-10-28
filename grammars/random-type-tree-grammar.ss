@@ -1,7 +1,7 @@
 ;;this generative grammar creates variables by randomly choosing a type and listing all the expressions that match that type in the body and chooses randomly from these, this is interesting b/c one can think of the process of finding the expressions that match the type as object recognition, functions developed here may be useful when looking at learning grammars and applying them
 
 ;;TO DO
-
+;;resolve the difference between pattern matching in the case for "regular" abstractions and recursion...read wikipedia page on fixed point combinators
 ;;write find-all-types
 ;;write random-type which chooses a rule randomly
 ;;- move appropriate functions to abstract.ss e.g. abstraction-matches, instantiate etc.
@@ -108,12 +108,18 @@
   (let ([abstractions (type->abstractions type)])
     (map (curry abstraction-matches s) abstractions)))
 
-;;return instances of abstraction in s
+;;;CODE BELOW SHOULD BE MERGED INTO ABSTRACT.SS
+;;return all instances of abstraction in s
 (define (abstraction-matches s abstraction)
   (let ([variable-values (unify-all s abstraction)])
     (map (curry instantiate abstraction) variable-values)))
 
-;;take values for the variables of an abstraction and return the completed pattern 
+;;this is similar to replace-matches
+(define (unify-all s abstraction)
+  (fold unify 
+
+
+;;take values for the variables of an abstraction and return the completed pattern DELETE THESE WHEN NOT NEEDED
 (define (instantiate abstraction variable-values)
   (let ([pattern (abstraction->pattern abstraction)])
     (fold instantiate-variable pattern variable-values)))
@@ -124,7 +130,7 @@
     (sexp-replace name value pattern)))
 
 
-;;- write unify-all
+;;-write abstraction-matches as replace-matches, don't use unify approach (finding all values then instantiating...)
 ;;- write a version of unify that does not try to check/remove-repeated variables
 ;;- test type-matches
 ;;- write insert-vars to use the random type method
