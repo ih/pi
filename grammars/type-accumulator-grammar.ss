@@ -31,7 +31,7 @@
 (define option list)
 
 
-;;grammar rules
+;;grammar rules, the parse includes its derivation, this is used in the definition of a function so that the types for the variables can be recorded
 (define (LABEL)
   (rule make-label
         (rhs (option (terminal 'a))
@@ -44,8 +44,8 @@
         (rhs 
          (option NODE)
          (option (terminal '()))
-         (option IF))))
-;;(option FUNC-APP)
+         (option IF)
+         (option FUNC-APP))))
 
 
 (define (NODE)
@@ -58,44 +58,51 @@
 
 (define (FUNC-APP)
   (rule make-application
-             (rhs (option FUNCTION))))
+             (rhs (option EXISTING-FUNCTION))))
 
-(define (FUNCTION)
+(define (EXISTING-FUNCTION)
   (uniform-draw functions))
 
-
-
-
+(define (FUNCTION)
+  (rule make-function
+        (rhs (option FUNC-LABEL))))
 
 ;;type constructors
+;;additional information e.g. type, to be included with the expression
+(define (extra-info expr type sub-expr-parses)
+  (list expr type sub-expr-parses))
+  
 (define (make-label label-info)
   (let ([label (first label-info)])
-    (list label LABEL)))
+    (extra-info label LABEL '())))
 
 (define (make-tree-expr tree-info)
-  (if (null? (first tree-info))
-      (list (first tree-info) TREE-EXPR)
-      (list (first (first tree-info)) TREE-EXPR)))
+  (let ([expr (first tree-info)])
+    (if (null? expr)
+        (extra-info expr TREE-EXPR '())
+        (first tree-info))))
 
 (define (make-node node-info)
   (let* ([label (first (first node-info))]
-         [expr (first (second node-info))])
+         [expr (first (second node-info))]
+         [db (pretty-print (list "mnode" node-info))])
     (if (null? expr)
-        (list (list 'node label) NODE)
-        (list (list 'node label expr) NODE))))
+        (extra-info (list 'node label) NODE (list label))
+        (extra-info (list 'node label expr) NODE (list label expr)))))
 
 (define (make-if if-info)
   (let* ([true-condition (first (first if-info))]
          [false-condition (first (second if-info))])
-    (list (list 'if '(flip) true-condition false-condition) IF)))
+    (extra-info (list 'if '(flip) true-condition false-condition) IF (list true-condition false-condition))))
 
 (define (make-application func-info)
-  (let ([name (first (first func-info))]
-        [args (second (first func-info))])
-    (list (pair name (map first (map sample args))) FUNC-APP)))
+  (let* ([name (first (first func-info))]
+         [arg-types (second (first func-info))]
+         [args (map first (map sample arg-types))])
+    (extra-info (pair name args) FUNC-APP arg-types)))
 
 
-
+;;;function definition related code
 ;;function information
 (define functions (list (list 'F1 (list LABEL TREE-EXPR)) (list 'F2 '()) (list 'F3 (list LABEL LABEL))))
 
@@ -104,32 +111,37 @@
   (let* ([name (first func-info)]
          [vars (second func-info)]
          [tree-expr (third func-info)]
-         [body (insert-vars vars tree-expr)])
-    `(define (,name ,vars) ,body)))
+         [body+var-types (insert-vars vars tree-expr)]
+         [body (first body+var-types)]
+         [var-types (second body+var-types)])
+    (set! functions (append functions (list name var-types)))
+    (list `(define (,name ,vars) ,body) FUNCTION)))
 
-(define (insert-vars vars body)
-  (define (insert-var var body-types)
-    (let ([body (first body-types)]
-          [types (second body-types)]
-          [target-sexpr (random-subexpr body)]
-          [type (return-type replaced-sexpr)]
+(define (insert-vars vars expr+)
+  (define (insert-var var body+var-types)
+    (let ([body (first body+var-types)]
+          [var-types (second body+var-types)]
+          [target-sexpr+ (random-subexpr body)]
+          [type (return-type target-sexpr+)]
           [new-body (sexp-replace target-sexpr var body)])
-      (list new-body (pair type types))))
-  (fold insert-var (list body '()) vars))
+      (list new-body (pair type vartypes))))
+  (let ([expr (first expr+)])
+    (fold insert-var (list expr '()) vars)))
 
 ;;inefficient to list out all the subexpressions w/ flatten...might want to do something more direct
-(define (random-subexpr sexpr)
-  (uniform-draw (all-sub-exprs sexpr)))
+(define (random-subexpr sexpr+)
+  (uniform-draw (all-sub-exprs sexpr+)))
 
 (define (all-sub-exprs sexpr)
   (if (list? sexpr)
       (pair sexpr (map all-sub-exprs sexpr))
       sexpr))
 
-
+;;- correct last arg for extra-info in most cases to act upon x-info rather than on the expression extracted from parts of x-info
+;;- write FUNC-LABEL
+;;- write random-subexpr
 
 ;;- write all-sub-exprs
-;;- write random-subexpr          
 ;;- write return-type, matches on pattern in type-constructor
 ;;- test insert-vars
 ;;- write FNAME
