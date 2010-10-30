@@ -4,12 +4,9 @@
 
 ;;TO DO
 
-;;- write NULL and integrate it into DEFINITIONS and TREE-EXPR
-;; make sure insert-variables is working correctly and choose-insertion-points
-;; think about possible problems with type accumulation and terminal options
+;;- make a general library w/ (sym tag) in it along w/ everything else
+
 ;;- rewrite abstract to use the general library
-;;- write a function that allows for repeated variables by collapsing what is returned by choose-insertion-points
-;;- write insert-vars to randomly determine whether to insert so that not all instances of a subexpr are replaced by a var
 ;;- write FUNC-LABEL
 ;;- pass rule an optional argument of values for a multinomial, and change uniform-draw to multinomial
 ;;- figure out how to get repeated variables?
@@ -28,9 +25,6 @@
       (map (curry sexp-replace old new) sexp)
       (if (equal? sexp old) new sexp)))
 
-(define (curry fun . const-args)
-  (lambda args
-    (apply fun (append const-args args))))
 
 ;;related to rules
 (define (sample distribution)
@@ -43,6 +37,7 @@
 
 (define rhs list)
 (define option list)
+
 
 ;;grammar rules, the parse includes its derivation, this is used in the definition of a function so that the types for the variables can be recorded
 (define (LABEL)
@@ -60,6 +55,7 @@
          (option IF)
          (option FUNC-APP))))
 
+
 (define (NODE)
   (rule make-node
         (rhs (option LABEL TREE-EXPR))))
@@ -74,17 +70,6 @@
 
 (define (EXISTING-FUNCTION)
   (uniform-draw functions))
-
-;;;the rules below do not need to keep track of the complete parse so they don't use extra-info in their constructors
-(define (PROGRAM)
-  (rule make-program
-        (rhs
-         (option DEFINITIONS TREE-EXPR))))
-
-(define (DEFINITIONS)
-  (rule make-defs
-        (rhs (option FUNCTION DEFINITIONS)
-             (option (terminal '())))))
 
 (define (FUNCTION)
   (rule make-function
@@ -128,21 +113,6 @@
          [arg-exprs (map first arg-parses)])
     (extra-info (pair name arg-exprs) FUNC-APP arg-parses)))
 
-;;doesn't use extra-info because definitions don't appear in the body of functions 
-(define (make-defs defs-info)
-  (if (null? (first defs-info))
-      '()
-      (let* ([func-parse (first defs-info)]
-             [func-list (second defs-info)])
-        (pair (first func-parse) func-list))))
-
-
-(define (make-program prog-info)
-  (set! functions '())
-  (let* ([defs (first prog-info)]
-         [expr-parse (second prog-info)])
-    (append '(let ()) defs (list (first expr-parse)))))
-         
 
 ;;;function definition related code
 ;;function information
@@ -152,37 +122,40 @@
 (define (make-function func-info)
   (let* ([name (first func-info)]
          [expr-parse (second func-info)]
-         [var+type+subexprs (choose-insertion-points expr-parse)]
-         [vars (map first var+type+subexprs)]
-         [var+subexprs (zip vars (map third var+type+subexprs))]
-         [body (insert-variables var+subexprs (first expr-parse))]
-         [var-types (map second var+type+subexprs)])
-    (set! functions (append functions (list (list name var-types))))
-    (list `(define (,name ,vars) ,body))))
+         [expr (first expr-parse)]
+         [vars (gen-vars expr)]
+         [body+var-types (insert-vars vars tree-expr)]
+         [body (first body+var-types)]
+         [var-types (second body+var-types)])
+    (set! functions (append functions (list name var-types)))
+    (list `(define (,name ,vars) ,body) FUNCTION)))
 
-;;return list of (var-name type subexpr) to be used in replacing vars
-(define (choose-insertion-points expr-parse)
-  (if (flip)
-      (let ([expr (first expr-parse)]
-            [type (second expr-parse)])
-        (list (list (gensym) type expr)))
-      (apply append (map choose-insertion-points (third expr-parse)))))
+(define (insert-vars vars expr-parse)
+  (define (insert-var var body+var-types)
+    (let ([body (first body+var-types)]
+          [var-types (second body+var-types)]
+          [target-sexpr+ (random-subexpr body)]
+          [type (return-type target-sexpr+)]
+          [new-body (sexp-replace target-sexpr var body)])
+      (list new-body (pair type vartypes))))
+  (let ([expr (first expr+)])
+    (fold insert-var (list expr '()) vars)))
 
-;;insert variables into the original expression
-(define (insert-variables var+subexprs expr)
-  (define (insert-variable var+subexpr expr)
-    (let* ([var (first var+subexpr)]
-           [sub-expr (second var+subexpr)]
-           [db (pretty-print (list "var:sub-expr" var sub-expr))])
-      (sexp-replace sub-expr var expr)))
-  (pretty-print (list "expr" expr))
-  (fold insert-variable expr var+subexprs))
+;;inefficient to list out all the subexpressions w/ flatten...might want to do something more direct
+(define (random-subexpr sexpr+)
+  (uniform-draw (all-sub-exprs sexpr+)))
+
+(define (all-sub-exprs sexpr)
+  (if (list? sexpr)
+      (pair sexpr (map all-sub-exprs sexpr))
+      sexpr))
 
 
-
-;;- combine liba
-;;- make a general library w/ (sym tag) in it along w/ everything else
-
+;;- write gen-vars or use from previous generative grammar 
+;;- write random-subexpr
+;;- write all-sub-exprs
+;;- write return-type, matches on pattern in type-constructor
+;;- test insert-vars
 ;;- write FNAME
 ;;- write make-function
 ;;- write rule VARS
