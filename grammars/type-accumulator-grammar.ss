@@ -4,22 +4,20 @@
 
 ;;TO DO
 
-;;- write NULL and integrate it into DEFINITIONS and TREE-EXPR
-;; make sure insert-variables is working correctly and choose-insertion-points
-;; think about possible problems with type accumulation and terminal options
+;; -figure out what GSL error is about
+;; -make sure insert-variables is working correctly and choose-insertion-points
+;; -think about possible problems with type accumulation and terminal options
+;; -write NULL and integrate it into DEFINITIONS and TREE-EXPR
 ;;- rewrite abstract to use the general library
-;;- write a function that allows for repeated variables by collapsing what is returned by choose-insertion-points
-;;- write insert-vars to randomly determine whether to insert so that not all instances of a subexpr are replaced by a var
 ;;- write FUNC-LABEL
-;;- pass rule an optional argument of values for a multinomial, and change uniform-draw to multinomial
-;;- figure out how to get repeated variables?
+;;- write a function that allows for repeated variables by collapsing what is returned by choose-insertion-points
 ;;- figure out how to get functions w/ different return types
-;;- write rule to generate programs (definitions and a body)
 ;;- add flag to rule function so that parse info is only tracked when called FUNCTION rule i.e. only track parse info when building the body of a new function
 (import (except (rnrs) string-hash string-ci-hash)
         (only (ikarus) set-car! set-cdr!)
         (_srfi :1)
         (_srfi :69)
+        (sym)
         (church)
         (church readable-scheme))
 ;;general functions
@@ -88,7 +86,7 @@
 
 (define (FUNCTION)
   (rule make-function
-        (rhs (option (terminal (gensym)) TREE-EXPR))))
+        (rhs (option (terminal (sym 'F)) TREE-EXPR))))
 
 ;;type constructors
 ;;additional information e.g. type, to be included with the expression
@@ -158,14 +156,14 @@
          [body (insert-variables var+subexprs (first expr-parse))]
          [var-types (map second var+type+subexprs)])
     (set! functions (append functions (list (list name var-types))))
-    (list `(define (,name ,vars) ,body))))
+    (list (list 'define (pair name vars) body))))
 
 ;;return list of (var-name type subexpr) to be used in replacing vars
 (define (choose-insertion-points expr-parse)
   (if (flip)
       (let ([expr (first expr-parse)]
             [type (second expr-parse)])
-        (list (list (gensym) type expr)))
+        (list (list (sym 'V) type expr)))
       (apply append (map choose-insertion-points (third expr-parse)))))
 
 ;;insert variables into the original expression
@@ -180,10 +178,8 @@
 
 
 
-;;- combine liba
-;;- make a general library w/ (sym tag) in it along w/ everything else
 
-;;- write FNAME
-;;- write make-function
-;;- write rule VARS
-;;- write rule to generate function definitions
+
+
+
+;;- pass rule an optional argument of values for a multinomial, and change uniform-draw to multinomial
