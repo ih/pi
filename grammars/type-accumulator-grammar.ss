@@ -3,14 +3,9 @@
 ;; (NODE) => ((node a) NODE (('a LABEL) ('() TREE-EXPR)))
 
 ;;TO DO
-
-;; -figure out what GSL error is about
-;; -make sure insert-variables is working correctly and choose-insertion-points
-;; -think about possible problems with type accumulation and terminal options
 ;; -write NULL and integrate it into DEFINITIONS and TREE-EXPR
-;;- rewrite abstract to use the general library
-;;- write FUNC-LABEL
 ;;- write a function that allows for repeated variables by collapsing what is returned by choose-insertion-points
+;; -change insert-variables and choose-subexprs to only replace the instance of the chosen subexpression where it was chosen...currently replaces all instances of the chosen subexpression
 ;;- figure out how to get functions w/ different return types
 ;;- add flag to rule function so that parse info is only tracked when called FUNCTION rule i.e. only track parse info when building the body of a new function
 (import (except (rnrs) string-hash string-ci-hash)
@@ -33,8 +28,6 @@
     (if (<= u accum)
         bin
         (loop (+ bin 1) (+ accum (list-ref distribution (+ bin 1)))))))
-             
-    
 
 ;;related to rules
 (define (sample distribution)
@@ -64,7 +57,7 @@
          (option (terminal '()))
          (option NODE)
          (option IF)
-         (option FUNC-APP)) .5 (/ .5 3) (/ .5 3) (/ .5 3)))
+         (option FUNC-APP)) .3 (/ .7 3) (/ .7 3) (/ .7 3)))
 
 (define (NODE)
   (rule make-node
@@ -79,7 +72,9 @@
              (rhs (option EXISTING-FUNCTION))))
 
 (define (EXISTING-FUNCTION)
-  (uniform-draw functions))
+  (if (null? functions)
+      '()
+      (uniform-draw functions)))
 
 ;;;the rules below do not need to keep track of the complete parse so they don't use extra-info in their constructors
 (define (PROGRAM)
@@ -128,11 +123,13 @@
     (extra-info (list 'if '(flip) true-condition false-condition) IF (list true-condition-parse false-condition-parse))))
 
 (define (make-application func-info)
-  (let* ([name (first (first func-info))]
-         [arg-types (second (first func-info))]
-         [arg-parses (map sample arg-types)]
-         [arg-exprs (map first arg-parses)])
-    (extra-info (pair name arg-exprs) FUNC-APP arg-parses)))
+  (if (null? (first func-info))
+      '()
+      (let* ([name (first (first func-info))]
+             [arg-types (second (first func-info))]
+             [arg-parses (map sample arg-types)]
+             [arg-exprs (map first arg-parses)])
+        (extra-info (pair name arg-exprs) FUNC-APP arg-parses))))
 
 ;;doesn't use extra-info because definitions don't appear in the body of functions 
 (define (make-defs defs-info)
@@ -152,13 +149,13 @@
 
 ;;;function definition related code
 ;;function information
-(define functions (list (list 'F1 (list LABEL TREE-EXPR)) (list 'F2 '()) (list 'F3 (list LABEL LABEL))))
-
+;;(define functions (list (list 'F1 (list LABEL TREE-EXPR)) (list 'F2 '()) (list 'F3 (list LABEL LABEL))))
+(define functions '())
 
 (define (make-function func-info)
   (let* ([name (first func-info)]
          [expr-parse (second func-info)]
-         [var+type+subexprs (choose-insertion-points expr-parse)]
+         [var+type+subexprs (choose-subexprs expr-parse)]
          [vars (map first var+type+subexprs)]
          [var+subexprs (zip vars (map third var+type+subexprs))]
          [body (insert-variables var+subexprs (first expr-parse))]
@@ -167,24 +164,24 @@
     (list (list 'define (pair name vars) body))))
 
 ;;return list of (var-name type subexpr) to be used in replacing vars
-(define (choose-insertion-points expr-parse)
-  (if (flip)
-      (let ([expr (first expr-parse)]
-            [type (second expr-parse)])
-        (list (list (sym 'V) type expr)))
-      (apply append (map choose-insertion-points (third expr-parse)))))
+(define (choose-subexprs expr-parse)
+  ;;internal definition so that we don't choose the whole expression as the subexpression
+  (define (choose-sub-exprs expr-parse)
+    (if (flip)
+        (let ([expr (first expr-parse)]
+              [type (second expr-parse)])
+          (list (list (sym 'V) type expr)))
+        (apply append (map choose-sub-exprs (third expr-parse)))))
+  (apply append (map choose-sub-exprs (third expr-parse))))
+  
 
 ;;insert variables into the original expression
 (define (insert-variables var+subexprs expr)
   (define (insert-variable var+subexpr expr)
     (let* ([var (first var+subexpr)]
-           [sub-expr (second var+subexpr)]
-           [db (pretty-print (list "var:sub-expr" var sub-expr))])
+           [sub-expr (second var+subexpr)])
       (sexp-replace sub-expr var expr)))
-  (pretty-print (list "expr" expr))
   (fold insert-variable expr var+subexprs))
-
-
 
 
 
