@@ -18,17 +18,23 @@
         (_srfi :1)
         (_srfi :69)
         (sym)
+        (util)
         (church)
         (church readable-scheme))
 ;;general functions
-(define (sexp-replace old new sexp)
-  (if (list? sexp)
-      (map (curry sexp-replace old new) sexp)
-      (if (equal? sexp old) new sexp)))
+(define (multinomial values distribution)
+  (let* ([u (random-real)]
+         [bin (find-bin u distribution)])
+    (list-ref values bin)))
 
-(define (curry fun . const-args)
-  (lambda args
-    (apply fun (append const-args args))))
+(define (find-bin u distribution)
+  (let loop ([bin 0]
+             [accum (list-ref distribution 0)])
+    (if (<= u accum)
+        bin
+        (loop (+ bin 1) (+ accum (list-ref distribution (+ bin 1)))))))
+             
+    
 
 ;;related to rules
 (define (sample distribution)
@@ -36,8 +42,10 @@
 
 (define (terminal t) (lambda () t))
 
-(define (rule constructor rhs)
-  (constructor (map sample (uniform-draw rhs))))
+(define (rule constructor rhs . mvalues)
+  (if (null? mvalues)
+      (constructor (map sample (uniform-draw rhs)))
+      (constructor (map sample (multinomial rhs mvalues)))))
 
 (define rhs list)
 (define option list)
@@ -52,11 +60,11 @@
 
 (define (TREE-EXPR)
   (rule make-tree-expr
-        (rhs 
-         (option NODE)
+        (rhs
          (option (terminal '()))
+         (option NODE)
          (option IF)
-         (option FUNC-APP))))
+         (option FUNC-APP)) .5 (/ .5 3) (/ .5 3) (/ .5 3)))
 
 (define (NODE)
   (rule make-node
@@ -182,4 +190,3 @@
 
 
 
-;;- pass rule an optional argument of values for a multinomial, and change uniform-draw to multinomial
