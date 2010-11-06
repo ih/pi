@@ -1,0 +1,13 @@
+;;TO DO
+;;-find out how to call shell commands from scheme 
+(import (church external py-pickle))
+
+(define draw-trees
+  (py-pickle-script "./treedraw.py"))
+
+(define (animate-tree tree)
+  (let* ([growth-sequence (tree-growth tree)]
+         [growth-images (draw-sequence growth-sequence)])
+    
+    
+    
