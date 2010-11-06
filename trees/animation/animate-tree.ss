@@ -1,8 +1,9 @@
 ;;TO DO
-;;-find out how to execute shell commands from scheme 
+;;-adjust image-magick so size of last image is used; or change tree-draw
 (import (church external py-pickle)
         (util)
-        (church readable-scheme))
+        (church readable-scheme)
+        (_srfi :1))
 
 (define (depth tree)
   (if (list? tree)
@@ -22,12 +23,12 @@
     (animate fname)))
 
 (define (draw-sequence fname tree-lst)
-  (map (lambda (x y) (draw-trees (pair fname (list x)))) tree-lst (length tree-lst)))
+  (map (lambda (x y) (draw-trees (pair (string-append fname (number->string y) ".png") (list x)))) tree-lst (range 1 (length tree-lst))))
 
 (define (tree-growth tree)
   (let* ([max-depth (depth tree)]
          [all-depths (range 0 max-depth)])
-    (map (lambda (x) (take-tree x tree)) all-depths))) 
+    (rest (map (lambda (x) (take-tree x tree)) all-depths)))) 
 
 
 (define (take-tree depth tree)
@@ -40,7 +41,8 @@
   
       
 
-(animate "images/image")
+;;(animate "images/image")
     
     
     
+(animate-tree '(a (b (q) (r (s))) (c (d (f)))) "images/tree")
