@@ -10,7 +10,6 @@
       (+ 1 (apply max (map depth tree)))
       0))
 
-
 (define draw-trees
   (py-pickle-script "./treedraw.py"))
 
@@ -18,9 +17,10 @@
   (py-pickle-script "./animate.py"))
 
 (define (animate-tree tree fname)
-  (let* ([growth-sequence (tree-growth tree)])
+  (let* ([growth-sequence (tree-growth tree)]
+         [num-of-images (length growth-sequence)])
     (draw-sequence fname growth-sequence)
-    (animate fname)))
+    (animate (list fname num-of-images))))
 
 (define (draw-sequence fname tree-lst)
   (map (lambda (x y) (draw-trees (pair (string-append fname (number->string y) ".png") (list x)))) tree-lst (range 1 (length tree-lst))))
@@ -30,19 +30,13 @@
          [all-depths (range 0 max-depth)])
     (rest (map (lambda (x) (take-tree x tree)) all-depths)))) 
 
-
 (define (take-tree depth tree)
   (if (null? tree)
       '()
       (if (= depth 0)
           '()
           (append (list (first tree)) (delete '() (map (curry take-tree (- depth 1)) (rest tree)))))))
+    
+(animate-tree '(a (b (q) (r (s))) (c (d (f))) (b (d))) "images/pees")
 
-  
-      
-
-;;(animate "images/image")
-    
-    
-    
-(animate-tree '(a (b (q) (r (s))) (c (d (f)))) "images/tree")
+;;(animate (list "images/tree" 5))
