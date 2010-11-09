@@ -37,6 +37,6 @@
           '()
           (append (list (first tree)) (delete '() (map (curry take-tree (- depth 1)) (rest tree)))))))
     
-(animate-tree '(a (b (q) (r (s))) (c (d (f))) (b (d))) "images/pees")
+(animate-tree '(a (b (q) (r (s (t (c (d)))))) (c (d (f))) (b (d))) "images/trees")
 
 ;;(animate (list "images/tree" 5))
