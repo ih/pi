@@ -8,6 +8,7 @@ import cPickle as pickle
 def y(y_large,y_small):
     return y_large-y_small
 def x(x_large,x_small):
+    assert((x_large-x_small)/2 >= 0)
     return (x_large-x_small)/2
 def newCoord(large,small):
     x_large,y_large = large
@@ -27,8 +28,10 @@ if __name__ == "__main__":
     fname,num_of_images = pickle.load(sys.stdin)
     print num_of_images
     sizes = imageSizes(fname,num_of_images)
-    coordinates = [newCoord(sizes[-1],size) for size in sizes]
-    first_page = ["-page %dx%d" % sizes[-1]]
+    max_x = max([size[0] for size in sizes])
+    max_y = max([size[1] for size in sizes])
+    coordinates = [newCoord((max_x,max_y),size) for size in sizes]
+    first_page = ["-page %dx%d" % (max_x,max_y)]
     pages = first_page+[makePage(coordinate, fname, coordinates.index(coordinate)+1) for coordinate in coordinates]
     pages = string.join(pages) 
     command = "convert -delay 100 "+pages+" -loop 0 "+fname+".gif"
