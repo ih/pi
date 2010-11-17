@@ -1,5 +1,5 @@
 ;;TO DO
-;;-adjust image-magick so size of last image is used; or change tree-draw
+;;-stall animate until treedraw is finished
 (library (animate-tree)
          (export animate-tree)
          (import (except (rnrs) string-hash string-ci-hash)

@@ -1,0 +1,12 @@
+;;TO DO
+;;-make prototype stimuli
+
+(import (_srfi :1)
+        (church readable-scheme)
+        (church external py-pickle)
+        (srfi :13)
+        (abstract)
+        (pi concepts)
+        (pi trees drawing))
+
+(define training-size 6)
