@@ -1,0 +1,46 @@
+#-To Do
+#- write realistic loadTrees 
+#- use javascript to cycle through training examples
+
+import random
+    
+def generateQuestions():
+    trees = loadTrees()
+    random.shuffle(trees)
+    return [generateQuestion(tree) for tree in trees]
+
+def generateQuestion(tree):
+#    link="""<a href="#" onclick="change_example('%d');">Click here to toggle visibility of element #foo</a>""" % tree['id']
+
+    question="""Here you see a plant %d, a newly discovered kind of plant that grows in extreme envioronments.:
+    <p>
+    <img id="training" src="%s"></a>
+    <p>
+    How likely is it that the following plant is the same kind of plant as the plants above.?
+    <p>
+    <img src="%s"></a>""" % (tree['id'],tree['id'], tree['trainingImage'], tree['testImage'])
+
+    answers = '<p> <input type="radio" name="previousQuestionAnswer" value="1"> certainly the same kind <p> <input type="radio" name="previousQuestionAnswer" value="2"> certainly not the same kind <p>'
+
+    return question+answers
+    
+def loadTrees():
+    tree0 = {}
+    tree0['id'] = 0
+    tree0['trainingImage'] = 'treeImages/training0.png'
+    tree0['testImage'] = 'treeImages/testing0.png'
+    tree1 = {}
+    tree1['id'] = 1
+    tree1['trainingImage'] = 'treeImages/training1.png'
+    tree1['testImage'] = 'treeImages/testing1.png'
+
+    return [tree0,tree1]
+    # trainingImages = ['treeImages/training0.png','treeImages/training1.png']
+    # testingImages = ['treeImages/testing0f.png','treeImages/testing1.png']
+    # Tree={}
+    # chosen = random(0,1)
+    # Trees['id'] = chosen
+    # Tree['trainingImage'] = trainingImages[chosen]
+    # Tree['testingImage'] = testingImages[chosen]
+    # return Tree
+    
