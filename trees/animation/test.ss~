@@ -1,0 +1,9 @@
+(import (animate-tree))
+
+(animate-tree '(e (b (d (a (a) (b))))
+  (a
+    (a
+      (a (a (a (a (a) (b)) (b)) (a (a (a) (a (b))) (b)))
+        (a (a) (a (a (a) (a (a (e) (a (a (b)) (b))))))))
+      (b))
+    (d))) "images/test")

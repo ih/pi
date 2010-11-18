@@ -1,0 +1,7 @@
+(define (rule constructor rhs . mvalues)
+  (if (null? mvalues)
+      (constructor (map sample (uniform-draw rhs)))
+      (constructor (map sample (multinomial rhs mvalues)))))
+
+(define rhs list)
+(define option list)

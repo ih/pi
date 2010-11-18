@@ -1,0 +1,1 @@
+<p>team 1: arthur eve alice merlin beats team 2: bob carol <p>team 1: arthur beats team 2: alice bob eve merlin carol <p>team 1: bob merlin carol beats team 2: alice eve arthur <p>team 1: bob arthur eve merlin carol beats team 2: alice<p> How strong is alice?<p>
