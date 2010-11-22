@@ -1,0 +1,60 @@
+div.training, div.test {
+    display: block;
+    float: left;
+}
+div.training p {
+    text-align: center;
+}
+h3 {
+padding-top: 1em;
+    clear: both;
+}
+div.category {
+    clear: both;
+    display: block;
+}
+body {
+    color: #222;
+    background:#fff;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif; 
+    padding: 1em;
+    padding-top: 0;
+}
+div.clear {
+    clear: both;
+}
+div.training img,
+div.test img {
+    height: 140px;
+    width: 131pix;
+}
+div.test {
+    text-align: center;
+}
+div.test img {
+    display: block;
+}
+input#submit {
+    font-size: 1em;
+    margin: 1em;
+}
+p.disclaimer {
+    font-style: italic;
+    font-size: 0.8em;
+}
+div.check p {
+    width: 500px;
+    display: inline;
+}
+div.check input {
+    display: inline;
+}
+p.category_label {
+    clear: both;
+}
+div.test {
+    text-align: left
+}
+div.test input {
+    margin-left: 4em;
+}

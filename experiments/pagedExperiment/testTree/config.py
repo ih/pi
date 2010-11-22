@@ -1,0 +1,3 @@
+previousStimuliAnswerField = "previousStimuliAnswerField"
+previousStimuliNumberField = "previousStimuliNumberField"
+

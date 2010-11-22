@@ -11,9 +11,10 @@ disclaimer = "You are going to be a participant."
 def loadQuestion(questionNumber):
     return generateQuestion(questionNumber)
 
-def storePreviousQuestion(value, questionNumber):
-    f = open("answerz.txt", 'a')
-    f.write(str((questionNumber,value)))
+
+def storePreviousQuestion(stimuli, answer, fname):
+    f = open(fname, 'a')
+    f.write(str((stimuli,answer)))
 
 
 #-write template for question

@@ -1,2 +1,2 @@
--modify TestSubmit to be like ExptSubmit.cgi
--modify controlExpt for tree
+-change config to common and move the turk variables to this and datafilename
+-store data in a more structured fashion in storePreviousQuestion e.g. use a pickled dictionary

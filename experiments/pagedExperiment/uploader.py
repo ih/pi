@@ -9,4 +9,4 @@ ssh_server="irvinh@cardinal.stanford.edu:cgi-bin/"
 
 # expt_dir=os.path.abspath(args[0])+'/'
 
-os.system('scp -r tugofwar '+ssh_server)
+os.system('scp -r tree '+ssh_server)

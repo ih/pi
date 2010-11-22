@@ -1,7 +1,4 @@
-#-To Do
-
-#- make order of shuffle persistent
-#- use javascript to cycle through training examples
+from mturk import previousStimuliAnswerField, previousStimuliNumberField
 
 import random,string
 finalQuestionNumber = 5
@@ -24,7 +21,7 @@ def generateQuestion(stimuliNumber):
 
     testImage = '<img src="stimuli/%d/testing.gif">' % stimuliNumber
 
-    answers = '<p> <input type="radio" name="previousQuestionAnswer" value="1"> certainly the same kind <p> <input type="radio" name="previousQuestionAnswer" value="2"> certainly not the same kind <p>'
+    answers = '<p> <input type="radio" name="'+previousStimuliAnswerField+'" value="1"> certainly the same kind <p> <input type="radio" name="'+previousStimuliAnswerField+'" value="2"> certainly not the same kind <p>'
 
     return training+trainingImages+testQuestion+testImage+answers
 

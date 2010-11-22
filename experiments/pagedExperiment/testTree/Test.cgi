@@ -1,16 +1,13 @@
 #!/usr/bin/python
 
 #TO DO
-#-recreate tree experiment
-#-make answer file names unique
-#-make form variables uniform across files
-#-write generateQuestions?
-#-print currentQuestionNumber/totalNumber
 #-connect to mturk code
 #-write question generator for trees and tug of war
 
 import cgi, random, glob
 from questions import loadQuestion, storePreviousQuestion, finalQuestionNumber, disclaimer
+#from config import previousStimuliAnswerField, previousStimuliNumberField
+from mturk import *
 
 def str2list(strRep):
     return map(int, strRep[1:-1].split(','))
@@ -18,28 +15,32 @@ def str2list(strRep):
 def main():
     form = cgi.FieldStorage()
 
-    if 'previousQuestionNumber' in form:
-        previousQuestionNumber = int(form["previousQuestionNumber"].value)
-        if previousQuestionNumber > 0:
-            storePreviousQuestion(form["previousQuestionAnswer"].value, previousQuestionNumber)
-        currentQuestionNumber = int(previousQuestionNumber)+1
-    else:
-	currentQuestionNumber = 0
+    (assignmentId,hitId,workerId,sandbox,exptlabel) = fillForm(form)
 
+    dataFileName = assignmentId+hitId+workerId+sandbox+exptlabel+".txt"
+
+    #get the current order of the stimulus
     if 'stimOrder' in form:
-        print form["stimOrder"].value
+#        print form["stimOrder"].value
         stimOrder = str2list(form["stimOrder"].value)
         question = loadQuestion(stimOrder[0])
+        currentQuestionNumber = finalQuestionNumber - len(stimOrder)+1
     else:
+        stimOrder = range(finalQuestionNumber)
+        random.shuffle(stimOrder)
         question = disclaimer
-        
-    print "Content-type: text/html\n"
-    print '<head>'
-    print '<script type="text/javascript" src="support.js"></script>'
-    print '<body>'
+        currentQuestionNumber = 0
 
+
+    if previousStimuliNumberField in form:
+        previousStimuliNumber = int(form[previousStimuliNumberField].value)
+        if len(stimOrder) < finalQuestionNumber:
+            storePreviousQuestion(previousStimuliNumber, form[previousStimuliAnswerField].value, dataFileName)
+
+    printHead()
+            
     if currentQuestionNumber < finalQuestionNumber:
-        print '<form method="POST" action="Test.cgi">'
+        print '<form name="question" method="POST" action="Test.cgi" onsubmit="return checkForm()">'
     else:
         print '<form method="POST" action="TestSubmit.cgi">'
 
@@ -47,11 +48,11 @@ def main():
 
     print question
     #the submitted question becomes the previous question answered
-    print '<input type="hidden" name="previousQuestionNumber" value=',currentQuestionNumber,'>'
+    print '<input type="hidden" name="'+previousStimuliNumberField+'" value=',stimOrder[0],'>'
+
+    printHidden(assignmentId, hitId, workerId, sandbox, exptlabel)
     
     if currentQuestionNumber == 0:
-        stimOrder = range(finalQuestionNumber)
-        random.shuffle(stimOrder)
         print '<input type="hidden" name="stimOrder" value="'+str(stimOrder)+ '">'
         print '<input type="submit" value="Agree">'
 

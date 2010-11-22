@@ -35,20 +35,20 @@ else:
 #these should be turned into options (with defaults):
 num_Ss='15'
 pay_per_S='0.2'
-title='Why does that happen? Make causal judgements.'
-description='Please read the nine scenarios and make guesses about what causes certain events.'
-keywords='stories, bets, guesses'
+title='a test'
+description='css test'
+keywords='css test'
 
 aws_clt_dir="/home/ih/Downloads/aws-mturk-clt-1.3.0/bin"
 ssh_server="irvinh@cardinal.stanford.edu:cgi-bin/"
-web_server="http://www.stanford.edu/~irvinh/cgi-bin/"
+web_server="http://www.stanford.edu/~irvinh/cgi-bin/testTree/"
 
 
 
 if options.run_mode=="run":
     #copy the cgi scripts and scenarios to the server (server should already have an 'exptData' directory that www can write to):
     print "Copying experiment files to remote server:"
-    os.system('scp -r '+expt_dir+'ExptServe.cgi '+expt_dir+'ExptSubmit.cgi '+expt_dir+'scenarios '+ssh_server)
+    os.system('scp -r '+expt_dir+' '+ssh_server)
 
     #now make the mturk control files (.input, .properties, .question):
     print "Building MTurk control files:"
@@ -65,8 +65,8 @@ if options.run_mode=="run":
     print >>f, "annotation:"+options.expt_label
     # this Assignment Duration value is 30 * 60 = 0.5 hour
     print >>f, "assignmentduration:1800"
-    # this HIT Lifetime value is 60*60*24*3 = 3 days
-    print >>f, "hitlifetime:259200"
+    # this HIT Lifetime value is 60*60*24*7 = 7 days
+    print >>f, "hitlifetime:604800"
     # this Auto Approval period is 60*60*24*15 = 15 days
     print >>f, "autoapprovaldelay:172800"
     f.close()
@@ -74,9 +74,9 @@ if options.run_mode=="run":
     f=open(expt_dir+'Expt_hit.question', 'w')
     print >>f, '<?xml version="1.0"?>\n<ExternalQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd">'
     if options.sandbox:
-        print >>f, '<ExternalURL>'+web_server+'ExptServe.cgi?exptlabel="'+options.expt_label+'"&amp;sandbox="true"</ExternalURL>'
+        print >>f, '<ExternalURL>'+web_server+'Test.cgi?exptlabel="'+options.expt_label+'"&amp;sandbox="true"</ExternalURL>'
     else:
-        print >>f, '<ExternalURL>'+web_server+'ExptServe.cgi?exptlabel="'+options.expt_label+'"&amp;sandbox="false"</ExternalURL>'
+        print >>f, '<ExternalURL>'+web_server+'TestSubmit.cgi?exptlabel="'+options.expt_label+'"&amp;sandbox="false"</ExternalURL>'
     print >>f, '<FrameHeight>450</FrameHeight>\n</ExternalQuestion>'
     f.close()
 
