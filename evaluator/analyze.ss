@@ -1,9 +1,9 @@
 ;;;TO DO
-;;-setup-environment
 ;;-test (+ 2 2), ((lambda (x) (+ x 2)) 3) 
 ;;-add unless to the language
 
-(import (srfi :1))
+(import (srfi :1)
+        (only (util) rest pair))
 
 (define (eval exp env)
   ((analyze exp) env))
@@ -14,7 +14,7 @@
         [(if? exp) (analyze-if exp)]
         [(lambda? exp) (analyze-lambda exp)]
         [(application? exp) (analyze-application exp)]
-        ;; [(variable? exp) (analyze-variable exp)]
+        [(variable? exp) (analyze-variable exp)]
         ;; [(unless? exp) (analyze (unless->applied-if-with-thunks exp))]
 
         ;; [(quoted? exp) (analyze-quoted exp)]
@@ -47,7 +47,7 @@
   (define (env-loop env)
     (define (scan vars vals)
       (cond [(null? vars) (env-loop (enclosing-environment env))]
-            [(eq? (first var) variable) (first vals)]
+            [(eq? (first vars) variable) (first vals)]
             [else (scan (rest vars) (rest vals))]))
     (if (eq? env the-empty-environment)
         (error "scan" "unbound variable" variable)
@@ -58,6 +58,12 @@
 ;;;PROCEDURES
 (define (make-procedure parameters body env)
   (list 'procedure parameters body env))
+
+(define procedure-parameters second)
+
+(define procedure-body third)
+
+(define procedure-environment fourth)
 
 (define (primitive-procedure? exp)
   (tagged-list? exp 'primitive))
@@ -70,6 +76,18 @@
         
 (define primitive-implementation second)
 
+(define primitive-procedures
+  (list (list 'first first)
+        (list 'rest rest)
+        (list '+ +)
+        (list '- -)
+        (list 'pair pair)
+        (list 'null? null?)))
+
+(define (primitive-procedure-names) (map first primitive-procedures))
+
+(define (primitive-procedure-objects)
+  (map (lambda (proc) (list 'primitive (primitive-implementation proc))) primitive-procedures))
   
 
 
@@ -103,9 +121,9 @@
 (define (lambda? exp)
   (tagged-list? exp 'lambda))
 
-(define lambda-params second)
+(define lambda-parameters second)
 
-(define lambda-body third)
+(define (lambda-body exp) (rest (rest exp)))
 
 (define (analyze-lambda exp)
   (let ([vars (lambda-parameters exp)]
@@ -147,6 +165,8 @@
         (loop (first procs) (rest procs)))))
 
 ;;;APPLICATION
+(define application? pair?)
+
 (define (analyze-application exp)
   (let ([operator-proc (analyze (operator exp))]
         [operand-procs (map analyze (operands exp))])
@@ -162,7 +182,15 @@
          ;;procedure-body is an analyzed expression (it's a lambda function that takes an environment)
          ((procedure-body proc) (extend-environment (procedure-parameters proc) args (procedure-environment proc)))]
         [else (error "application execution" "unknown procedure type" proc)]))
-        
+
+(define underlying-apply apply)
+
+(define operator first)
+
+(define operands rest)
+
+
+
 ;;;ENVIRONMENT
 (define (extend-environment variables values environment)
   (if (= (length variables) (length values))
@@ -171,7 +199,7 @@
       (error "extend-environment" "number of variables and values don't match" (list (length variables) (length values)))))
         
 (define (make-frame variables values)
-  (pair variables values))
+  (list variables values))
 
 (define enclosing-environment rest)
 
@@ -182,8 +210,21 @@
 (define frame-variables first)
 
 (define frame-values second)
+
+(define (setup-environment)
+  (let ([initial-environment (extend-environment (primitive-procedure-names)
+                                                 (primitive-procedure-objects)
+                                                 the-empty-environment)])
+    initial-environment))
+
+(define the-global-environment (setup-environment))
+
+        
+    
 ;;;TESTING
-(pretty-print (eval '(if #f #f #t) '()))
+;(pretty-print (eval '(if #f #f #t) the-global-environment))
+;(pretty-print (eval '(+ 2 2) the-global-environment))
+(pretty-print (eval '((lambda (x) (+ x 2)) 4) the-global-environment))
 
 
 
