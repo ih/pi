@@ -15,7 +15,8 @@
         [(lambda? exp) (analyze-lambda exp)]
         [(application? exp) (analyze-application exp)]
         [(variable? exp) (analyze-variable exp)]
-        ;; [(unless? exp) (analyze (unless->applied-if-with-thunks exp))]
+        [(unless? exp) (analyze-unless exp)]
+;;        [(unless? exp) (analyze (unless->applied-if-with-thunks exp))]
 
         ;; [(quoted? exp) (analyze-quoted exp)]
         ;; [(assignment? exp) (analyze-assignment exp)]
@@ -82,7 +83,9 @@
         (list '+ +)
         (list '- -)
         (list 'pair pair)
-        (list 'null? null?)))
+        (list 'null? null?)
+        (list '= =)
+        (list '/ /)))
 
 (define (primitive-procedure-names) (map first primitive-procedures))
 
@@ -117,6 +120,8 @@
           (consequent-proc env)
           (alternative-proc env)))))
 
+
+
 ;;;LAMBDA
 (define (lambda? exp)
   (tagged-list? exp 'lambda))
@@ -132,23 +137,45 @@
         
 
 ;;;UNLESS
+
+;;;UNLESS
+;;from lawful samurai
 (define (unless? exp)
   (tagged-list? exp 'unless))
 
-(define (unless-predicate exp)
-  (second exp))
+(define unless-condition second)
+(define unless-usual-value third)
+(define unless-exceptional-value fourth)
 
-(define (unless-usual exp)
-  (third exp))
+(define (analyze-unless exp)  
+  (let ((condition (analyze (unless-condition exp)))  
+        (usual-value (analyze (unless-usual-value exp)))  
+        (exceptional-value (analyze (unless-exceptional-value exp))))
+    (lambda (env)  
+      (if (true? (condition env))  
+          (exceptional-value env)  
+          (usual-value env)))))
 
-(define (unless-exception exp)
-  (fourth exp))
+;;end lawful samurai
 
-(define (unless->applied-if-with-thunks exp)
-  (let ([predicate (unless-predicate exp)]
-        [usual-thunk (make-thunk (unless-usual exp))]
-        [exception-thunk (make-thunk (unless-exception exp))])
-    (make-application (make-if predicate usual-thunk exception-thunk))))
+
+;; (define (unless? exp)
+;;   (tagged-list? exp 'unless))
+
+;; (define (unless-predicate exp)
+;;   (second exp))
+
+;; (define (unless-usual exp)
+;;   (third exp))
+
+;; (define (unless-exception exp)
+;;   (fourth exp))
+
+;; (define (unless->applied-if-with-thunks exp)
+;;   (let ([predicate (unless-predicate exp)]
+;;         [usual-thunk (make-thunk (unless-usual exp))]
+;;         [exception-thunk (make-thunk (unless-exception exp))])
+;;     (make-application (make-if predicate usual-thunk exception-thunk))))
 
 ;;;SEQUENCE
 
@@ -199,7 +226,7 @@
       (error "extend-environment" "number of variables and values don't match" (list (length variables) (length values)))))
         
 (define (make-frame variables values)
-  (list variables values))
+  (pair variables values))
 
 (define enclosing-environment rest)
 
@@ -209,7 +236,7 @@
 
 (define frame-variables first)
 
-(define frame-values second)
+(define frame-values rest)
 
 (define (setup-environment)
   (let ([initial-environment (extend-environment (primitive-procedure-names)
@@ -222,9 +249,10 @@
         
     
 ;;;TESTING
-;(pretty-print (eval '(if #f #f #t) the-global-environment))
-;(pretty-print (eval '(+ 2 2) the-global-environment))
-(pretty-print (eval '((lambda (x) (+ x 2)) 4) the-global-environment))
+;;(pretty-print (eval '(if #f #f #t) the-global-environment))
+;;(pretty-print (eval '(+ 2 2) the-global-environment))
+;;(pretty-print (eval '((lambda (x) (+ x 2)) 4) the-global-environment))
+(pretty-print (eval '(unless (= 0 0) (/ 4 0) 999) the-global-environment))
 
 
 

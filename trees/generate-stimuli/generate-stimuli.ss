@@ -5,21 +5,26 @@
         (srfi :13)
         (util)
         (system)
-        (abstract)
+        (pi abstract)
         (pi concepts)
         (pi trees drawing))
 
-(define training-size 3)
+(define training-size 10)
 (define test-size 1)
 (define stimuli-size 5)
 
 (define models (list prototype multiple-recursion))
 
-(define (generate-stimulus concept directory)
+(define (generate-animated-stimulus concept directory)
   (let* ([training-data (gen-data concept training-size)]
          [test-data ((uniform-draw models))])
     (map animate-tree training-data (training-filenames directory))
     (animate-tree test-data (testing-filename directory))))
+
+(define (generate-static-stimulus concept amount fname)
+  (let* ([data (gen-data concept amount)])
+    (draw-trees (pair fname data))))
+    
 
 (define (testing-filename directory)
   (string-join (list directory "testing") ""))
@@ -40,8 +45,10 @@
 (define (remove-pngs directory)
   (system (string-join (list "rm " directory "*.png") "")))
 
-(generate-stimuli prototype)
+;;(generate-stimuli prototype)
+;;(generate-static-stimulus trunk-two-branches 2 "stimuli/trunk-two-branches/set1.png")
 
+(generate-static-stimulus line-recursion 3 "stimuli/line-recursion/testing.png")
 ;;-generate test example (randomly from either from true model or different
 ;;-change concepts so that the first node is always generated
 ;;-store training and test examples in unique folder for stimuli, name should reflect whether the test example is true or not?
