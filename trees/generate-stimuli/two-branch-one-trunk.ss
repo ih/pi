@@ -1,0 +1,77 @@
+(import (util)
+        (church readable-scheme))
+        
+
+(define (trunk-two-branches branch trunk)
+  (tree-insert branch (make-list (- (depth trunk) 1) 1) (tree-insert branch (make-list (- (depth trunk) 1) 1) trunk)))
+
+(define (structure-of-size label-generator size)
+  (if (= size 1)
+      (list (label-generator))
+      (let* ([num-branches (random-from-range 1 (- size 1))]
+             [branch-sizes (create-partition num-branches (- size 1))])
+        (pair (label-generator) (map (curry structure-of-size label-generator) branch-sizes)))))
+
+(define (create-partition number-partitions total)
+  (if (= number-partitions 1)
+      (list total)
+      (let* ([partition-max-size (- total (- number-partitions 1))]
+             [partition-size (+ (random-integer partition-max-size) 1)])
+        (pair partition-size (create-partition (- number-partitions 1) (- total partition-size))))))
+
+(define (depth tree)
+  (if (not (list? tree))
+      0
+      (+ 1 (apply max (map depth tree)))))
+  ;; (define concepts (list prototype single-recursion parameterized-parts))
+  ;; ;;(define concepts (list multiple-recursion))
+  ;; (define branch ((uniform-draw concepts)))
+  ;; (define (trunk length label-generator)
+  ;;   (if (= length 0)
+  ;;       (apply node (list (label-generator) branch branch))
+  ;;       (node (label-generator) (trunk (- length 1) label-generator))))
+  ;; (define (all-a) 'a)
+  ;; (define (random-label) (uniform-draw '(a b c d e f)))
+  ;; (define label-generators (list all-a random-label))
+  ;; (define lengths (range 1 10))
+  ;; (trunk (uniform-draw lengths) (uniform-draw label-generators)))
+
+(define (bottom-top-color bcolor tcolor bstructure tstructure connection-location)
+  (tree-insert  (color-tree tcolor tstructure) connection-location (color-tree bcolor bstructure)))
+
+(define (color-tree color tree)
+  (sexp-replace 'x color tree))
+
+(define (tree-insert new-branch location tree)
+  (define (substitute indx value lst)
+    (if (= indx 0)
+        (pair value (rest lst))
+        (pair (first lst) (substitute (- indx 1) value (rest lst)))))
+  (define (build-mask location number-of-branches)
+    (let ([mask (make-list number-of-branches '*)]
+          [index (- (first location) 1)])
+      (if (= (length location) 1)
+          (substitute index '() mask)
+          (substitute index (rest location) mask))))
+  (cond [(null? tree) tree]
+        [(null? location) (append tree (list new-branch))]
+        [(eq? location '*) tree]
+        [else
+         (let ([location-mask (build-mask location (length (rest tree)))])
+           (pair (first tree) (map (curry tree-insert new-branch) location-mask (rest tree))))]))
+
+(define stim1btcolor (bottom-top-color 'g 'b '(x (x (x (x)))) '(x (x (x)) (x (x))) '(1 1 1)))
+(define stim12branch1trunk (trunk-two-branches '(b (b (b))) '(g (g (g (g))))))
+
+(pretty-print (tree-insert '(a (q)) '(1) '(a (b) (c))))
+(pretty-print (tree-insert '(a) '() '(b)))
+(pretty-print (tree-insert '(d) '(1 1) '(a (b (a (q))) (c))))
+
+(pretty-print (create-partition 3 3))
+(pretty-print (structure-of-size (lambda () 'x) 5))
+;;(equal? (tree-insert '(a) '(1) '(b)) '(b (a)))
+
+;;(tree-insert '(a (b (b))) '(1) '(c (c (d) (d))))
+
+
+;;(generate-static-stimulus line-recursion 3 "stimuli/line-recursion/tbd.png")
