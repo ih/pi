@@ -216,7 +216,11 @@
 
 (define operands rest)
 
-
+;;;LAZINESS
+(define (list-of-arg-values exps env)
+  (if (no-operands? exps)
+      '()
+      (pair (actual-value (first-operand exps) env) (list-of-arg-values (rest-operands exps) env))))
 
 ;;;ENVIRONMENT
 (define (extend-environment variables values environment)
