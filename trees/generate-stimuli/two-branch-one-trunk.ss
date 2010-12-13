@@ -30,11 +30,16 @@
 (define max-random-tree-size 40)
 (define label-generators (list random-label))
 (define labels '(a b c d e f))
+(define N 7)
 ;;;thunks
 (define (gen-trunk-two-branches)
   (let* ([trunk (random-line)]
          [branch ((random-concept))])
     (trunk-two-branches branch trunk)))
+
+(define (sizeNtree)
+  (let ([label-generator (random-label-generator)])
+    (structure-of-size label-generator N)))
 
 (define (random-concept)
   (uniform-draw concepts))
