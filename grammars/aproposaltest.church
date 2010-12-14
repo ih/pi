@@ -1,0 +1,62 @@
+(define (lazy-pair a b) (lambda (tag) (if (eq? tag 'first) a (if (eq? tag 'rest) b 'lazy-pair))))
+(define (lazy-pair? a) (if (procedure? a) (eq? 'lazy-pair (a 'type?)) false))
+
+(define lazy-list (lambda args (if (pair? args) (lazy-pair (first args) (apply lazy-list (rest args))) args)))
+
+;;returns false if finds missmatch, otherwise returns amount of sexprs matched.
+(define (seq-sexpr-equal? t1 t2 depth)
+  (if (= depth 0)
+      0
+      (if (and (lazy-pair? t1) (lazy-pair? t2))
+          (let ((left (seq-sexpr-equal? (t1 'first) (t2 'first) (- depth 1))))
+            (if (eq? false left)
+                false
+                (seq-sexpr-equal? (t1 'rest) (t2 'rest) left)))
+          (if (eq? t1 t2)
+              (- depth 1)
+              false))))
+(define (lazy-equal? a b depth) (not (eq? false (seq-sexpr-equal? a b depth))))
+
+
+(define (lazy-list->list a depth)
+  (if (= 0 depth)
+      (pair 'unf 0)
+      (if (lazy-pair? a)
+          (let* ((left (lazy-list->list (a 'first) (- depth 1)))
+                 (right (lazy-list->list (a 'rest) (rest left))))
+            (pair (pair (first left) (first right)) (rest right)))
+          (pair a (- depth 1)))))
+
+(pretty-print (get-store))
+
+(mh-query
+ 10 0
+ (define MAX-DEPTH 30)
+ 
+ (define (terminal t) (lambda () t))
+
+ (define EXPR
+   (lambda ()
+     (sample (multinomial (list IF BOOL) (list 1/4 3/4)))))
+ (define IF
+   (lambda ()
+     ;;(list 'if (EXPR) (EXPR) (EXPR))))
+     (lazy-list 'if (EXPR) (EXPR) (EXPR))))
+ (define BOOL
+   (lambda ()
+     (sample  (uniform-draw (list (terminal 't) (terminal 'f))))))
+ (define extra-xrp (flip))
+
+ (define lazy-program (EXPR))
+
+ (define program (first (lazy-list->list lazy-program MAX-DEPTH)))
+;; (define program (EXPR))
+ 
+ (list program extra-xrp)
+ (and (equal? (depth program) 1) (equal? extra-xrp true)))
+
+(pretty-print (get-store))
+ 
+;; (and (equal? (depth program) 1) (equal? (eval program) 't)))
+
+;;(depth '(a b c))

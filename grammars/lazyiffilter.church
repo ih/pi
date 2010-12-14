@@ -35,8 +35,8 @@
 (define (id x) x)
 (define obs2 (lazy-pair 'if (lazy-map id (list (lazy-pair 'if (lazy-map id (list 't 'f 't))) 'f 't)))) 
 (pretty-print
-(psmc-query (depth) (map list (list 0))
-            1
+(psmc-query (depth) (map list (list 17))
+            10
             0
 
             (define (terminal t) (lambda () t))
@@ -46,12 +46,10 @@
                 (sample (multinomial (list IF BOOL) (list 1/4 3/4)))))
             (define IF
               (lambda ()
-                (make-if (lazy-map sample (list EXPR EXPR EXPR)))))
+                (lazy-list 'if (EXPR) (EXPR) (EXPR))))
             (define BOOL
               (lambda ()
                 (sample  (uniform-draw (list (terminal 't) (terminal 'f))))))
-            (define (make-if args)
-              (lazy-pair 'if args))
 
             (define program (EXPR))
 
