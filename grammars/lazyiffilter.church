@@ -1,4 +1,3 @@
-
 (define obs (lazy-list 'if (lazy-list 'if 't 'f 'f) 'f 't))
 
 (define (id x) x)
