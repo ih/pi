@@ -1,0 +1,1 @@
+(sample (multinomial (list (lambda () 'a) (lambda () 'b)) (list 1/4 3/4)))

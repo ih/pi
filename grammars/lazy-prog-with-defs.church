@@ -1,24 +1,40 @@
 (define MAX-FUNCS 5)
 (define MAX-ARITY 3)
-;; ;;grammar for generating programs that consist of a list of definitions and a body that may use those definitions
+;;move these higher-order functions back into scheme lazy library if possible
+(define (lazy-repeat reps thunk)
+           (if (= reps 0)
+               '()
+               (lazy-pair (thunk) (lazy-repeat (- reps 1) thunk))))
+
+(define (lazy-pair a b) (lambda (tag) (if (eq? tag 'first) a (if (eq? tag 'rest) b 'lazy-pair))))
+
+(define (lazy-map proc lazy-lst)
+  (if (not (lazy-pair? lazy-lst))
+      lazy-lst
+      (lazy-pair (proc (lazy-lst 'first)) (lazy-map proc (lazy-lst 'rest)))))
+
+
+;;grammar for generating programs that consist of a list of definitions and a body that may use those definitions
+
+
 
 (define (gen-program)
   (let* ([num-of-funcs (random-integer MAX-FUNCS)]
          [function-signatures (gen-func-signatures num-of-funcs)]
-         [functions (map (lambda (function-signature) (gen-function function-signature function-signatures)) function-signatures)]
+         [functions (lazy-map (lambda (function-signature) (gen-function function-signature function-signatures)) function-signatures)]
          [body (gen-expr '() function-signatures)])
     (combine-program-parts functions body)))
 (define (combine-program-parts functions body)
-  (append (append (list 'let '()) functions) (list body)))
+  (lazy-append (lazy-append (lazy-list 'let '()) functions) (lazy-list body)))
 
-;; ;;function signature related functions
-(define get-name first)
-(define get-vars rest)
+;;function signature related functions
+(define (get-name sig) (sig 'first))
+(define (get-vars sig) (sig 'rest))
 (define (get-arity signature)
-  (length (get-vars signature)))
+  (lazy-length (get-vars signature)))
 
 (define (gen-func-signatures num-of-funcs)
-  (repeat num-of-funcs gen-func-signature))
+  (lazy-repeat num-of-funcs gen-func-signature))
 
 
 (define (gen-func-signature)
@@ -26,20 +42,21 @@
          [arity (random-integer MAX-ARITY)]
          [vars (gen-vars arity)])
     (combine-sig-parts name vars)))
-(define combine-sig-parts pair)
+(define combine-sig-parts lazy-pair)
 
 (define (gen-vars arity)
-  (repeat arity (lambda () (sym 'V))))
+;;  (lazy-repeat arity (lambda () (sym 'V))))
+  (lazy-repeat arity (lambda () 'a)))
 
 
-;; ;;creates a function based on function-signature and may use functions specified by function-signatures in the body
+;;creates a function based on function-signature and may use functions specified by function-signatures in the body
 (define (gen-function function-signature function-signatures)
-  (let* ([function-signatures (remove function-signature function-signatures)] ;;ensures no recursive functions
+  (let* ([function-signatures (lazy-remove function-signature function-signatures)] ;;ensures no recursive functions
          [vars (get-vars function-signature)]
          [body (gen-expr vars function-signatures)])
     (combine-function-parts function-signature body)))
 (define (combine-function-parts function-signature body)
-  (list 'define function-signature body))
+  (lazy-list 'define function-signature body))
 
 (define (gen-expr vars function-signatures)
   (cond [(and (null? vars) (null? function-signatures))
@@ -57,7 +74,7 @@
 (define (gen-if vars function-signatures)
   (combine-if-parts 'if (gen-expr vars function-signatures) (gen-expr vars function-signatures) (gen-expr vars function-signatures)))
 
-(define combine-if-parts list)
+(define combine-if-parts lazy-list)
 
 (define (gen-application vars function-signatures)
   (let* ([function-signature (uniform-draw function-signatures)]
@@ -65,21 +82,30 @@
          [arity (get-arity function-signature)]
          [args (gen-args arity vars function-signatures)])
     (combine-application-parts function args)))
-(define combine-application-parts pair)
+(define combine-application-parts lazy-pair)
 
 (define (gen-args arity vars function-signatures)
-  (repeat arity (lambda () (gen-expr vars function-signatures))))
+  (lazy-repeat arity (lambda () (gen-expr vars function-signatures))))
 
 
 (define gen-var uniform-draw)
 
 
 (pretty-print (gen-bool))
-(pretty-print (gen-func-signatures 4))
-(pretty-print (gen-vars 3))
+;;(pretty-print (gen-func-signatures 4))
+;;(pretty-print (gen-vars 3))
+(define (thunk) 'a)
+
+(define lr (lazy-repeat 5 gen-bool))
+(lazy-list->all-list lr)
+;; (define (plus1 x) (+ x 1))
+;; (define m (lazy-map plus1 (lazy-list 1 2 3 4 5)))
+;; (pretty-print (lazy-equal? m (lazy-list 'a 'a 'a 'a) 10))
+;; (pretty-print (lazy-equal? m (lazy-list 2 3 4 5 6) 10))
+
 ;;(pretty-print (repeat 50 (lambda () (gen-expr '(V5 V6) '((F1 V1))))))
 
-(pretty-print (repeat 20 gen-program))
+;;(pretty-print (repeat 20 (lambda () (lazy-list->list (gen-program) 20))))
 
 
 
