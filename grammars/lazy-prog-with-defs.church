@@ -37,16 +37,6 @@
       lazy-lst2
       (lazy-pair (lazy-lst1 'first) (lazy-append (lazy-lst1 'rest) lazy-lst2))))
 
-;; (define (lazy-repeat reps thunk)
-;;   (if (= reps 0)
-;;       lazy-null
-;;       (lazy-pair (thunk) (lazy-repeat (- reps 1) thunk))))
-
-;; (define (lazy-map proc lazy-lst)
-;;   (if (lazy-null? lazy-lst)
-;;       lazy-null
-;;       (lazy-pair (proc (lazy-lst 'first)) (lazy-map proc (lazy-lst 'rest)))))
-
 (define (compute-depth lazy-lst)
   (pretty-print "define compute-depth"))
 
@@ -91,8 +81,6 @@
 
 ;;grammar for generating programs that consist of a list of definitions and a body that may use those definitions
 
-
-
 (define (gen-program)
   (let* ([num-of-funcs (random-integer MAX-FUNCS)]
          [function-signatures (gen-func-signatures num-of-funcs)]
@@ -101,8 +89,6 @@
     (combine-program-parts functions body)))
 (define (combine-program-parts functions body)
   (lazy-append (lazy-append (lazy-list 'let '()) functions) (lazy-list body)))
-
-
 
 ;;function signature related functions
 (define (get-name sig) (sig 'first))
@@ -115,7 +101,6 @@
       '()
       (lazy-pair (gen-func-signature) (gen-func-signatures (- num-of-funcs 1)))))
 ;;      (lazy-repeat num-of-funcs gen-func-signature))
-
 
 (define (gen-func-signature)
   (let* ([name (sym 'F)]

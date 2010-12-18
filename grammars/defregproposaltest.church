@@ -1,0 +1,31 @@
+(mh-query
+ 10 0
+ (define MAX-DEPTH 30)
+ 
+ (define (terminal t) (lambda () t))
+
+ (define EXPR
+   (lambda ()
+     (sample (multinomial (list IF BOOL) (list 1/4 3/4)))))
+ (define IF
+   (lambda ()
+     ;;(list 'if (EXPR) (EXPR) (EXPR))))
+     (lazy-list 'if (EXPR) (EXPR) (EXPR))))
+ (define BOOL
+   (lambda ()
+     (sample  (uniform-draw (list (terminal 't) (terminal 'f))))))
+ (define extra-xrp (flip))
+
+ (define lazy-program (EXPR))
+
+ (define program (first (lazy-list->list lazy-program MAX-DEPTH)))
+;; (define program (EXPR))
+ 
+ (list program extra-xrp)
+ (and (equal? (depth program) 1) (equal? extra-xrp true)))
+
+
+ 
+;; (and (equal? (depth program) 1) (equal? (eval program) 't)))
+
+;;(depth '(a b c))
