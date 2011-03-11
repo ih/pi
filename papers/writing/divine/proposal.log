@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.9.1)  22 DEC 2010 17:49
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.9.1)  22 DEC 2010 22:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -133,10 +133,6 @@ LaTeX Font Info:    ... okay on input line 4.
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: Citation `ang-sem' on page 2 undefined on input line 15.
-
-
 Overfull \hbox (4.13896pt too wide) in paragraph at lines 18--19
 \OT1/cmr/m/n/12 We use a con-cept known as least gen-eral gen-er-al-iza-tion (l
 gg) or anti-unification
@@ -153,28 +149,24 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 29.
- [3]
-No file proposal.bbl.
-[4] (./proposal.aux)
-
-LaTeX Warning: There were undefined references.
-
- ) 
+ [3] (./proposal.bbl)
+[4] (./proposal.aux) ) 
 Here is how much of TeX's memory you used:
- 1507 strings out of 495061
- 18048 string characters out of 1182622
- 73510 words of memory out of 3000000
- 4719 multiletter control sequences out of 15000+50000
- 6771 words of font info for 25 fonts, out of 3000000 for 9000
+ 1526 strings out of 495061
+ 18259 string characters out of 1182622
+ 73513 words of memory out of 3000000
+ 4729 multiletter control sequences out of 15000+50000
+ 9626 words of font info for 35 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,6n,21p,1314b,205s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb>
-Output written on proposal.pdf (4 pages, 61421 bytes).
+ 27i,6n,20p,1397b,205s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on proposal.pdf (4 pages, 71631 bytes).
 PDF statistics:
- 31 PDF objects out of 1000 (max. 8388607)
+ 35 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
