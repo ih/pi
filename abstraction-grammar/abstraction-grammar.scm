@@ -1,5 +1,5 @@
 (library (abstraction-grammar)
-         (export make-start-rule select rhs-options)
+         (export make-start-rule select rhs-options apply-option make-rule)
          (import (rnrs)
                  (abstract)
                  (only (church readable-scheme) uniform-draw))
@@ -14,5 +14,11 @@
 
          ;;every rule takes a list of sexpressions that will be the options for the rhs
          (define (make-start-rule rhs-sexprs)
-           `(define (S) ((select (rhs-options ,@(map make-option rhs-sexprs)))))))
+           (make-rule 'S rhs-sexprs))
+
+         (define (make-rule rule-name rhs-sexprs)
+           `(define (,rule-name) (apply-option ,@(map make-option rhs-sexprs))))
+
+         (define (apply-option . options)
+           ((select options))))
 
