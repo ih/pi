@@ -1,0 +1,186 @@
+
+;;dnf one clause certain one not
+(mh-query 100 100
+    (define strength (mem (lambda (person) (if (flip) 10 5))))
+    (define lazy (lambda (person) (flip (/ 1 3))))
+
+    (define (total-pulling team)
+      (sum
+         (map (lambda (person) (if (lazy person) (/ (strength person) 2) (strength person)))
+               team)))
+ 
+    (define (winner team1 team2) (if (< (total-pulling team1) (total-pulling team2)) 'team2 'team1))
+
+    (strength 'bob)
+ 
+    (or (and (eq? 'team1 (winner '(bob mary) '(tom sue)))
+             (eq? 'team1 (winner '(bob tom) '(mary jim)))
+             (eq? 'team1 (winner '(bob kim) '(sue jim))))
+        (and (eq? 'team1 (winner '(bob mary) '(tom sue)))
+             (eq? 'team1 (winner '(tom jan) '(bob jim)))
+             (eq? 'team1 (winner '(bob tom) '(sue jim)))))
+
+        )
+
+
+
+;;conditional
+(mh-query 100 100
+    (define strength (mem (lambda (person) (if (flip) 10 5))))
+    (define lazy (lambda (person) (flip (/ 1 3))))
+
+    (define (total-pulling team)
+      (sum
+         (map (lambda (person) (if (lazy person) (/ (strength person) 2) (strength person)))
+               team)))
+ 
+    (define (winner team1 team2) (if (< (total-pulling team1) (total-pulling team2)) 'team2 'team1))
+
+    (strength 'bob)
+ 
+    (if (eq? (strength 'bob) 5)
+        (and (eq? 'team1 (winner '(bob mary) '(tom sue)))
+             (eq? 'team1 (winner '(bob tom) '(mary jim)))
+             (eq? 'team1 (winner '(bob kim) '(sue jim))))
+        (and (eq? 'team1 (winner '(bob mary) '(tom sue)))
+             (eq? 'team1 (winner '(tom jan) '(bob jim)))
+             (eq? 'team1 (winner '(bob tom) '(sue jim)))))
+
+        )
+
+;;long and, easy
+(mh-query 100 100
+    (define strength (mem (lambda (person) (if (flip) 10 5))))
+    (define lazy (lambda (person) (flip (/ 1 3))))
+
+    (define (total-pulling team)
+      (sum
+         (map (lambda (person) (if (lazy person) (/ (strength person) 2) (strength person)))
+               team)))
+ 
+    (define (winner team1 team2) (if (< (total-pulling team1) (total-pulling team2)) 'team2 'team1))
+
+    (strength 'bob)
+ 
+    (and (eq? 'team1 (winner '(bob mary) '(bess sue)))
+         (eq? 'team1 (winner '(bob tom) '(mary jim)))
+         (eq? 'team1 (winner '(tom jan) '(bob jim)))
+         (eq? 'team1 (winner '(bob mary) '(tom jim))))
+         (eq? 'team1 (winner '(tom mary) '(jane sue)))
+         (eq? 'team1 (winner '(tom bill) '(sue jim)))
+         (eq? 'team1 (winner '(bob kim) '(sue jim)))
+
+    )
+;;long or
+(mh-query 100 100
+    (define strength (mem (lambda (person) (if (flip) 10 5))))
+    (define lazy (lambda (person) (flip (/ 1 3))))
+
+    (define (total-pulling team)
+      (sum
+         (map (lambda (person) (if (lazy person) (/ (strength person) 2) (strength person)))
+               team)))
+ 
+    (define (winner team1 team2) (if (< (total-pulling team1) (total-pulling team2)) 'team2 'team1))
+
+    (strength 'bob)
+ 
+    (or (eq? 'team1 (winner '(bob mary) '(bess sue)))
+         (eq? 'team1 (winner '(bob tom) '(mary jim)))
+         (eq? 'team1 (winner '(tom jan) '(bob jim)))
+         (eq? 'team1 (winner '(bob mary) '(tom jim))))
+         (eq? 'team1 (winner '(tom mary) '(jane sue)))
+         (eq? 'team1 (winner '(tom bill) '(sue jim)))
+         (eq? 'team1 (winner '(bob kim) '(sue jim)))
+
+    )
+
+;;alternating
+(mh-query 100 100
+    (define strength (mem (lambda (person) (if (flip) 10 5))))
+    (define lazy (lambda (person) (flip (/ 1 3))))
+
+    (define (total-pulling team)
+      (sum
+         (map (lambda (person) (if (lazy person) (/ (strength person) 2) (strength person)))
+               team)))
+ 
+    (define (winner team1 team2) (if (< (total-pulling team1) (total-pulling team2)) 'team2 'team1))
+
+    (strength 'bob)
+ 
+    (and (or (and (or (eq? 'team1 (winner '(bob mary) '(bess sue)))
+                      (eq? 'team1 (winner '(bob tom) '(mary jim))))
+                  (eq? 'team1 (winner '(tom jan) '(nadine jim))))
+             (eq? 'team1 (winner '(bob mary) '(tom jim))))
+         (eq? 'team1 (winner '(tom mary) '(jane sue))))
+
+    )
+
+
+;;bob strong
+  (mh-query 100 100
+    (define strength (mem (lambda (person) (if (flip) 10 5))))
+    (define lazy (lambda (person) (flip (/ 1 3))))
+
+    (define (total-pulling team)
+      (sum
+         (map (lambda (person) (if (lazy person) (/ (strength person) 2) (strength person)))
+               team)))
+ 
+    (define (winner team1 team2) (if (< (total-pulling team1) (total-pulling team2)) 'team2 'team1))
+
+    (strength 'bob)
+ 
+    (and (or (and (or (eq? 'team1 (winner '(bob mary) '(bess sue)))
+                      (eq? 'team1 (winner '(martha tom) '(bob jim))))
+                  (eq? 'team1 (winner '(tom jan) '(nadine jim))))
+             (eq? 'team1 (winner '(candace mary) '(tom jim))))
+         (eq? 'team1 (winner '(dex bob) '(jane sue))))
+
+    )
+
+;;bob weak
+  (mh-query 100 100
+    (define strength (mem (lambda (person) (if (flip) 10 5))))
+    (define lazy (lambda (person) (flip (/ 1 3))))
+
+    (define (total-pulling team)
+      (sum
+         (map (lambda (person) (if (lazy person) (/ (strength person) 2) (strength person)))
+               team)))
+ 
+    (define (winner team1 team2) (if (< (total-pulling team1) (total-pulling team2)) 'team2 'team1))
+
+    (strength 'bob)
+ 
+    (and (or (and (or (eq? 'team1 (winner '(bob mary) '(bess sue)))
+                      (eq? 'team1 (winner '(martha tom) '(bob jim))))
+                  (eq? 'team1 (winner '(tom jan) '(nadine jim))))
+             (eq? 'team1 (winner '(candace mary) '(tom jim))))
+         (eq? 'team1 (winner '(dex omar) '(jane sue))))
+
+    )
+
+;;functions
+
+  (mh-query 100 100
+    (define strength (mem (lambda (person) (if (flip) 10 5))))
+    (define lazy (lambda (person) (flip (/ 1 3))))
+
+    (define (total-pulling team)
+      (sum
+         (map (lambda (person) (if (lazy person) (/ (strength person) 2) (strength person)))
+               team)))
+ 
+    (define (winner team1 team2) (if (< (total-pulling team1) (total-pulling team2)) 'team2 'team1))
+
+    (define (champion person)
+      (and (eq? 'team1 (winner (list person) '(bess sue)))
+           (eq? 'team1 (winner (list person) '(todd jim)))
+           (eq? 'team1 (winner (list person) '(nadine tom)))))
+
+    (strength 'bob)
+ 
+    (and (champion 'bob) (eq? 'team1 (winner '(jim) '(bob))))
+    )
