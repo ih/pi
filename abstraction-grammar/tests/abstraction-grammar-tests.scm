@@ -42,20 +42,20 @@
 (let* ([sexprs '((F8 'b) (F8 'c) (F8 'd))])
    (check (create-rule-applications sexprs) => '((F8) (F8) (F8))))
 ;;body->options
-(let* ([body '(uniform-draw (F8 'b) (F8 'c) (F8 'd))])
+(let* ([body '(uniform-draw (list (F8 'b) (F8 'c) (F8 'd)))])
   (check (body->options body) => '((lambda () (F8)) (lambda () (F8)) (lambda () (F8)))))
 ;;program->start-rule
 (let* ([program (sexpr->program '(let ()
                                    (define F8
                                      (lambda (V25) (list 'a (list 'a (list V25) (list V25)))))
-                                   (uniform-draw (F8 'b) (F8 'c) (F8 'd))))])
+                                   (uniform-draw (list (F8 'b) (F8 'c) (F8 'd)))))])
   (check (rule->define (program->start-rule program)) => `(define (,START-SYMBOL) (apply-option (lambda () (F8)) (lambda () (F8)) (lambda () (F8))))))
 ;;;
 ;;variable->rule
 (let* ([program (sexpr->program '(let ()
                                    (define F8
                                      (lambda (V25) (list 'a (list 'a (list V25) (list V25)))))
-                                   (uniform-draw (F8 'b) (F8 'c) (F8 'd))))]
+                                   (uniform-draw (list (F8 'b) (F8 'c) (F8 'd)))))]
        [abstraction (define->abstraction '(define F8
                                             (lambda (V25) (list 'a (list 'a (list V25) (list V25))))))])
   (check (rule->define (variable->rule program abstraction 'V25))
@@ -65,7 +65,7 @@
 (let* ([program (sexpr->program '(let ()
                                    (define F8
                                      (lambda (V25) (list 'a (list 'a (list V25) (list V25)))))
-                                   (uniform-draw (F8 'b) (F8 'c) (F8 'd))))]
+                                   (uniform-draw (list (F8 'b) (F8 'c) (F8 'd)))))]
        [abstraction (define->abstraction '(define F8
                                             (lambda (V25) (list 'a (list 'a (list V25) (list V25))))))])
   (check (map rule->define (abstraction->rules program abstraction))
@@ -74,26 +74,35 @@
            (define (V25) (apply-option (lambda () 'b) (lambda () 'c) (lambda () 'd))))))
 
 ;;program->rules
-;; (let* ([program (sexpr->program '(let ()
-;;                                    (define F8
-;;                                      (lambda (V25) (list 'a (list 'a (list V25) (list V25)))))
-;;                                    (uniform-draw (F8 'b) (F8 'c) (F8 'd))))])
-;;   (check (map rule->define (program->rules program))
-;;          =>
-;;          '((define (F8) (apply-option (lambda () (list 'a (list 'a (V25) (V25))))))
-;;            (define (V25) (apply-option (lambda () (list 'b)) (lambda () (list 'c)) (lambda () (list 'd)))))))
+(let* ([program (sexpr->program '(let ()
+                                   (define F8
+                                     (lambda (V25) (list 'a (list 'a (list V25) (list V25)))))
+                                   (uniform-draw (list (F8 'b) (F8 'c) (F8 'd)))))])
+  (check (map rule->define (program->rules program))
+         =>
+         '((define (F8) (apply-option (lambda () (list 'a (list 'a (list (V25)) (list (V25)))))))
+           (define (V25) (apply-option (lambda () 'b) (lambda () 'c) (lambda () 'd))))))
 ;; ;;program->grammar
-;; (let* ([program (sexpr->program '(let ()
-;;                                    (define F8
-;;                                      (lambda (V25) (list 'a (list 'a (list V25) (list V25)))))
-;;                                    (uniform-draw (F8 'b) (F8 'c) (F8 'd))))])
-;;   (check (grammar->sexpr (program->grammar program))
-;;          =>
-;;          `(let ()
-;;            (define (,START-SYMBOL) (apply-option (lambda () (F8))))
-;;            (define (F8) (apply-option (lambda () (list 'a (list 'a (V25) (V25))))))
-;;            (define (V25) (apply-option (lambda () (list 'b)) (lambda () (list 'c)) (lambda () (list 'd))))
-;;            (lambda () (,START-SYMBOL)))))
+(let* ([program (sexpr->program '(let ()
+                                   (define F8
+                                     (lambda (V25) (list 'a (list 'a (list V25) (list V25)))))
+                                   (uniform-draw (list (F8 'b) (F8 'c) (F8 'd)))))])
+  (check (grammar->sexpr (program->grammar program))
+         =>
+         `(let ()
+           (define (,START-SYMBOL) (apply-option (lambda () (F8)) (lambda () (F8)) (lambda () (F8))))
+           (define (F8) (apply-option (lambda () (list 'a (list 'a (list (V25)) (list (V25)))))))
+           (define (V25) (apply-option (lambda () 'b) (lambda () 'c) (lambda () 'd)))
+           (lambda () (,START-SYMBOL)))))
+
+(let* ([program (sexpr->program '(let ()
+                                   (define F8
+                                     (lambda (V25) (list 'a (list 'a (list V25) (list V25)))))
+                                   (uniform-draw (list (F8 'b)))))])
+  (check ((eval (grammar->sexpr (program->grammar program)) (interaction-environment)))
+         =>
+         '(a (a (b) (b)))))
+
 
 ;; ;;;multiple possible trees 
 ;; ;; (let* ([start-rule (make-start-rule '((F1)))]

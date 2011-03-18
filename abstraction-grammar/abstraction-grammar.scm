@@ -1,5 +1,5 @@
 (library (abstraction-grammar)
-         (export make-start-rule select apply-option make-rule START-SYMBOL make-grammar make-option rule->define make-options grammar->sexpr create-rule-applications body->options program->start-rule variable->rule abstraction->rules rule-application?)
+         (export make-start-rule select apply-option make-rule START-SYMBOL make-grammar make-option rule->define make-options grammar->sexpr create-rule-applications body->options program->start-rule variable->rule abstraction->rules rule-application? program->rules program->grammar)
          (import (rnrs)
                  (abstract)
                  (_srfi :1)
@@ -61,7 +61,7 @@
          ;;the sexprs that are abstraction function applications are returned as thunk applications
          ;;everything else is returned as is
          (define (body->options program-body)
-           (let* ([sexprs (rest program-body)]
+           (let* ([sexprs (rest (second program-body))]
                   [thunkified-sexprs (create-rule-applications sexprs)])
              (make-options thunkified-sexprs)))
 
