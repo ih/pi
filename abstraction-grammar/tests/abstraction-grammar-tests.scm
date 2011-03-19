@@ -1,6 +1,7 @@
 (import (rnrs)
         (abstract)
         (abstraction-grammar)
+        (only (church readable-scheme) repeat)
         (srfi :78))
 ;;;make-rule tests
 (check (rule->define (make-rule 'F1 (make-options '((list 'a (list 'a (V25) (V25)))))))
@@ -103,6 +104,19 @@
          =>
          '(a (a (b) (b)))))
 
+(let* ([program (sexpr->program '(let () (define F1 (lambda (V2) (list 'a V2)))
+                                      (uniform-draw
+                                       (list (F1 (list 'a)) (F1 (F1 (F1 (list 'a))))
+                                             (F1 (F1 (list 'a))) (list 'a)
+                                             (F1 (F1 (F1 (F1 (F1 (list 'a))))))))))])
+  (check (grammar->sexpr (program->grammar program))
+         =>
+         `(let ()
+            (define (,START-SYMBOL) (apply-option (lambda () (F1)) (lambda () (F1)) (lambda () (F1)) (lambda () (list 'a)) (lambda () (F1))))
+            (define (F1) (apply-option (lambda () (list 'a (V2)))))
+            (define (V2) (apply-option (lambda () (list 'a)) (lambda () (F1)) (lambda () (F1)) (lambda () (list 'a)) (lambda () (F1)) (lambda () (list 'a)) (lambda () (F1)) (lambda () (F1)) (lambda () (F1)) (lambda () (F1)) (lambda () (list 'a))))
+            (lambda () (,START-SYMBOL)))))
+
 
 ;; ;;;multiple possible trees 
 ;; ;; (let* ([start-rule (make-start-rule '((F1)))]
@@ -111,3 +125,10 @@
 ;; ;;        [grammar (make-grammar start-rule (rhs-options rule-F1 rule-V25))])
 ;; ;;  (check-member ((eval grammar)) => '(a (a (b) (b)))))
 (check-report)
+
+(let* ([program (sexpr->program '(let () (define F1 (lambda (V2) (list 'a V2)))
+                                      (uniform-draw
+                                       (list (F1 (list 'a)) (F1 (F1 (F1 (list 'a))))
+                                             (F1 (F1 (list 'a))) (list 'a)
+                                             (F1 (F1 (F1 (F1 (F1 (list 'a))))))))))])
+  (repeat 20 (eval (grammar->sexpr (program->grammar program)) (interaction-environment))))
