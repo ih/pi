@@ -1,3 +1,5 @@
+;;;this is wrong, having the variables as thunks makes everything context free, you have to have the rhs of the non-terminals be functions that take arguments or somehow have a variable be generated only once e.g (lambda () (let ([V25 (V25)]) (list 'a (list 'a V25 V25))))
+
 (import (rnrs)
         (abstract)
         (abstraction-grammar)
